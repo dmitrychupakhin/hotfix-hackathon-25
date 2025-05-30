@@ -1,61 +1,62 @@
-import { useLazyGetProfile } from '@/entities/Profile';
-import { ROUTES } from '@/shared/const/routes';
-import FormLoader from '@/shared/ui/FormLoader/FormLoader';
-import { alpha, Box, Button, Stack, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
-import { useAuthConfirmChangeEmail } from '../api/authConfirmChangeEmailApi';
+import { useLazyGetProfile } from '@/entities/Profile'
+import { ROUTES } from '@/shared/const/routes'
+import FormLoader from '@/shared/ui/FormLoader/FormLoader'
+import { alpha, Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
+import { useAuthConfirmChangeEmail } from '../api/authConfirmChangeEmailApi'
 import type {
   AuthConfirmChangeEmailResponse,
   AuthConfirmChangeEmailSchema,
-} from '../model/types/AuthConfirmChangeEmail';
+} from '../model/types/AuthConfirmChangeEmail'
 
 const AuthConfirmChangeEmailForm = () => {
-  const [formError, setFormError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthConfirmChangeEmailSchema>({
     defaultValues: {
       code: '',
     },
-  });
+  })
 
-  const [getProfile, { isLoading: isGetProfileLoading }] = useLazyGetProfile();
-  const [authConfirmChangeEmail, { isLoading }] = useAuthConfirmChangeEmail();
-  const navigate = useNavigate();
+  const [getProfile, { isLoading: isGetProfileLoading }] = useLazyGetProfile()
+  const [authConfirmChangeEmail, { isLoading }] = useAuthConfirmChangeEmail()
+  const navigate = useNavigate()
 
   const onSubmit = async (data: AuthConfirmChangeEmailSchema) => {
     try {
-      setFormError(null);
-      clearErrors();
+      setFormError(null)
+      clearErrors()
 
-      await authConfirmChangeEmail(data).unwrap();
-      await getProfile().unwrap();
-      navigate(ROUTES.MAIN());
-    } catch (err) {
-      const { errors } = err as AuthConfirmChangeEmailResponse;
-      const { detail, ...fieldErrors } = errors;
+      await authConfirmChangeEmail(data).unwrap()
+      await getProfile().unwrap()
+      navigate(ROUTES.HOME())
+    }
+    catch (err) {
+      const { errors } = err as AuthConfirmChangeEmailResponse
+      const { detail, ...fieldErrors } = errors
       if (detail) {
-        setFormError(Array.isArray(detail) ? detail[0] : detail);
+        setFormError(Array.isArray(detail) ? detail[0] : detail)
       }
 
       Object.entries(fieldErrors).forEach(([field, message]) => {
-        setError(field as keyof AuthConfirmChangeEmailSchema, { type: 'server', message });
-      });
+        setError(field as keyof AuthConfirmChangeEmailSchema, { type: 'server', message })
+      })
     }
-  };
+  }
 
   return (
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={(theme) => ({
+      sx={theme => ({
         display: 'flex',
         position: 'relative',
         width: '400px',
         maxWidth: '400px',
         p: 4,
-        backgroundColor: `${alpha(theme.palette.background.default, 0.5)}`,
+        backgroundColor: theme.palette.background.paper,
         border: `1px solid ${alpha(theme.palette.grey[100], 0.1)}`,
         borderRadius: 2,
         overflow: 'hidden',
@@ -64,9 +65,17 @@ const AuthConfirmChangeEmailForm = () => {
       {(isLoading || isGetProfileLoading) && <FormLoader />}
       <Stack spacing={2} width="100%">
         <Stack spacing={1}>
-          <Typography variant="h6" fontWeight="bold" color="primary">
-            Подтверждение почты
-          </Typography>
+          <Box>
+            <Typography
+              variant="h6"
+              component="span"
+              sx={theme => ({
+                backgroundColor: theme.palette.primary.light,
+              })}
+            >
+              Подтверждение почты
+            </Typography>
+          </Box>
           <Typography variant="h4" fontWeight={600}>
             Код подтверждения отправлен на почту
           </Typography>
@@ -96,6 +105,6 @@ const AuthConfirmChangeEmailForm = () => {
         </Button>
       </Stack>
     </Box>
-  );
-};
-export default AuthConfirmChangeEmailForm;
+  )
+}
+export default AuthConfirmChangeEmailForm
