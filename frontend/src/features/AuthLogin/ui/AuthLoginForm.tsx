@@ -109,14 +109,14 @@ const AuthLoginForm = () => {
           name="username"
           control={control}
           rules={{
-            required: 'Введите логин',
+            required: 'Введите логин или почту',
           }}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
               fullWidth
               variant="outlined"
-              label="Логин"
+              label="Логин или почта"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />

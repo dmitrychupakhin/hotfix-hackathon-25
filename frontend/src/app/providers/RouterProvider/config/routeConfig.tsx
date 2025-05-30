@@ -9,6 +9,7 @@ import { AuthPageLayout } from '@/pages/AuthPage'
 import { Navigate } from 'react-router'
 import { AuthLoginForm } from '@/features/AuthLogin'
 import { AuthBanner } from '@/pages/AuthPage'
+import { AuthRegisterForm } from '@/features/AuthRegister'
 
 export const routeConfig: AppRouteObject[] = [
   {
@@ -39,11 +40,11 @@ export const routeConfig: AppRouteObject[] = [
                     element: <AuthLoginForm />,
                     redirectIfAuth: true,
                   },
-                  // {
-                  //   path: ROUTES.AUTH_REGISTER(),
-                  //   element: <AuthRegisterForm />,
-                  //   redirectIfAuth: true,
-                  // },
+                  {
+                    path: ROUTES.AUTH_REGISTER(),
+                    element: <AuthRegisterForm />,
+                    redirectIfAuth: true,
+                  },
                   // {
                   //   path: ROUTES.AUTH_REGISTER_CONFIRM(),
                   //   element: <AuthConfirmRegisterForm />,
