@@ -1,5 +1,4 @@
-import aio_pika
-import json
+import aio_pika, json
 from django.conf import settings
 
 async def send_email_task(email: str, code: str, email_type: int):
