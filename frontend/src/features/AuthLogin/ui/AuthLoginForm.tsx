@@ -27,7 +27,7 @@ const AuthLoginForm = () => {
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthLoginSchema>({
     defaultValues: {
-      personalId: '',
+      username: '',
       password: '',
       rememberMe: false,
     },
@@ -106,7 +106,7 @@ const AuthLoginForm = () => {
           </Typography>
         )}
         <Controller
-          name="personalId"
+          name="username"
           control={control}
           rules={{
             required: 'Введите логин',
