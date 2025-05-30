@@ -25,6 +25,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     vk_id = models.IntegerField(unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=64, null=True, blank=False)
     last_name = models.CharField(max_length=64, null=True, blank=False)
+    middle_name = models.CharField(max_length=64, null=True, blank=True)
+    phone = models.CharField(max_length=11, null=True, blank=False)
     photo = models.ImageField(
         upload_to="users", 
         blank=True, 
@@ -34,6 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     remember_me = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_team = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

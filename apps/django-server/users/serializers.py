@@ -9,7 +9,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'confirm')
+        fields = ('username', 'first_name', 'last_name', 'middle_name', 'phone', 'email', 'password', 'confirm')
         write_only_fields = ('confirm', )
     
     def validate(self, attrs):
@@ -60,13 +60,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CodeSerializer(serializers.Serializer):
     code = serializers.CharField(required=True)
 
-
-
-
-
-
-
-
 class EmailCodeSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     code = serializers.CharField(required=True)
@@ -111,8 +104,8 @@ class GetUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'photo')
-
+        fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'is_staf', 'is_team')
+    
 class UpdatePhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

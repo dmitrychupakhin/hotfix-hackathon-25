@@ -31,7 +31,7 @@ class UserRegisterView(APIView):
         
         EmailSender.send_email(email=serializer.validated_data['email'], code=code, email_type=1)
         return Response({'detail': ['Код подтверждения отправлен на почту']}, status=status.HTTP_200_OK)
-        
+    
 class UserRegisterConfirmView(APIView):
     serializer_class = CodeSerializer
 
@@ -175,7 +175,8 @@ class VKAuthView(APIView):
             return Response({"detail": ["Пользователь не найден"]}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({"detail": ["Ошибка при обращении к VK ID"]}, status=status.HTTP_502_BAD_GATEWAY)
-        
+
+
 # IsAuthenticated
 
 @extend_schema(summary="Отвязка VK", tags=["Авторизация"])

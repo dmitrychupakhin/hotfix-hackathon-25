@@ -178,7 +178,7 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'users.User'
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'EVEREST API',
+    'TITLE': 'SlobodaSoft API',
     'DESCRIPTION': '',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
