@@ -6,7 +6,7 @@ export const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     getProfile: build.query<User, void>({
       query: () => ({
-        url: '/account/me',
+        url: '/users/me',
         method: 'GET',
       }),
       transformResponse: (response: any) => {

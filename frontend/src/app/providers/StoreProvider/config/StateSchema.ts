@@ -1,7 +1,7 @@
 import type { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from '@reduxjs/toolkit';
 import { rtkApi } from '@/shared/api';
 import { logoutReducer } from '@/features/AuthLogout';
-// import { globalLoaderReducer } from '@/features/GlobalLoader';
+import { globalLoaderReducer } from '@/features/GlobalLoader';
 // import { AxiosInstance } from 'axios';
 // import { CombinedState } from 'redux';
 
@@ -9,7 +9,7 @@ export interface StateSchema {
   // counter: CounterSchema;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
   logout: ReturnType<typeof logoutReducer>;
-  // globalLoader: ReturnType<typeof globalLoaderReducer>;
+  globalLoader: ReturnType<typeof globalLoaderReducer>;
   // Асинхронные редюсеры
   // loginForm?: LoginSchema;
 }
