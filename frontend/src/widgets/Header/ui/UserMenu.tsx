@@ -1,5 +1,5 @@
 // import type { User } from '@/entities/Profile/model/types/User'
-// import useLogout from '@/features/AuthLogout/lib/hooks/useLogout'
+import useLogout from '@/features/AuthLogout/lib/hooks/useLogout'
 import { ROUTES } from '@/shared/const/routes'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
@@ -19,13 +19,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
 
-  // const { logout, isLoading: isLoggingOut } = useLogout()
-
-  const logout = () => {
-    console.log('logout')
-  }
-
-  const isLoggingOut = false
+  const { logout, isLoading: isLoggingOut } = useLogout()
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -70,7 +64,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
               width: 42,
               height: 42,
             })}
-            variant="rounded"
+            variant="circular"
             src={user.photo}
           />
           <Stack spacing={0} alignItems="start">
@@ -86,7 +80,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
               Студент
             </Typography>
           </Stack>
-          <KeyboardArrowDownIcon color="primary" />
+          <KeyboardArrowDownIcon color="secondary" />
         </Stack>
       </ButtonBase>
 
