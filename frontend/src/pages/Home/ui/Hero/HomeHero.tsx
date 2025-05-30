@@ -1,4 +1,4 @@
-import background from '@/shared/assets/images/appBackground.jpg'
+
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined'
 import { Box, Button, Typography } from '@mui/material'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
@@ -6,10 +6,6 @@ import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
 const HomeHero = () => {
   return (
     <Box sx={{
-      backgroundImage: `url(${background})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
       minHeight: '100vh',
       width: '100%',
       display: 'flex',
