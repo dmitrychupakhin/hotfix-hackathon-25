@@ -31,10 +31,10 @@ jobs:
             --exclude=".env" \
             ./ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}
 
-      - name: Copy default photo none.png separately
-        shell: bash
-        run: |
-          rsync --archive --compress ./django-server/media/users/none.png ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}/django-server/media/users/
+      # - name: Copy default photo none.png separately
+      #   shell: bash
+      #   run: |
+      #     rsync --archive --compress ./django-server/media/users/none.png ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}/django-server/media/users/
 
       - name: Run docker-compose on server
         shell: bash
