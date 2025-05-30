@@ -1,5 +1,4 @@
 import {
-  alpha,
   type Components,
   inputLabelClasses,
   outlinedInputClasses,

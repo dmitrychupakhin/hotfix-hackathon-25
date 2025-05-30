@@ -1,22 +1,22 @@
-import type { FieldErrors } from '@/shared/types/FieldErrors';
+import type { FieldErrors } from '@/shared/types/FieldErrors'
 
 interface AuthConfirmResetPasswordSchema {
-  code: string;
-  password: string;
-  confirm: string;
+  code: string
+  password: string
+  confirm: string
 }
 
 type AuthConfirmResetPasswordErrors = FieldErrors<AuthConfirmResetPasswordSchema> & {
-  detail?: string | string[];
-};
+  detail?: string | string[]
+}
 
 type AuthConfirmResetPasswordResponse = {
-  errors: AuthConfirmResetPasswordErrors;
-  status: number;
-};
+  errors: AuthConfirmResetPasswordErrors
+  status: number
+}
 
 export type {
   AuthConfirmResetPasswordSchema,
   AuthConfirmResetPasswordResponse,
   AuthConfirmResetPasswordErrors,
-};
+}

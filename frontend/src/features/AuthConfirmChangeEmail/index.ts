@@ -1,1 +1,1 @@
-export { default as AuthConfirmChangeEmailForm } from './ui/AuthConfirmChangeEmailForm';
+export { default as AuthConfirmChangeEmailForm } from './ui/AuthConfirmChangeEmailForm'

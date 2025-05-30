@@ -1,16 +1,16 @@
-import type { FieldErrors } from '@/shared/types/FieldErrors';
+import type { FieldErrors } from '@/shared/types/FieldErrors'
 
 interface AuthChangeEmailSchema {
-  email: string;
+  email: string
 }
 
 type AuthChangeEmailErrors = FieldErrors<AuthChangeEmailSchema> & {
-  detail?: string | string[];
-};
+  detail?: string | string[]
+}
 
 type AuthChangeEmailResponse = {
-  errors: AuthChangeEmailErrors;
-  status: number;
-};
+  errors: AuthChangeEmailErrors
+  status: number
+}
 
-export type { AuthChangeEmailSchema, AuthChangeEmailResponse, AuthChangeEmailErrors };
+export type { AuthChangeEmailSchema, AuthChangeEmailResponse, AuthChangeEmailErrors }

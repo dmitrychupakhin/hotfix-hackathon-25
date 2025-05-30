@@ -14,11 +14,10 @@ export const useVkLogin = () => {
     redirectTo?: ReturnType<(typeof ROUTES)[keyof typeof ROUTES]> | null,
   ) => {
     try {
-      // @ts-ignore
-
+      // @ts-expect-error: VKIDSDK.Auth.login() возвращает объект без типов
       const { code, device_id } = await VKIDSDK.Auth.login()
       const vkExchangeCode = await vkidSdkExchangeCode(code, device_id)
-      // @ts-ignore
+
       await vkLogin({ access_token: vkExchangeCode.access_token }).unwrap()
       await getProfile().unwrap()
       if (redirectTo) {

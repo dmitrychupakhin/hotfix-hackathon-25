@@ -1,20 +1,20 @@
-import type { FieldErrors } from '@/shared/types/FieldErrors';
+import type { FieldErrors } from '@/shared/types/FieldErrors'
 
 interface AuthConfirmChangeEmailSchema {
-  code: string;
+  code: string
 }
 
 type AuthConfirmChangeEmailErrors = FieldErrors<AuthConfirmChangeEmailSchema> & {
-  detail?: string | string[];
-};
+  detail?: string | string[]
+}
 
 type AuthConfirmChangeEmailResponse = {
-  errors: AuthConfirmChangeEmailErrors;
-  status: number;
-};
+  errors: AuthConfirmChangeEmailErrors
+  status: number
+}
 
 export type {
   AuthConfirmChangeEmailSchema,
   AuthConfirmChangeEmailResponse,
   AuthConfirmChangeEmailErrors,
-};
+}

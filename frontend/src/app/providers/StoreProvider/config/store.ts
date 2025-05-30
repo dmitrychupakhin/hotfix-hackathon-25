@@ -38,7 +38,7 @@ export function createReduxStore(
       }).concat(rtkApi.middleware),
   })
 
-  // @ts-ignore
+  // @ts-expect-error: reducerManager is not typed
   store.reducerManager = reducerManager
 
   return store

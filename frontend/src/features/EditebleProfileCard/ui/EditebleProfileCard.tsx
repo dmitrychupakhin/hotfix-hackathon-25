@@ -8,13 +8,21 @@ interface EditebleProfileCardProps {
 }
 
 const EditebleProfileCard = ({ user }: EditebleProfileCardProps) => {
+  const [isEdit, setIsEdit] = useState(false)
+
   if (!user) {
     return null
   }
 
-  const [isEdit, setIsEdit] = useState(false)
-
-  return <ProfileCard user={user} EditebleProfileLogo={<ProfileLogo user={user} />} isEdit={isEdit} setIsEdit={setIsEdit} EditebleProfileData={<EditebleProfileData user={user} isEdit={isEdit} setIsEdit={setIsEdit} />} />
+  return (
+    <ProfileCard
+      user={user}
+      EditebleProfileLogo={<ProfileLogo user={user} />}
+      isEdit={isEdit}
+      setIsEdit={setIsEdit}
+      EditebleProfileData={<EditebleProfileData user={user} isEdit={isEdit} setIsEdit={setIsEdit} />}
+    />
+  )
 }
 
 export default EditebleProfileCard

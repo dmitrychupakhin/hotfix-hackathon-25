@@ -1,1 +1,1 @@
-export { default as AuthChangePasswordForm } from './ui/AuthChangePasswordForm';
+export { default as AuthChangePasswordForm } from './ui/AuthChangePasswordForm'

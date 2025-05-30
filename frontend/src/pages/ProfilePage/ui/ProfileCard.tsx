@@ -3,7 +3,7 @@ import EditebleProfileCard from '@/features/EditebleProfileCard/ui/EditebleProfi
 import { useSelector } from 'react-redux'
 
 const ProfileCard = () => {
-  const { data: user, isLoading, isUninitialized } = useSelector(getProfileData)
+  const { data: user } = useSelector(getProfileData)
   if (!user) {
     return null
   }

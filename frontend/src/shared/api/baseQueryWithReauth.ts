@@ -11,7 +11,7 @@ const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError,
-  {},
+  object,
   FetchBaseQueryMeta
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)

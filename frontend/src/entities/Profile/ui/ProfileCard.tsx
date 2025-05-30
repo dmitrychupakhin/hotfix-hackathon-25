@@ -1,7 +1,7 @@
 import { type User } from '@/entities/Profile'
 import backgroundLight from '@/shared/assets/images/profileBackground.png'
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
-import { Avatar, Box, Divider, Grid, Typography } from '@mui/material'
+import { Box, Divider, Grid, Typography } from '@mui/material'
 import ProfileActions from './ProfileActions'
 import ProfileData from './ProfileData'
 
@@ -17,7 +17,7 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
   return (
     <Grid
       container
-      sx={theme => ({
+      sx={({
         width: '100%',
         height: '100%',
         backgroundImage: `url(${backgroundLight})`,

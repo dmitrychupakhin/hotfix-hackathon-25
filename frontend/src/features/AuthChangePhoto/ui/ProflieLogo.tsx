@@ -3,9 +3,9 @@ import type { User } from '@/entities/Profile/model/types/User'
 import { useAuthChangePhoto } from '@/features/AuthChangePhoto/api/authChangePhotoApi'
 // import { useNotification } from '@/shared/lib/hooks/useNotification'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
-import { Avatar, Box, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Stack } from '@mui/material'
 import type { ChangeEvent, FC } from 'react'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 
 export interface ProfileLogoProps {
   user: User
@@ -14,7 +14,6 @@ export interface ProfileLogoProps {
 const ProfileLogo: FC<ProfileLogoProps> = ({ user }) => {
   const [getProfile] = useLazyGetProfile()
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [, setIsHovered] = useState(false)
   const [authChangePhoto] = useAuthChangePhoto()
   //   const { showNotification } = useNotification()
 
@@ -35,6 +34,7 @@ const ProfileLogo: FC<ProfileLogoProps> = ({ user }) => {
     //   showNotification('Фото успешно обновлено', 'success')
     }
     catch (error) {
+      console.error('Ошибка при загрузке фото:', error)
     //   showNotification('Ошибка при загрузке фото', 'error')
     }
   }

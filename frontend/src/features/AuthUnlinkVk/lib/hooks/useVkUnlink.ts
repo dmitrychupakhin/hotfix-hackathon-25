@@ -14,6 +14,7 @@ export const useVkUnlink = () => {
       // showNotification('Вы успешно отвязали VK', 'success')
     }
     catch (error) {
+      console.error('Ошибка при отвязке VK:', error)
       // showNotification('Ошибка при отвязке VK', 'error')
     }
   }

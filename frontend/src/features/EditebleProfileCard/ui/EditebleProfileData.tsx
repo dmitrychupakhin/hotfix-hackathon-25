@@ -18,7 +18,7 @@ interface EditebleProfileDataProps {
   setIsEdit: (isEdit: boolean) => void
 }
 
-const EditebleProfileData = ({ user, isEdit, setIsEdit }: EditebleProfileDataProps) => {
+const EditebleProfileData = ({ user, setIsEdit }: EditebleProfileDataProps) => {
   const { handleSubmit, control, setError, clearErrors } = useForm<EditebleProfileCardSchema>({
     defaultValues: {
       firstName: user.firstName || '',

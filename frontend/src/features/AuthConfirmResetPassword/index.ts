@@ -1,1 +1,1 @@
-export { default as AuthConfirmResetPasswordForm } from './ui/AuthConfirmResetPasswordForm';
+export { default as AuthConfirmResetPasswordForm } from './ui/AuthConfirmResetPasswordForm'
