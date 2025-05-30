@@ -23,8 +23,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email', unique=True)
     
     vk_id = models.IntegerField(unique=True, null=True, blank=True)
-    first_name = models.CharField(max_length=64, null=True, blank=False)
-    last_name = models.CharField(max_length=64, null=True, blank=False)
+    first_name = models.CharField(max_length=64, null=True, blank=False, default="Измени")
+    last_name = models.CharField(max_length=64, null=True, blank=False, default="Меня")
     middle_name = models.CharField(max_length=64, null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=False)
     tg = models.CharField(max_length=64, null=True, blank=True)

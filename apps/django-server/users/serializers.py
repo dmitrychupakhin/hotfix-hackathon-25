@@ -107,6 +107,9 @@ class GetUserSerializer(serializers.ModelSerializer):
         fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staff', 'is_team')
 
 class EditUserSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
+    phone = serializers.CharField(required=True)
     
     class Meta:
         model = User
