@@ -70,11 +70,13 @@ services:
       dockerfile: nginx/Dockerfile
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - django
     volumes:
       - static_volume:/static
       - media_volume:/media
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
 
   adminer:
     container_name: adminer
