@@ -4,6 +4,7 @@ import { useVkUnlink } from '@/features/AuthUnlinkVk/lib/hooks/useVkUnlink'
 import VkUnlinkButton from '@/features/AuthUnlinkVk/ui/VkUnlinkButton'
 import { useVkLogin, VkLoginButton } from '@/features/AuthVkLogin'
 import type { AuthVkLoginResponse } from '@/features/AuthVkLogin/model/types/AuthVkLoginSchema'
+import FormLoader from '@/shared/ui/FormLoader/FormLoader'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
 import { Box, Button, Grid, Stack, TextField } from '@mui/material'
@@ -75,6 +76,7 @@ const EditebleProfileData = ({ user, isEdit, setIsEdit }: EditebleProfileDataPro
       onSubmit={handleSubmit(onSubmit)}
       spacing={2}
     >
+      {(isEditebleProfileCardLoading || isVkLoginLoading || isUnlinkVkLoading) && <FormLoader />}
       <Grid container spacing={2}>
         <Grid size={3}>
           <Controller
