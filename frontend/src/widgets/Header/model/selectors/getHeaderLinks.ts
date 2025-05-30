@@ -7,8 +7,8 @@ export const getHeaderLinks = (): HeaderLink[] => {
       path: '/',
     },
     {
-      title: 'Мероприятия',
-      path: '/events',
+      title: 'Наши работы',
+      path: '/projects',
     },
     {
       title: 'О нас',
