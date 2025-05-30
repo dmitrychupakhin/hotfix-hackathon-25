@@ -11,15 +11,14 @@ interface AppBackgroundLayoutProps {
 }
 
 const AppBackgroundLayout: FC<AppBackgroundLayoutProps> = ({ backgroundDark, backgroundLight }) => {
-  // const isZoom = useIsCurrentRoute(getPagesWithBackgroundZoom());
-  const isZoom = false;
+  const isZoom = useIsCurrentRoute(getPagesWithBackgroundZoom());
   const theme = useTheme();
   const zoomSize = `calc(100%)`;
 
   const currentBackground = theme.palette.mode === 'light' ? backgroundLight : backgroundDark;
 
   return (
-    <Box position="relative" width="100%">
+    <Box position="relative" width="100%" overflow="hidden">
       <Box
         position="absolute"
         width="100%"
