@@ -179,6 +179,14 @@ class VKAuthView(APIView):
 
 # IsAuthenticated
 
+@extend_schema(summary="Обновление данных пользователя", tags=["Пользователь"])
+class UserUpdateAPIView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = EditUserSerializer
+
+    def get_object(self):
+        return self.request.user
+
 @extend_schema(summary="Отвязка VK", tags=["Авторизация"])
 class VKLogoutView(APIView):
     permission_classes = [IsAuthenticated]

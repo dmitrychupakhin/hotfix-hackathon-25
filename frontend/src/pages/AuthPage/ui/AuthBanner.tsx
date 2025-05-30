@@ -6,7 +6,7 @@ const AuthBanner = () => {
             <Typography variant="h1" fontWeight={600} component="h2" sx={(theme) => ({
                 color: theme.palette.invertedSecondary.dark,
             })}>
-                Будь тем, кто поднимается выше, когда остальные сомневаются!
+                Здесь начинается путь от идеи к рабочему решению.
             </Typography>
         </Stack>
     );

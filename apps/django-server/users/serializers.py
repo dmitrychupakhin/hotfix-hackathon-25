@@ -106,6 +106,13 @@ class GetUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staff', 'is_team')
 
+class EditUserSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'middle_name', 'phone', 'tg')
+    
+
 class UpdatePhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
