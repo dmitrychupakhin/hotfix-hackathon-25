@@ -104,8 +104,8 @@ class GetUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'is_staf', 'is_team')
-    
+        fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staf', 'is_team')
+
 class UpdatePhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

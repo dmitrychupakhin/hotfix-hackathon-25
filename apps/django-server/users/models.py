@@ -27,6 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=64, null=True, blank=False)
     middle_name = models.CharField(max_length=64, null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=False)
+    tg = models.CharField(max_length=64, null=True, blank=True)
     photo = models.ImageField(
         upload_to="users", 
         blank=True, 
