@@ -55,7 +55,7 @@ const HomeHero = () => {
             color: theme.palette.invertedSecondary.dark,
           })}
         >
-          Помогаем беречь водопады липецкой области!
+          SLOBODASOFT — превращаем идеи в эффективные цифровые решения
         </Typography>
         <Typography
           variant="h4"
@@ -64,9 +64,9 @@ const HomeHero = () => {
             color: theme.palette.invertedSecondary.main,
           })}
         >
-          Помогаем беречь водопады липецкой области!
+          Мы не просто делаем WEB, мы даем ему характер!
         </Typography>
-        <Button variant="contained" endIcon={<RocketLaunchOutlinedIcon />}>Рассчитать стоимость</Button>
+        <Button variant="contained" endIcon={<RocketLaunchOutlinedIcon />}>Подать заявку</Button>
       </Box>
     </Box>
   )
