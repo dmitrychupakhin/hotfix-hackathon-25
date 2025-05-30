@@ -14,4 +14,7 @@ export default defineConfig({
   define: {
     __API__: JSON.stringify('https://crocodailo.ru/api'),
   },
+  server: {
+    port: 80,
+  },
 })

@@ -8,7 +8,7 @@ interface ThemeProviderProps {
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   return (
-    <MuiThemeProvider noSsr theme={appTheme} defaultMode="system" disableTransitionOnChange>
+    <MuiThemeProvider noSsr theme={appTheme} defaultMode="light" disableTransitionOnChange>
       <CssBaseline enableColorScheme />
       {children}
     </MuiThemeProvider>
