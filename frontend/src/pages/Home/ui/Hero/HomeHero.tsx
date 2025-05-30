@@ -93,7 +93,7 @@ const HomeHero = () => {
                   fontWeight: 600,
                 }}
                 >
-                  0
+                  120
                 </Box>
                 <Typography fontWeight={600}>Багов</Typography>
               </Stack>
