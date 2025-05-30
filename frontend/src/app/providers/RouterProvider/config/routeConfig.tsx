@@ -12,6 +12,11 @@ import backgroundLight from '@/shared/assets/images/appBackground.jpg'
 import { ROUTES } from '@/shared/const/routes'
 import { Navigate } from 'react-router'
 import type { AppRouteObject } from '../types/router'
+import { AuthConfirmChangeEmailForm } from '@/features/AuthConfirmChangeEmail'
+import { AuthChangeEmailForm } from '@/features/AuthChangeEmail'
+import { AuthConfirmResetPasswordForm } from '@/features/AuthConfirmResetPassword'
+import { AuthResetPasswordForm } from '@/features/AuthResetPassword'
+import { AuthChangePasswordForm } from '@/features/AuthChangePassword'
 export const routeConfig: AppRouteObject[] = [
   {
     element: <RootLayout />,
@@ -51,31 +56,31 @@ export const routeConfig: AppRouteObject[] = [
                     element: <AuthConfirmRegisterForm />,
                     redirectIfAuth: true,
                   },
-                  // {
-                  //   path: ROUTES.AUTH_CHANGE_EMAIL(),
-                  //   element: <AuthChangeEmailForm />,
-                  //   authOnly: true,
-                  // },
-                  // {
-                  //   path: ROUTES.AUTH_RESET_PASSWORD(),
-                  //   element: <AuthResetPasswordForm />,
-                  //   redirectIfAuth: true,
-                  // },
-                  // {
-                  //   path: ROUTES.AUTH_RESET_PASSWORD_CONFIRM(),
-                  //   element: <AuthConfirmResetPasswordForm />,
-                  //   redirectIfAuth: true,
-                  // },
-                  // {
-                  //   path: ROUTES.AUTH_CHANGE_EMAIL_CONFIRM(),
-                  //   element: <AuthConfirmChangeEmailForm />,
-                  //   authOnly: true,
-                  // },
-                  // {
-                  //   path: ROUTES.AUTH_CHANGE_PASSWORD(),
-                  //   element: <AuthChangePasswordForm />,
-                  //   authOnly: true,
-                  // },
+                  {
+                    path: ROUTES.AUTH_CHANGE_EMAIL(),
+                    element: <AuthChangeEmailForm />,
+                    authOnly: true,
+                  },
+                  {
+                    path: ROUTES.AUTH_RESET_PASSWORD(),
+                    element: <AuthResetPasswordForm />,
+                    redirectIfAuth: true,
+                  },
+                  {
+                    path: ROUTES.AUTH_RESET_PASSWORD_CONFIRM(),
+                    element: <AuthConfirmResetPasswordForm />,
+                    redirectIfAuth: true,
+                  },
+                  {
+                    path: ROUTES.AUTH_CHANGE_EMAIL_CONFIRM(),
+                    element: <AuthConfirmChangeEmailForm />,
+                    authOnly: true,
+                  },
+                  {
+                    path: ROUTES.AUTH_CHANGE_PASSWORD(),
+                    element: <AuthChangePasswordForm />,
+                    authOnly: true,
+                  },
                 ],
               },
             ],

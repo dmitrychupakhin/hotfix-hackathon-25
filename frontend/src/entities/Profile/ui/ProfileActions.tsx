@@ -6,6 +6,7 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import { ROUTES } from '@/shared/const/routes'
 
 interface ProfileActionsProps {
   setIsEdit: (isEdit: boolean) => void
@@ -31,12 +32,12 @@ const ProfileActions = ({ setIsEdit }: ProfileActionsProps) => {
 
   const goToChangePassword = () => {
     handleClose()
-    navigate('/profile/change-password')
+    navigate(ROUTES.AUTH_CHANGE_PASSWORD())
   }
 
   const goToChangeEmail = () => {
     handleClose()
-    navigate('/profile/change-email')
+    navigate(ROUTES.AUTH_CHANGE_EMAIL())
   }
 
   return (

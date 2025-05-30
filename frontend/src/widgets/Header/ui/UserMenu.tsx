@@ -37,12 +37,12 @@ const UserMenu = ({ user }: UserMenuProps) => {
 
   const handleChangeEmailClick = () => {
     handleClose()
-    // navigate(ROUTES.AUTH_CHANGE_EMAIL())
+    navigate(ROUTES.AUTH_CHANGE_EMAIL())
   }
 
   const handleChangePasswordClick = () => {
     handleClose()
-    // navigate(ROUTES.AUTH_CHANGE_PASSWORD())
+    navigate(ROUTES.AUTH_CHANGE_PASSWORD())
   }
 
   const handleLogout = async () => {
