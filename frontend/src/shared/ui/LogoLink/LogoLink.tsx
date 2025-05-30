@@ -9,7 +9,7 @@ export const LogoLink = () => {
       <Stack direction="row" sx={{ alignItems: 'center', gap: 1 }}>
         <Logo width="42px" height="42px" />
         <Typography variant="h4" sx={{ fontWeight: '600' }}>
-          Эверест
+          SlobodaSoft
         </Typography>
       </Stack>
     </Link>
