@@ -2,6 +2,8 @@
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined'
 import { Box, Button, Typography } from '@mui/material'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
+import { AnimatePresence } from 'motion/react'
+import { MotionBox } from '@/shared/ui/MotionBox'
 
 const HomeHero = () => {
   return (
@@ -22,16 +24,25 @@ const HomeHero = () => {
         height: 'auto',
       }}
       />
-      <ImgCornerVector
-        style={{
-          position: 'absolute',
-          bottom: -1,
-          right: 0,
-          width: '650px',
-          height: 'auto',
-          transform: 'rotate(180deg)',
-        }}
-      />
+      <AnimatePresence>
+        <MotionBox
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 10 }}
+          exit={{ opacity: 0, y: 50 }}
+          transition={{ duration: 0.4 }}
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            width: '650px',
+            height: 'auto',
+          }}
+        >
+          <ImgCornerVector style={{
+            transform: 'rotate(180deg)',
+          }} />
+        </MotionBox>
+      </AnimatePresence>
 
       <Box
         sx={{

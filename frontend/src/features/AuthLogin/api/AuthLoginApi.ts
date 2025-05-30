@@ -10,7 +10,7 @@ const authLoginApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     authLogin: build.mutation<void, AuthLoginSchema>({
       query: (body) => ({
-        url: '/account/login',
+        url: '/users/login',
         method: 'POST',
         body: camelToSnakeObject(body),
       }),

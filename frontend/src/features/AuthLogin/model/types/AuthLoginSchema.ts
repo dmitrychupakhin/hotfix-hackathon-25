@@ -1,7 +1,7 @@
 import type { FieldErrors } from '@/shared/types/FieldErrors';
 
 interface AuthLoginSchema {
-  personalId: string;
+  username: string;
   password: string;
   rememberMe: boolean;
 }

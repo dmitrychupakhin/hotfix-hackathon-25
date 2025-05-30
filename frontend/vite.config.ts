@@ -12,7 +12,7 @@ export default defineConfig({
     alias: [{ find: '@', replacement: '/src' }],
   },
   define: {
-    __API__: JSON.stringify('https://crocodailo.ru/api'),
+    __API__: JSON.stringify('https://slobodasoft.ru/api'),
   },
   server: {
     port: 80,

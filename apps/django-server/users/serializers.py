@@ -9,7 +9,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'middle_name', 'phone', 'email', 'password', 'confirm')
+        fields = ('username', 'email', 'password', 'confirm')
         write_only_fields = ('confirm', )
     
     def validate(self, attrs):
@@ -104,7 +104,7 @@ class GetUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staf', 'is_team')
+        fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staff', 'is_team')
 
 class UpdatePhotoSerializer(serializers.ModelSerializer):
     class Meta:
