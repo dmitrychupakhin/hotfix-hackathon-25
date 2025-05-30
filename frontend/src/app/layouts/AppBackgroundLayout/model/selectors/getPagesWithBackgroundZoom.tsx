@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared/const/routes';
+import { ROUTES } from '@/shared/const/routes'
 
 const getPagesWithBackgroundZoom = (): string[] => {
   return [
@@ -10,6 +10,6 @@ const getPagesWithBackgroundZoom = (): string[] => {
     ROUTES.AUTH_CHANGE_PASSWORD(),
     ROUTES.AUTH_RESET_PASSWORD(),
     ROUTES.AUTH_RESET_PASSWORD_CONFIRM(),
-  ];
-};
-export default getPagesWithBackgroundZoom;
+  ]
+}
+export default getPagesWithBackgroundZoom

@@ -1,19 +1,19 @@
-import type { FieldErrors } from '@/shared/types/FieldErrors';
+import type { FieldErrors } from '@/shared/types/FieldErrors'
 
 interface AuthRegisterSchema {
-  username: string;
-  email: string;
-  password: string;
-  confirm: string;
+  username: string
+  email: string
+  password: string
+  confirm: string
 }
 
 type AuthRegisterErrors = FieldErrors<AuthRegisterSchema> & {
-  detail?: string | string[];
-};
+  detail?: string | string[]
+}
 
 type AuthRegisterResponse = {
-  errors: AuthRegisterErrors;
-  status: number;
-};
+  errors: AuthRegisterErrors
+  status: number
+}
 
-export type { AuthRegisterSchema, AuthRegisterResponse, AuthRegisterErrors };
+export type { AuthRegisterSchema, AuthRegisterResponse, AuthRegisterErrors }

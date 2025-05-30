@@ -1,10 +1,10 @@
 type AuthVkLoginErrors = {
-  detail?: string | string[];
-};
+  detail?: string | string[]
+}
 
 type AuthVkLoginResponse = {
-  errors: AuthVkLoginErrors;
-  status: number;
-};
+  errors: AuthVkLoginErrors
+  status: number
+}
 
-export type { AuthVkLoginErrors, AuthVkLoginResponse };
+export type { AuthVkLoginErrors, AuthVkLoginResponse }

@@ -1,11 +1,11 @@
-import { setIsLoggedOut } from '@/features/AuthLogout/model/slice/logoutSlice';
+import { setIsLoggedOut } from '@/features/AuthLogout/model/slice/logoutSlice'
 import type {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
   FetchBaseQueryMeta,
-} from '@reduxjs/toolkit/query/react';
-import baseQuery from './baseQuery';
+} from '@reduxjs/toolkit/query/react'
+import baseQuery from './baseQuery'
 
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
@@ -14,7 +14,7 @@ const baseQueryWithReauth: BaseQueryFn<
   {},
   FetchBaseQueryMeta
 > = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
+  let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
     const refreshResult = await baseQuery(
@@ -24,16 +24,17 @@ const baseQueryWithReauth: BaseQueryFn<
       },
       api,
       extraOptions,
-    );
+    )
 
     if (refreshResult.data) {
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      api.dispatch(setIsLoggedOut(true));
+      result = await baseQuery(args, api, extraOptions)
+    }
+    else {
+      api.dispatch(setIsLoggedOut(true))
     }
   }
 
-  return result;
-};
+  return result
+}
 
-export default baseQueryWithReauth;
+export default baseQueryWithReauth

@@ -1,16 +1,16 @@
-import type { FieldErrors } from '@/shared/types/FieldErrors';
+import type { FieldErrors } from '@/shared/types/FieldErrors'
 
 interface AuthConfirmRegisterSchema {
-  code: string;
+  code: string
 }
 
 type AuthConfirmRegisterErrors = FieldErrors<AuthConfirmRegisterSchema> & {
-  detail?: string | string[];
-};
+  detail?: string | string[]
+}
 
 type AuthConfirmRegisterResponse = {
-  errors: AuthConfirmRegisterErrors;
-  status: number;
-};
+  errors: AuthConfirmRegisterErrors
+  status: number
+}
 
-export type { AuthConfirmRegisterSchema, AuthConfirmRegisterResponse, AuthConfirmRegisterErrors };
+export type { AuthConfirmRegisterSchema, AuthConfirmRegisterResponse, AuthConfirmRegisterErrors }

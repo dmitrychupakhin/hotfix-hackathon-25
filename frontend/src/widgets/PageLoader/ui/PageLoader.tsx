@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material'
 
 const PageLoader = () => {
   return (
@@ -19,6 +19,6 @@ const PageLoader = () => {
     >
       <CircularProgress size="4rem" color="primary" />
     </Box>
-  );
-};
-export default PageLoader;
+  )
+}
+export default PageLoader

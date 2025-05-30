@@ -1,2 +1,2 @@
-export { default as AuthPageLayout } from './ui/AuthPageLayout';
-export { default as AuthBanner } from './ui/AuthBanner';
+export { default as AuthPageLayout } from './ui/AuthPageLayout'
+export { default as AuthBanner } from './ui/AuthBanner'

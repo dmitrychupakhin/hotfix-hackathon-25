@@ -1,1 +1,1 @@
-export { default as AppBackgroundLayout } from './ui/AppBackgroundLayout';
+export { default as AppBackgroundLayout } from './ui/AppBackgroundLayout'

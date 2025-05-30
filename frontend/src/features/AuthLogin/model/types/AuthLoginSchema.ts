@@ -1,18 +1,18 @@
-import type { FieldErrors } from '@/shared/types/FieldErrors';
+import type { FieldErrors } from '@/shared/types/FieldErrors'
 
 interface AuthLoginSchema {
-  username: string;
-  password: string;
-  rememberMe: boolean;
+  username: string
+  password: string
+  rememberMe: boolean
 }
 
 type AuthLoginErrors = FieldErrors<AuthLoginSchema> & {
-  detail?: string | string[];
-};
+  detail?: string | string[]
+}
 
 type AuthLoginResponse = {
-  errors: AuthLoginErrors;
-  status: number;
-};
+  errors: AuthLoginErrors
+  status: number
+}
 
-export type { AuthLoginSchema, AuthLoginResponse, AuthLoginErrors };
+export type { AuthLoginSchema, AuthLoginResponse, AuthLoginErrors }

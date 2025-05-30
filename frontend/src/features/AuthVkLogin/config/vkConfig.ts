@@ -1,4 +1,4 @@
-import * as VKIDSDK from '@vkid/sdk';
+import * as VKIDSDK from '@vkid/sdk'
 
 export const initVKAuth = () => {
   VKIDSDK.Config.init({
@@ -7,5 +7,5 @@ export const initVKAuth = () => {
     responseMode: VKIDSDK.ConfigResponseMode.Callback,
     source: VKIDSDK.ConfigSource.LOWCODE,
     scope: 'email',
-  });
-};
+  })
+}

@@ -1,1 +1,1 @@
-export { useAuthUnlinkVk } from './api/authUnlinkVkApi';
+export { useAuthUnlinkVk } from './api/authUnlinkVkApi'

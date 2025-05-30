@@ -1,25 +1,25 @@
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch'
 import {
   showLoader as showLoaderAction,
   hideLoader as hideLoaderAction,
-} from '@/features/GlobalLoader';
-import { useCallback } from 'react';
+} from '@/features/GlobalLoader'
+import { useCallback } from 'react'
 
 interface UseGlobalLoaderResult {
-  showLoader: () => void;
-  hideLoader: () => void;
+  showLoader: () => void
+  hideLoader: () => void
 }
 
 export function useGlobalLoader(): UseGlobalLoaderResult {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const showLoader = useCallback(() => {
-    dispatch(showLoaderAction());
-  }, [dispatch]);
+    dispatch(showLoaderAction())
+  }, [dispatch])
 
   const hideLoader = useCallback(() => {
-    dispatch(hideLoaderAction());
-  }, [dispatch]);
+    dispatch(hideLoaderAction())
+  }, [dispatch])
 
-  return { showLoader, hideLoader };
+  return { showLoader, hideLoader }
 }

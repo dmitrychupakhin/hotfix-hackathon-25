@@ -19,4 +19,4 @@ export const ROUTES = {
   EVENT_DETAIL: (id: string) => `/event/${id}`,
 
   NOT_FOUND: () => '*',
-} as const;
+} as const

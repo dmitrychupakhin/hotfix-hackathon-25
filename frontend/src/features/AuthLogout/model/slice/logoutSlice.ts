@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 export const logoutSlice = createSlice({
   name: 'logout',
@@ -10,10 +10,10 @@ export const logoutSlice = createSlice({
       return {
         ...state,
         isLoggedOut: action.payload,
-      };
+      }
     },
   },
-});
+})
 
-export const { setIsLoggedOut } = logoutSlice.actions;
-export const logoutReducer = logoutSlice.reducer;
+export const { setIsLoggedOut } = logoutSlice.actions
+export const logoutReducer = logoutSlice.reducer

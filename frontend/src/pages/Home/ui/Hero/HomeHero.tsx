@@ -1,4 +1,3 @@
-
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined'
 import { Box, Button, Typography } from '@mui/material'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
@@ -40,7 +39,8 @@ const HomeHero = () => {
         >
           <ImgCornerVector style={{
             transform: 'rotate(180deg)',
-          }} />
+          }}
+          />
         </MotionBox>
       </AnimatePresence>
 

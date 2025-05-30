@@ -1,3 +1,3 @@
-import { profileApi } from '@/entities/Profile/api/ProfileApi';
+import { profileApi } from '@/entities/Profile/api/ProfileApi'
 
-export const getProfileData = profileApi.endpoints.getProfile.select();
+export const getProfileData = profileApi.endpoints.getProfile.select()

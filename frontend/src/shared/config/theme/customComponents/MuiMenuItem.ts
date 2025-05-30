@@ -1,5 +1,5 @@
-import type { Components, Theme } from '@mui/material';
-import { menuItemClasses } from '@mui/material';
+import type { Components, Theme } from '@mui/material'
+import { menuItemClasses } from '@mui/material'
 
 const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   defaultProps: {
@@ -22,4 +22,4 @@ const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   },
 }
 
-export default MuiMenuItem;
+export default MuiMenuItem

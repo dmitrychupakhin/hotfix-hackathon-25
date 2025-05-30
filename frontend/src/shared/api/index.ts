@@ -1,1 +1,1 @@
-export { default as rtkApi } from './rtkApi';
+export { default as rtkApi } from './rtkApi'

@@ -1,4 +1,4 @@
-import { useGetProfile } from '@/entities/Profile';
+import { useGetProfile } from '@/entities/Profile'
 
 export const loadingHooks = [
   {
@@ -6,4 +6,4 @@ export const loadingHooks = [
     hook: useGetProfile,
     getIsLoading: (result: ReturnType<typeof useGetProfile>) => result.isLoading,
   },
-];
+]

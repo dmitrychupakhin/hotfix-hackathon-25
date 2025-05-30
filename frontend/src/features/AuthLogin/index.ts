@@ -1,1 +1,1 @@
-export { default as AuthLoginForm } from './ui/AuthLoginForm';
+export { default as AuthLoginForm } from './ui/AuthLoginForm'
