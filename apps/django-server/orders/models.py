@@ -8,7 +8,8 @@ class Status(models.TextChoices):
     DENIED  = "denied",  "Отказано"
     
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Заказчик")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Заказчик", related_name='user_orders')
+    team = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Тимлид", related_name='team_orders')
     title = models.CharField(max_length=128, verbose_name="Тема")
     description = models.TextField(blank=False, null=False, verbose_name="Описание")
     status = models.CharField(max_length=16, choices=Status.choices, default=Status.WAITING, verbose_name="Статус")
