@@ -81,16 +81,16 @@ const Footer = ({ sx }: FooterProps) => {
             sx={{
               backgroundImage: `url(${appBackground})`,
               backgroundSize: 'cover',
-              WebkitBackgroundClip: 'text', // Для Chrome и Safari
-              backgroundClip: 'text', // Для Firefox (если поддерживает)
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
               color: 'transparent',
               fontWeight: 600,
-              minHeight: '150px',
+              minHeight: '100px',
               display: 'inline-block',
-              lineHeight: '150px',
+              lineHeight: '100px',
             }}
           >
-            АБОБА
+            SLOBODA <br /> SOFT
           </Typography>
 
         </Box>
