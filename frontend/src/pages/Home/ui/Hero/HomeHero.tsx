@@ -1,5 +1,5 @@
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
 import { AnimatePresence } from 'motion/react'
 import { MotionBox } from '@/shared/ui/MotionBox'
@@ -23,6 +23,68 @@ const HomeHero = () => {
         height: 'auto',
       }}
       />
+      <Box sx={{
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        zIndex: 2,
+        p: 4,
+      }}
+      >
+        <Stack spacing={2} direction="row" alignItems="center">
+          <Stack spacing={1} direction="row" alignItems="center">
+            <Box sx={{
+              borderRadius: '50%',
+              backgroundColor: 'primary.main',
+              aspectRatio: 1,
+              height: '42px',
+              width: '42px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 600,
+            }}
+            >
+              5
+            </Box>
+            <Typography fontWeight={600}>Сотрудников</Typography>
+          </Stack>
+          <Stack spacing={1} direction="row" alignItems="center">
+            <Box sx={{
+              borderRadius: '50%',
+              backgroundColor: 'primary.main',
+              aspectRatio: 1,
+              height: '42px',
+              width: '42px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 600,
+            }}
+            >
+              3
+            </Box>
+            <Typography fontWeight={600}>Проекта</Typography>
+          </Stack>
+          <Stack spacing={1} direction="row" alignItems="center">
+            <Box sx={{
+              borderRadius: '50%',
+              backgroundColor: 'primary.main',
+              aspectRatio: 1,
+              height: '42px',
+              width: '42px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 600,
+            }}
+            >
+              0
+            </Box>
+            <Typography fontWeight={600}>Багов</Typography>
+          </Stack>
+        </Stack>
+      </Box>
       <AnimatePresence>
         <MotionBox
           initial={{ opacity: 0, y: 50 }}
