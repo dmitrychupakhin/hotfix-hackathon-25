@@ -69,7 +69,7 @@ const AppBackgroundLayout: FC<AppBackgroundLayoutProps> = ({ backgroundDark, bac
                 height: '100%',
                 objectFit: 'cover',
                 objectPosition: 'center center',
-                filter: 'brightness(80%)',
+                filter: 'brightness(70%)',
               }}
             />
           </MotionBox>
