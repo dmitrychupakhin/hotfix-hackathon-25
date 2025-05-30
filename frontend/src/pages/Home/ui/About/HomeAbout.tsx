@@ -3,6 +3,7 @@ import { PageWrapper } from '@/shared/ui/PageWrapper'
 import QuoteIcon from '@/shared/assets/images/quotes.svg?react'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import StarIcon from '@/shared/assets/images/star.svg?react'
+import notebookImage from '@/shared/assets/images/notbook.png'
 
 const HomeAbout = () => {
   return (
@@ -34,16 +35,19 @@ const HomeAbout = () => {
               <Stack spacing={2}>
                 <Typography variant="h3" sx={theme => ({ color: theme.palette.invertedSecondary.dark, fontWeight: 600 })}>
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>
-                    Описание работы
+                    SlobodaSoft
                   </Typography>
-                  , описание работы, описание работы придумать почему что как зачем,
+                  — превращаем
                   {' '}
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>
-                    не знаю что еще.
+                    IT-идеи
                   </Typography>
+                  {' '}в{' '}
+                  <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>проекты</Typography>
+                  , которые реально работают.
                 </Typography>
                 <Typography variant="h4" sx={theme => ({ color: theme.palette.invertedSecondary.main, fontWeight: 400 })}>
-                  Описание работы, описание работы, описание работы придумать почему что как зачем, не знаю что еще
+                  Мы знаем, как сложно бывает запустить IT-проект: с чего начать, сколько это займёт времени, каких людей подключить, какие технологии выбрать. Всё звучит сложно — и мы тут, чтобы это упростить.
                 </Typography>
               </Stack>
             </Grid>
@@ -57,8 +61,7 @@ const HomeAbout = () => {
                   objectFit: 'cover',
                   display: 'block',
                 }}
-                src="https://img.freepik.com/free-psd/macaroon-isolated-transparent-background_191095-35017.jpg?semt=ais_hybrid&w=740"
-                alt="about"
+                src={notebookImage}
               />
             </Grid>
           </Grid>

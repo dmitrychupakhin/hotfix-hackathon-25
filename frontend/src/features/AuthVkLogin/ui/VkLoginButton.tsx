@@ -1,4 +1,4 @@
-import VkIcon from '@/shared/assets/icons/VK.svg?react';
+import VkIcon from '@/shared/assets/icons/VKButton.svg?react';
 import { Button } from '@mui/material';
 import { useEffect } from 'react';
 import { initVKAuth } from '../config/vkConfig';
@@ -17,8 +17,8 @@ const VkLoginButton = ({ handleVkLogin, disabled, title }: VkLoginButtonProps) =
   return (
     <Button
       onClick={handleVkLogin}
-      variant="outlined"
-      color="primary"
+      variant="contained"
+      color="secondary"
       startIcon={<VkIcon width="24px" height="24px" />}
       disabled={disabled}
     >
