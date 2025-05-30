@@ -6,7 +6,7 @@ export const AuthVkLoginApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     authVkLogin: build.mutation<void, { access_token: string }>({
       query: ({ access_token }) => ({
-        url: '/account/vk',
+        url: '/users/vk/login',
         method: 'POST',
         body: { access_token },
       }),

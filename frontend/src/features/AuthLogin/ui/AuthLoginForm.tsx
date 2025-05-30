@@ -27,7 +27,7 @@ const AuthLoginForm = () => {
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthLoginSchema>({
     defaultValues: {
-      personalId: '',
+      username: '',
       password: '',
       rememberMe: false,
     },
@@ -89,9 +89,13 @@ const AuthLoginForm = () => {
       {(isLoginLoading || isVkLoginLoading) && <FormLoader />}
       <Stack spacing={2} width="100%">
         <Stack spacing={1}>
-          <Typography variant="h6" fontWeight="bold" color="primary">
-            С возвращением!
-          </Typography>
+          <Box>
+            <Typography variant="h6" component="span" sx={(theme) => ({
+              backgroundColor: theme.palette.primary.light,
+            })}>
+              С возвращением!
+            </Typography>
+          </Box>
           <Typography variant="h4" fontWeight={600}>
             Войдите в аккаунт
           </Typography>
@@ -102,7 +106,7 @@ const AuthLoginForm = () => {
           </Typography>
         )}
         <Controller
-          name="personalId"
+          name="username"
           control={control}
           rules={{
             required: 'Введите логин',
@@ -150,7 +154,7 @@ const AuthLoginForm = () => {
               />
             )}
           />
-          <MuiLink component={Link} to={ROUTES.AUTH_RESET_PASSWORD()} variant="body2">
+          <MuiLink component={Link} color="secondary" to={ROUTES.AUTH_RESET_PASSWORD()} variant="body2">
             Забыли пароль?
           </MuiLink>
         </Box>
@@ -159,9 +163,9 @@ const AuthLoginForm = () => {
         </Button>
         <Divider
           sx={(theme) => ({
-            color: theme.palette.primary.main,
+            color: theme.palette.secondary.main,
             '&::before, &::after': {
-              borderColor: theme.palette.primary.main,
+              borderColor: theme.palette.secondary.main,
             },
           })}
           textAlign="center"
@@ -175,7 +179,10 @@ const AuthLoginForm = () => {
         />
         <Typography variant="body2" textAlign="end">
           Нет аккаунта?{' '}
-          <MuiLink component={Link} to={ROUTES.AUTH_REGISTER()} variant="body2">
+          <MuiLink component={Link} to={ROUTES.AUTH_REGISTER()} variant="body2" sx={(theme) => ({
+            backgroundColor: theme.palette.primary.light,
+            color: theme.palette.secondary.main,
+          })}>
             Зарегестрироваться
           </MuiLink>
         </Typography>

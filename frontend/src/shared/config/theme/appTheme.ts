@@ -4,6 +4,10 @@ import { typography } from './config/typography/typography'
 import MuiButton from './customComponents/MuiButton'
 import MuiButtonBase from './customComponents/MuiButtonBase'
 import MuiLink from './customComponents/MuiLink'
+import MuiInputBase from './customComponents/MuiInputBase'
+import { MuiInputLabel, MuiOutlinedInput } from './customComponents/MuiOutlinedInput'
+import MuiCheckbox from './customComponents/MuiCheckbox'
+import MuiFormControlLabel from './customComponents/MuiFormControlLabel'
 
 const appTheme = createTheme({
   colorSchemes: {
@@ -35,8 +39,14 @@ const appTheme = createTheme({
   components: {
     MuiButtonBase,
     MuiButton,
-
     MuiLink,
+
+    MuiInputBase,
+    MuiInputLabel,
+    MuiOutlinedInput,
+    MuiCheckbox,
+
+    MuiFormControlLabel,
   },
   mixins: {
     toolbar: {
