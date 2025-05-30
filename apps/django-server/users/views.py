@@ -183,6 +183,7 @@ class VKAuthView(APIView):
 class UserUpdateAPIView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = EditUserSerializer
+    http_method_names = ['put']
 
     def get_object(self):
         return self.request.user
