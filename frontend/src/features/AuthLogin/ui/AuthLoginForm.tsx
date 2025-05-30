@@ -1,9 +1,9 @@
-import { VkLoginButton } from '@/features/AuthVkLogin';
-import { useVkLogin } from '@/features/AuthVkLogin/lib/hooks/useVkLogin';
-import type { AuthVkLoginResponse } from '@/features/AuthVkLogin/model/types/AuthVkLoginSchema';
-import { ROUTES } from '@/shared/const/routes';
-import FormLoader from '@/shared/ui/FormLoader/FormLoader';
-import PasswordField from '@/shared/ui/PasswordField/PasswordField';
+import { VkLoginButton } from '@/features/AuthVkLogin'
+import { useVkLogin } from '@/features/AuthVkLogin/lib/hooks/useVkLogin'
+import type { AuthVkLoginResponse } from '@/features/AuthVkLogin/model/types/AuthVkLoginSchema'
+import { ROUTES } from '@/shared/const/routes'
+import FormLoader from '@/shared/ui/FormLoader/FormLoader'
+import PasswordField from '@/shared/ui/PasswordField/PasswordField'
 import {
   alpha,
   Box,
@@ -15,15 +15,15 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { Link } from 'react-router';
-import { useLogin } from '../lib/hooks/useLogin';
-import type { AuthLoginResponse, AuthLoginSchema } from '../model/types/AuthLoginSchema';
+} from '@mui/material'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { Link } from 'react-router'
+import { useLogin } from '../lib/hooks/useLogin'
+import type { AuthLoginResponse, AuthLoginSchema } from '../model/types/AuthLoginSchema'
 
 const AuthLoginForm = () => {
-  const [formError, setFormError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthLoginSchema>({
     defaultValues: {
@@ -31,50 +31,52 @@ const AuthLoginForm = () => {
       password: '',
       rememberMe: false,
     },
-  });
+  })
 
-  const { loginAndGetProfile, isLoading: isLoginLoading } = useLogin();
+  const { loginAndGetProfile, isLoading: isLoginLoading } = useLogin()
 
-  const { vkLoginAndGetProfile, isLoading: isVkLoginLoading } = useVkLogin();
+  const { vkLoginAndGetProfile, isLoading: isVkLoginLoading } = useVkLogin()
 
   const handleVkLogin = async () => {
     try {
-      await vkLoginAndGetProfile();
-    } catch (error) {
-      const { errors } = error as AuthVkLoginResponse;
-      const { detail } = errors;
+      await vkLoginAndGetProfile()
+    }
+    catch (error) {
+      const { errors } = error as AuthVkLoginResponse
+      const { detail } = errors
 
       if (detail) {
-        setFormError(Array.isArray(detail) ? detail[0] : detail);
+        setFormError(Array.isArray(detail) ? detail[0] : detail)
       }
     }
-  };
+  }
 
   const onSubmit = async (data: AuthLoginSchema) => {
     try {
-      setFormError(null);
-      clearErrors();
+      setFormError(null)
+      clearErrors()
 
-      await loginAndGetProfile(data);
-    } catch (err) {
-      const { errors } = err as AuthLoginResponse;
-      const { detail, ...fieldErrors } = errors;
+      await loginAndGetProfile(data)
+    }
+    catch (err) {
+      const { errors } = err as AuthLoginResponse
+      const { detail, ...fieldErrors } = errors
 
       if (detail) {
-        setFormError(Array.isArray(detail) ? detail[0] : detail);
+        setFormError(Array.isArray(detail) ? detail[0] : detail)
       }
 
       Object.entries(fieldErrors).forEach(([field, message]) => {
-        setError(field as keyof AuthLoginSchema, { type: 'server', message });
-      });
+        setError(field as keyof AuthLoginSchema, { type: 'server', message })
+      })
     }
-  };
+  }
 
   return (
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={(theme) => ({
+      sx={theme => ({
         display: 'flex',
         position: 'relative',
         width: '400px',
@@ -90,9 +92,13 @@ const AuthLoginForm = () => {
       <Stack spacing={2} width="100%">
         <Stack spacing={1}>
           <Box>
-            <Typography variant="h6" component="span" sx={(theme) => ({
-              backgroundColor: theme.palette.primary.light,
-            })}>
+            <Typography
+              variant="h6"
+              component="span"
+              sx={theme => ({
+                backgroundColor: theme.palette.primary.light,
+              })}
+            >
               С возвращением!
             </Typography>
           </Box>
@@ -162,8 +168,8 @@ const AuthLoginForm = () => {
           Войти
         </Button>
         <Divider
-          sx={(theme) => ({
-            color: theme.palette.secondary.main,
+          sx={theme => ({
+            'color': theme.palette.secondary.main,
             '&::before, &::after': {
               borderColor: theme.palette.secondary.main,
             },
@@ -178,16 +184,22 @@ const AuthLoginForm = () => {
           disabled={isVkLoginLoading}
         />
         <Typography variant="body2" textAlign="end">
-          Нет аккаунта?{' '}
-          <MuiLink component={Link} to={ROUTES.AUTH_REGISTER()} variant="body2" sx={(theme) => ({
-            backgroundColor: theme.palette.primary.light,
-            color: theme.palette.secondary.main,
-          })}>
+          Нет аккаунта?
+          {' '}
+          <MuiLink
+            component={Link}
+            to={ROUTES.AUTH_REGISTER()}
+            variant="body2"
+            sx={theme => ({
+              backgroundColor: theme.palette.primary.light,
+              color: theme.palette.secondary.main,
+            })}
+          >
             Зарегестрироваться
           </MuiLink>
         </Typography>
       </Stack>
     </Box>
-  );
-};
-export default AuthLoginForm;
+  )
+}
+export default AuthLoginForm

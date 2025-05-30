@@ -1,10 +1,13 @@
 export interface User {
-  personalId: string;
-  vkId: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  birth: string;
-  photo: string;
+  username: string
+  vkId: string
+  email: string
+  firstName: string
+  lastName: string
+  middleName: string
+  phone: string
+  photo: string
+  tg: string
+  isStaff: boolean
+  isTeam: boolean
 }

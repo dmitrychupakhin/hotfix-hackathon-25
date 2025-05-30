@@ -1,17 +1,17 @@
+import { AppBackgroundLayout } from '@/app/layouts/AppBackgroundLayout'
 import { AppLayout } from '@/app/layouts/AppLayout'
 import { RootLayout } from '@/app/layouts/RootLayout'
+import { AuthConfirmRegisterForm } from '@/features/AuthConfirmRegister'
+import { AuthLoginForm } from '@/features/AuthLogin'
+import { AuthRegisterForm } from '@/features/AuthRegister'
+import { AuthBanner, AuthPageLayout } from '@/pages/AuthPage'
 import { Home } from '@/pages/Home'
-import type { AppRouteObject } from '../types/router'
-import { AppBackgroundLayout } from '@/app/layouts/AppBackgroundLayout'
+import { ProfileCard } from '@/pages/ProfilePage'
+import ProfileLayout from '@/pages/ProfilePage/ui/ProfileLayout'
 import backgroundLight from '@/shared/assets/images/appBackground.jpg'
 import { ROUTES } from '@/shared/const/routes'
-import { AuthPageLayout } from '@/pages/AuthPage'
 import { Navigate } from 'react-router'
-import { AuthLoginForm } from '@/features/AuthLogin'
-import { AuthBanner } from '@/pages/AuthPage'
-import { AuthRegisterForm } from '@/features/AuthRegister'
-import { AuthConfirmRegisterForm } from '@/features/AuthConfirmRegister'
-
+import type { AppRouteObject } from '../types/router'
 export const routeConfig: AppRouteObject[] = [
   {
     element: <RootLayout />,
@@ -77,6 +77,16 @@ export const routeConfig: AppRouteObject[] = [
                   //   authOnly: true,
                   // },
                 ],
+              },
+            ],
+          },
+          {
+            path: ROUTES.PROFILE(),
+            element: <ProfileLayout />,
+            children: [
+              {
+                path: ROUTES.PROFILE(),
+                element: <ProfileCard />,
               },
             ],
           },

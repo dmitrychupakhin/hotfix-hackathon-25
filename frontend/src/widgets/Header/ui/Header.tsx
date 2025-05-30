@@ -14,9 +14,8 @@ import { useSelector } from 'react-redux'
 const Header: FC = () => {
   const profileData = useSelector(getProfileData)
 
-  const { isError, isLoading: isUserLoading, isSuccess, data: user } = profileData;
+  const { isError, isLoading: isUserLoading, isSuccess, data: user } = profileData
   // const { data: user } = profileData
-
 
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -70,7 +69,7 @@ const Header: FC = () => {
             borderRadius: theme.shape.borderRadius * 50,
             boxShadow: isScrolled ? theme.shadows[1] : 'none',
             px: 2,
-            py: 1,
+            // py: 1,
             position: 'relative',
             transition: isScrolled ? showTransition : hideTransition,
           }

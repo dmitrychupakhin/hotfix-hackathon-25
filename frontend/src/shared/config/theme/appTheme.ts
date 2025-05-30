@@ -57,6 +57,9 @@ const appTheme = createTheme({
     toolbar: {
       minHeight: 70,
     },
+    profileSidebar: {
+      minWidth: 70,
+    },
   },
 })
 

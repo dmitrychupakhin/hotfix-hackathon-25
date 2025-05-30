@@ -1,21 +1,21 @@
-import getPagesWithBackgroundZoom from '@/app/layouts/AppBackgroundLayout/model/selectors/getPagesWithBackgroundZoom';
-import { useIsCurrentRoute } from '@/shared/lib/hooks/useIsCurrentRoute';
-import { MotionBox } from '@/shared/ui/MotionBox';
-import { Box, useTheme } from '@mui/material';
-import { type FC } from 'react';
-import { Outlet } from 'react-router';
+import getPagesWithBackgroundZoom from '@/app/layouts/AppBackgroundLayout/model/selectors/getPagesWithBackgroundZoom'
+import { useIsCurrentRoute } from '@/shared/lib/hooks/useIsCurrentRoute'
+import { MotionBox } from '@/shared/ui/MotionBox'
+import { Box, useTheme } from '@mui/material'
+import { type FC } from 'react'
+import { Outlet } from 'react-router'
 
 interface AppBackgroundLayoutProps {
-  backgroundDark?: string;
-  backgroundLight?: string;
+  backgroundDark?: string
+  backgroundLight?: string
 }
 
 const AppBackgroundLayout: FC<AppBackgroundLayoutProps> = ({ backgroundDark, backgroundLight }) => {
-  const isZoom = useIsCurrentRoute(getPagesWithBackgroundZoom());
-  const theme = useTheme();
-  const zoomSize = `calc(100%)`;
+  const isZoom = useIsCurrentRoute(getPagesWithBackgroundZoom())
+  const theme = useTheme()
+  const zoomSize = `calc(100%)`
 
-  const currentBackground = theme.palette.mode === 'light' ? backgroundLight : backgroundDark;
+  const currentBackground = theme.palette.mode === 'light' ? backgroundLight : backgroundDark
 
   return (
     <Box position="relative" width="100%" overflow="hidden">
@@ -69,7 +69,7 @@ const AppBackgroundLayout: FC<AppBackgroundLayoutProps> = ({ backgroundDark, bac
                 height: '100%',
                 objectFit: 'cover',
                 objectPosition: 'center center',
-                filter: 'brightness(70%)',
+                filter: 'brightness(95%)',
               }}
             />
           </MotionBox>
@@ -79,7 +79,7 @@ const AppBackgroundLayout: FC<AppBackgroundLayoutProps> = ({ backgroundDark, bac
         <Outlet />
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default AppBackgroundLayout;
+export default AppBackgroundLayout

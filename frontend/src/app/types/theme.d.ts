@@ -1,4 +1,9 @@
 import '@mui/material/styles'
+import type { CSSProperties } from 'react'
+import type {
+  Mixins as MuiMixins,
+  MixinsOptions as MuiMixinsOptions,
+} from '@mui/material/styles'
 
 declare module '@mui/material/styles' {
   interface CommonColors {
@@ -19,5 +24,12 @@ declare module '@mui/material/styles' {
       dark?: string
     }
     inputDivider?: string
+  }
+
+  interface Mixins extends MuiMixins {
+    profileSidebar: CSSProperties
+  }
+  interface MixinsOptions extends MuiMixinsOptions {
+    profileSidebar?: CSSProperties
   }
 }

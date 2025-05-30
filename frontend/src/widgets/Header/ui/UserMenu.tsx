@@ -1,4 +1,5 @@
 // import type { User } from '@/entities/Profile/model/types/User'
+import type { User } from '@/entities/Profile/model/types/User'
 import useLogout from '@/features/AuthLogout/lib/hooks/useLogout'
 import { ROUTES } from '@/shared/const/routes'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
@@ -11,7 +12,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 
 interface UserMenuProps {
-  user: any
+  user: User
 }
 
 const UserMenu = ({ user }: UserMenuProps) => {
@@ -31,7 +32,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
 
   const handleProfileClick = () => {
     handleClose()
-    // navigate(ROUTES.PROFILE())
+    navigate(ROUTES.PROFILE())
   }
 
   const handleChangeEmailClick = () => {
@@ -57,7 +58,16 @@ const UserMenu = ({ user }: UserMenuProps) => {
   return (
     <>
       <ButtonBase onClick={handleOpen}>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={theme => ({
+            backgroundColor: theme.palette.background.default,
+            borderRadius: theme.shape.borderRadius * 5,
+            p: 1,
+          })}
+        >
           <Avatar
             sx={theme => ({
               border: `2px solid ${theme.palette.primary.main}`,
@@ -77,7 +87,9 @@ const UserMenu = ({ user }: UserMenuProps) => {
               variant="subtitle1"
               sx={theme => ({ color: theme.palette.secondary.light })}
             >
-              Студент
+              {user.isStaff && 'Модератор' }
+              {user.isTeam && 'Команда' }
+              {!user.isStaff && 'Пользователь' }
             </Typography>
           </Stack>
           <KeyboardArrowDownIcon color="secondary" />
