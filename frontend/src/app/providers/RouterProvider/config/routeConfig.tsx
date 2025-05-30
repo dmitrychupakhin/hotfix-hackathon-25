@@ -10,6 +10,7 @@ import { Navigate } from 'react-router'
 import { AuthLoginForm } from '@/features/AuthLogin'
 import { AuthBanner } from '@/pages/AuthPage'
 import { AuthRegisterForm } from '@/features/AuthRegister'
+import { AuthConfirmRegisterForm } from '@/features/AuthConfirmRegister'
 
 export const routeConfig: AppRouteObject[] = [
   {
@@ -45,11 +46,11 @@ export const routeConfig: AppRouteObject[] = [
                     element: <AuthRegisterForm />,
                     redirectIfAuth: true,
                   },
-                  // {
-                  //   path: ROUTES.AUTH_REGISTER_CONFIRM(),
-                  //   element: <AuthConfirmRegisterForm />,
-                  //   redirectIfAuth: true,
-                  // },
+                  {
+                    path: ROUTES.AUTH_REGISTER_CONFIRM(),
+                    element: <AuthConfirmRegisterForm />,
+                    redirectIfAuth: true,
+                  },
                   // {
                   //   path: ROUTES.AUTH_CHANGE_EMAIL(),
                   //   element: <AuthChangeEmailForm />,

@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // import { counterReducer } from '@/entities/Counter';
 // import { $api } from '@/shared/api/api';
 import { logoutReducer } from '@/features/AuthLogout';
-// import { globalLoaderReducer } from '@/features/GlobalLoader';
+import { globalLoaderReducer } from '@/features/GlobalLoader';
 import { rtkApi } from '@/shared/api';
 import type { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
@@ -17,7 +17,7 @@ export function createReduxStore(
     ...asyncReducers,
     // counter: counterReducer,
     logout: logoutReducer,
-    // globalLoader: globalLoaderReducer,
+    globalLoader: globalLoaderReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 

@@ -8,13 +8,15 @@ import { getHeaderLinks } from '../model/selectors/getHeaderLinks'
 import AuthSection from './AuthSection'
 import UserMenu from './UserMenu'
 import { useLocation, useNavigate } from 'react-router'
+import { getProfileData } from '@/entities/Profile'
+import { useSelector } from 'react-redux'
 
 const Header: FC = () => {
-  // const profileData = useAppSelector(getProfileData)
+  const profileData = useSelector(getProfileData)
 
-  // const { isError, isLoading: isUserLoading, isSuccess, data: user } = profileData;
+  const { isError, isLoading: isUserLoading, isSuccess, data: user } = profileData;
   // const { data: user } = profileData
-  const user = null
+
 
   const [isScrolled, setIsScrolled] = useState(false)
 
