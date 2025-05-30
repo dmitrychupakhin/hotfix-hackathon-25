@@ -24,6 +24,7 @@ const EditebleProfileData = ({ user, isEdit, setIsEdit }: EditebleProfileDataPro
       lastName: user.lastName || '',
       middleName: user.middleName || '',
       phone: user.phone || '',
+      tg: user.tg || '',
     },
   })
 
@@ -141,6 +142,24 @@ const EditebleProfileData = ({ user, isEdit, setIsEdit }: EditebleProfileDataPro
                 color="secondary"
                 variant="filled"
                 label="Телефон"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+              />
+            )}
+          />
+        </Grid>
+        <Grid size={3}>
+          <Controller
+            name="tg"
+            control={control}
+            rules={{ required: 'Введите Telegram' }}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                fullWidth
+                color="secondary"
+                variant="filled"
+                label="Telegram"
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />

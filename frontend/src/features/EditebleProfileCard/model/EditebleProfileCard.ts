@@ -5,6 +5,7 @@ interface EditebleProfileCardSchema {
   lastName: string
   middleName: string
   phone: string
+  tg: string
 }
 
 type EditebleProfileCardErrors = FieldErrors<EditebleProfileCardSchema> & {
