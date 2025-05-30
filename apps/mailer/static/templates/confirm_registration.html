@@ -4,35 +4,45 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
-    <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 20px auto; background: #f7f7f7; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #ffffff;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
         <tr>
-            <td style="padding: 30px; text-align: center; background: #E1F5C3; border-radius: 8px 8px 0 0;">
-                <h1 style="color: #000; margin: 0; font-weight: normal;">Подтверждение регистрации Sportium</h1>
+            <td style="padding: 30px; text-align: center; background: #C6FB50; border-radius: 10px 10px 0 0;">
+                <h1 style="color: #1A1A1A; margin: 0; font-weight: bold;">Добро пожаловать в SlobodaSoft!</h1>
             </td>
         </tr>
         <tr>
-            <td style="padding: 30px; text-align: center;">
-                <p style="font-size: 16px; color: #333; margin: 0 0 25px 0;">
-                    Ваш код подтверждения для регистрации:
+            <td style="padding: 25px 30px 10px 30px; text-align: center;">
+                <p style="font-size: 16px; color: #333; margin: 0 0 20px 0;">
+                    Остался один шаг до активации вашего аккаунта:
                 </p>
-                <!-- Изменённый блок с кодом -->
-                <div style="display: inline-block; background: #000000; padding: 15px 30px; border-radius: 8px; border: 2px solid #000000;">
-                    <span style="font-size: 28px; font-weight: bold; letter-spacing: 3px; color: #83CC48;">
+
+                <!-- Прогресс-бар -->
+                <div style="background: #F1FBE3; border-radius: 8px; overflow: hidden; width: 100%; margin: 20px auto 25px auto;">
+                    <div style="width: 80%; background-color: #C6FB50; height: 12px;"></div>
+                </div>
+
+                <p style="font-size: 16px; color: #333; margin-bottom: 15px;">
+                    Введите этот код подтверждения:
+                </p>
+
+                <div style="display: inline-block; background: #ffffff; padding: 15px 30px; border-radius: 10px; border: 2px dashed #C6FB50; margin-bottom: 20px;">
+                    <span style="font-size: 28px; font-weight: bold; letter-spacing: 3px; color: #C6FB50;">
                         {{ code }}
                     </span>
                 </div>
-                <p style="font-size: 14px; color: #666; margin: 25px 0 0 0;">
-                    Введите этот код в течение 5 минут для завершения операции.<br>
+
+                <p style="font-size: 14px; color: #666;">
+                    Убедитесь, что вы введёте код в течение 5 минут.<br>
                     Никому не сообщайте этот код!
                 </p>
             </td>
         </tr>
         <tr>
-            <td style="padding: 25px; text-align: center; background: #B5D97E; border-radius: 0 0 8px 8px;">
-                <p style="font-size: 12px; color: #666; margin: 0;">
-                    Если вы не запрашивали это подтверждение, проигнорируйте письмо.<br>
-                    С уважением, команда <strong><strong><a href="https://crocodailo.ru/" style="color: #000; text-decoration: none;">Sportium</a></strong></strong>
+            <td style="padding: 20px; text-align: center; background: #E9FCC2; border-radius: 0 0 10px 10px;">
+                <p style="font-size: 12px; color: #555; margin: 0;">
+                    Если вы не запрашивали этот код, проигнорируйте это письмо.<br>
+                    С уважением, команда <strong><a href="https://slobodasoft.ru/" style="color: #1A1A1A; text-decoration: none;">SlobodaSoft</a></strong>
                 </p>
             </td>
         </tr>
