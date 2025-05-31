@@ -6,12 +6,13 @@ from celery.result import AsyncResult
 from rest_framework import status
 from orders.models import Order
 from teams.models import TeamMember
+from predictors.models import Plan
 
 class PredictionResultView(APIView):
-    def get(self, request, task_id):
-        result = AsyncResult(task_id)
-        if result.ready():
-            return Response({'status': 'done', 'result': result.result})
+    def get(self, request, id):
+        plan = Plan.objects.filter(order=id).first()
+        if plan:
+            return Response({'status': 'success'})
         return Response({'status': 'pending'})
     
 class PredictionCatsView(APIView):
