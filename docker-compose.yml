@@ -56,6 +56,23 @@ services:
       - media_volume:/app/media
       - ./apps/django-server:/app
 
+  celery:
+    container_name: celery-worker
+    build: ./apps/django-server
+    command: celery -A core worker -l info
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      django:
+        condition: service_started
+    volumes:
+      - ./apps/django-server:/app
+    restart: always
+
   mailer:
     container_name: mailer-service
     build: 

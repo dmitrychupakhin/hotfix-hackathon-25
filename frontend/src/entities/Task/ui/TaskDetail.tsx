@@ -1,11 +1,11 @@
-import { Box, Card, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material'
-import type { Task } from '../model/Task'
-import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import { data, useNavigate } from 'react-router'
 import { TaskFilterField } from '@/shared/types/TaskFilterField'
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
+import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded'
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
+import { Box, Card, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material'
+import { useNavigate } from 'react-router'
+import type { Task } from '../model/Task'
 
 interface TaskDetailProps {
   task: Task
