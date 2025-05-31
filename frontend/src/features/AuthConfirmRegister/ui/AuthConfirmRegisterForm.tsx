@@ -9,8 +9,10 @@ import type {
   AuthConfirmRegisterResponse,
   AuthConfirmRegisterSchema,
 } from '../model/types/AuthConfirmRegisterSchema'
+import { useTranslation } from 'react-i18next'
 
 const AuthConfirmRegisterform = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthConfirmRegisterSchema>({
@@ -70,11 +72,11 @@ const AuthConfirmRegisterform = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              Подтверждение регистрации
+              {t('Подтверждение регистрации')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Код подтверждения отправлен на почту
+            {t('Код подтверждения отправлен на почту')}
           </Typography>
         </Stack>
         {formError && (
@@ -85,20 +87,20 @@ const AuthConfirmRegisterform = () => {
         <Controller
           name="code"
           control={control}
-          rules={{ required: 'Введите пароль' }}
+          rules={{ required: t('Введите код подтверждения') }}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
               fullWidth
               variant="outlined"
-              label="Код подтверждения"
+              label={t('Код подтверждения')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
           )}
         />
         <Button type="submit" disabled={isLoading} variant="contained" color="primary">
-          Отправить
+          {t('Отправить')}
         </Button>
       </Stack>
     </Box>

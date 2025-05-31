@@ -1,6 +1,8 @@
 import { Stack, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 const AuthBanner = () => {
+  const { t } = useTranslation()
   return (
     <Stack spacing={2}>
       <Typography
@@ -11,7 +13,7 @@ const AuthBanner = () => {
           color: theme.palette.invertedSecondary.dark,
         })}
       >
-        Здесь начинается путь от идеи к рабочему решению.
+        {t('Здесь начинается путь от идеи к рабочему решению.')}
       </Typography>
     </Stack>
   )

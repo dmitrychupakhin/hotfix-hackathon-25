@@ -10,7 +10,9 @@ class Status(models.TextChoices):
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Заказчик", related_name='user_orders')
     team = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Тимлид", related_name='team_orders')
+    predicted_team = models.IntegerField(null=True, blank=True)
     title = models.CharField(max_length=128, verbose_name="Тема")
+    category = models.CharField(max_length=128, verbose_name="Категория", null=True, blank=True)
     description = models.TextField(blank=False, null=False, verbose_name="Описание")
     status = models.CharField(max_length=16, choices=Status.choices, default=Status.WAITING, verbose_name="Статус")
     start = models.DateTimeField(verbose_name="Начало", null=True, blank=True)

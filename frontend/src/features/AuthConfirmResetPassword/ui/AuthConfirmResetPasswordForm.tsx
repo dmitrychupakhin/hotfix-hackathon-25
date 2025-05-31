@@ -10,8 +10,10 @@ import type {
   AuthConfirmResetPasswordResponse,
   AuthConfirmResetPasswordSchema,
 } from '../model/types/authConfirmResetPasswordSchema'
+import { useTranslation } from 'react-i18next'
 
 const AuthConfirmResetPasswordForm = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, watch, clearErrors }
@@ -78,11 +80,11 @@ const AuthConfirmResetPasswordForm = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              Изменение пароля
+              {t('Изменение пароля')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Введите новый пароль
+            {t('Введите новый пароль')}
           </Typography>
         </Stack>
         {formError && (
@@ -100,7 +102,7 @@ const AuthConfirmResetPasswordForm = () => {
               {...field}
               fullWidth
               variant="outlined"
-              label="Код"
+              label={t('Код')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -109,13 +111,13 @@ const AuthConfirmResetPasswordForm = () => {
         <Controller
           name="password"
           control={control}
-          rules={{ required: 'Введите пароль' }}
+          rules={{ required: t('Введите пароль') }}
           render={({ field, fieldState }) => (
             <PasswordField
               {...field}
               fullWidth
               variant="outlined"
-              label="Пароль"
+              label={t('Пароль')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -125,15 +127,15 @@ const AuthConfirmResetPasswordForm = () => {
           name="confirm"
           control={control}
           rules={{
-            required: 'Подтвердите пароль',
-            validate: value => value === password || 'Пароли не совпадают',
+            required: t('Подтвердите пароль'),
+            validate: value => value === password || t('Пароли не совпадают'),
           }}
           render={({ field, fieldState }) => (
             <PasswordField
               {...field}
               fullWidth
               variant="outlined"
-              label="Подтверждение пароля"
+              label={t('Подтверждение пароля')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -141,11 +143,11 @@ const AuthConfirmResetPasswordForm = () => {
         />
 
         <Button type="submit" disabled={isLoading} variant="contained" color="primary">
-          Поменять пароль
+          {t('Поменять пароль')}
         </Button>
         <Typography variant="body2" textAlign="end">
           <MuiLink component={Link} to={ROUTES.AUTH_LOGIN()} variant="body2">
-            Назад к авторизации
+            {t('Назад к авторизации')}
           </MuiLink>
         </Typography>
       </Stack>

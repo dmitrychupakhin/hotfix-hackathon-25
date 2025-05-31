@@ -9,8 +9,10 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { useOrderForm } from '../api/orderFormApi'
 import type { OrderFormSchema } from '../model/types/OrderFormSchema'
+import { useTranslation } from 'react-i18next'
 
 const OrderForm = () => {
+  const { t } = useTranslation()
   const [orderForm, { isLoading }] = useOrderForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -56,14 +58,14 @@ const OrderForm = () => {
         name="title"
         control={control}
         rules={{
-          required: 'Введите тему проекта',
+          required: t('Введите тему проекта'),
         }}
         render={({ field, fieldState }) => (
           <TextField
             {...field}
             fullWidth
             variant="outlined"
-            label="Тема проекта"
+            label={t('Тема проекта')}
             error={!!fieldState.error}
             helperText={fieldState.error?.message}
           />
@@ -73,7 +75,7 @@ const OrderForm = () => {
         name="description"
         control={control}
         rules={{
-          required: 'Введите описание',
+          required: t('Введите описание'),
         }}
         render={({ field, fieldState }) => (
           <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -82,7 +84,7 @@ const OrderForm = () => {
               multiline
               fullWidth
               variant="outlined"
-              label="Задание"
+              label={t('Задание')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               InputProps={{
@@ -95,8 +97,8 @@ const OrderForm = () => {
         )}
       />
       <Box sx={{ display: 'flex', gap: 2, justifyContent: 'end' }}>
-        <Button variant="outlined" color="secondary" endIcon={<DeleteOutlineRoundedIcon />}>Очистить</Button>
-        <Button variant="contained" color="secondary" endIcon={<SendRoundedIcon />} type="submit">Отправить</Button>
+        <Button variant="outlined" color="secondary" endIcon={<DeleteOutlineRoundedIcon />}>{t('Очистить')}</Button>
+        <Button variant="contained" color="secondary" endIcon={<SendRoundedIcon />} type="submit">{t('Отправить')}</Button>
       </Box>
     </Stack>
   )

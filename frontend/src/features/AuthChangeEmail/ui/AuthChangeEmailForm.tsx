@@ -5,12 +5,14 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { useAuthChangeEmail } from '../api/authChangeEmailApi'
+import { useTranslation } from 'react-i18next'
 import type {
   AuthChangeEmailResponse,
   AuthChangeEmailSchema,
 } from '../model/types/authChangeEmailSchema'
 
 const AuthChangeEmailForm = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
   const navigate = useNavigate()
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthChangeEmailSchema>({
@@ -71,11 +73,11 @@ const AuthChangeEmailForm = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              Изменение почты
+              {t('Изменение почты')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Введите новый адрес электронной почты
+            {t('Введите новый адрес электронной почты')}
           </Typography>
         </Stack>
         {formError && (
@@ -87,10 +89,10 @@ const AuthChangeEmailForm = () => {
           name="email"
           control={control}
           rules={{
-            required: 'Введите почту',
+            required: t('Введите почту'),
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Некорректный email адрес',
+              message: t('Некорректный email адрес'),
             },
           }}
           render={({ field, fieldState }) => (
@@ -98,7 +100,7 @@ const AuthChangeEmailForm = () => {
               {...field}
               fullWidth
               variant="outlined"
-              label="Новая почта"
+              label={t('Новая почта')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -106,7 +108,7 @@ const AuthChangeEmailForm = () => {
         />
 
         <Button type="submit" disabled={isLoading} variant="contained" color="primary">
-          Изменить
+          {t('Изменить')}
         </Button>
       </Stack>
     </Box>

@@ -10,8 +10,10 @@ import type {
   AuthChangePasswordResponse,
   AuthChangePasswordSchema,
 } from '../model/types/authChangePasswordSchema'
+import { useTranslation } from 'react-i18next'
 
 const AuthChangePasswordForm = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, watch, clearErrors } = useForm<AuthChangePasswordSchema>(
@@ -79,11 +81,11 @@ const AuthChangePasswordForm = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              Изменение пароля
+              {t('Изменение пароля')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Введите новый пароль
+            {t('Введите новый пароль')}
           </Typography>
         </Stack>
         {formError && (
@@ -95,13 +97,13 @@ const AuthChangePasswordForm = () => {
         <Controller
           name="oldPassword"
           control={control}
-          rules={{ required: 'Введите старый пароль' }}
+          rules={{ required: t('Введите старый пароль')}}
           render={({ field, fieldState }) => (
             <PasswordField
               {...field}
               fullWidth
               variant="outlined"
-              label="Старый пароль"
+              label={t('Старый пароль')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -110,13 +112,13 @@ const AuthChangePasswordForm = () => {
         <Controller
           name="password"
           control={control}
-          rules={{ required: 'Введите пароль' }}
+          rules={{ required: t('Введите пароль') }}
           render={({ field, fieldState }) => (
             <PasswordField
               {...field}
               fullWidth
               variant="outlined"
-              label="Пароль"
+              label={t('Пароль')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -126,15 +128,15 @@ const AuthChangePasswordForm = () => {
           name="confirm"
           control={control}
           rules={{
-            required: 'Подтвердите пароль',
-            validate: value => value === password || 'Пароли не совпадают',
+            required: t('Подтвердите пароль'),
+            validate: value => value === password || t('Пароли не совпадают'),
           }}
           render={({ field, fieldState }) => (
             <PasswordField
               {...field}
               fullWidth
               variant="outlined"
-              label="Подтверждение пароля"
+              label={t('Подтверждение пароля')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -142,7 +144,7 @@ const AuthChangePasswordForm = () => {
         />
 
         <Button type="submit" disabled={isLoading} variant="contained" color="primary">
-          Поменять пароль
+          {t('Поменять пароль')}
         </Button>
       </Stack>
     </Box>

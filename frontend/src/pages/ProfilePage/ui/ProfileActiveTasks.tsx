@@ -1,5 +1,5 @@
-import { useGetTasks } from '@/entities/Task/api/taskApi'
 import { TaskList } from '@/entities/Task'
+import { useLazyGetTasks } from '@/entities/Task/api/taskApi'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import { useTasksFilter } from '@/shared/lib/hooks/useTasksFilter'
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded'
@@ -9,7 +9,7 @@ import ProfileActiveTasksFilter from './ProfileActiveTasksFilter'
 
 const ProfileActiveTasks = () => {
   const [page, setPage] = useState(1)
-  const pageSize = 6
+  const pageSize = 4
 
   const { search, setSearch, sort, setSort, status, setStatus }
       = useTasksFilter()
@@ -20,15 +20,19 @@ const ProfileActiveTasks = () => {
     setPage(1)
   }, [debouncedSearch, sort, status])
 
-  const { data, isFetching } = useGetTasks({
-    status,
-    ordering: sort,
-    page,
-    pageSize,
-    search: debouncedSearch,
-  })
+  const [getTasks, { data, isFetching }] = useLazyGetTasks()
 
   const pagesCount = Math.ceil((data?.count ?? 0) / pageSize)
+
+  useEffect(() => {
+    getTasks({
+      status,
+      ordering: sort,
+      page,
+      pageSize,
+      search: debouncedSearch,
+    })
+  }, [getTasks, status, sort, page, pageSize, debouncedSearch])
 
   return (
     <Card sx={{ p: 3, borderRadius: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>

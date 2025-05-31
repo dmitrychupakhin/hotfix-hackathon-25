@@ -18,6 +18,7 @@ import { AuthConfirmResetPasswordForm } from '@/features/AuthConfirmResetPasswor
 import { AuthResetPasswordForm } from '@/features/AuthResetPassword'
 import { AuthChangePasswordForm } from '@/features/AuthChangePassword'
 import ProfileActiveTasks from '@/pages/ProfilePage/ui/ProfileActiveTasks'
+import ProfileTaskDetail from '@/pages/ProfilePage/ui/ProfileTaskDetail'
 
 export const routeConfig: AppRouteObject[] = [
   {
@@ -90,6 +91,7 @@ export const routeConfig: AppRouteObject[] = [
           {
             path: ROUTES.PROFILE(),
             element: <ProfileLayout />,
+            authOnly: true,
             children: [
               {
                 path: ROUTES.PROFILE(),
@@ -102,6 +104,10 @@ export const routeConfig: AppRouteObject[] = [
               {
                 path: ROUTES.PROFILE_ACTIVE_TASKS(),
                 element: <ProfileActiveTasks />,
+              },
+              {
+                path: ROUTES.PROFILE_TASK(':id'),
+                element: <ProfileTaskDetail />,
               },
             ],
           },
