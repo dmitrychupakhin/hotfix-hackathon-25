@@ -90,6 +90,7 @@ const Header: FC = () => {
                 '&:hover': {
                   color: theme.palette.secondary.main,
                 },
+                'lineHeight': 2,
               })}
               color="secondary"
             >
