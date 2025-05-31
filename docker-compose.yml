@@ -68,6 +68,16 @@ services:
       django:
         condition: service_started
 
+  predictor:
+    container_name: predictor-service
+    build: 
+      context: ./apps/predictor
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      django:
+        condition: service_started
+
   nginx:
     container_name: nginx
     build:

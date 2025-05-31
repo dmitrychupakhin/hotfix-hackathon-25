@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema
 from .serializers import *
+from core.tasks import run_ml_prediction_cats
 from users.permissions import IsStaff, IsOrderRelatedUser
 from .models import *
 
@@ -11,9 +12,11 @@ from .models import *
 class OrderCreateAPIView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = CreateOrderSerializer
-
+    
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        order = serializer.save(user=self.request.user)
+        run_ml_prediction_cats.delay({"data": "data"}, order.id)
+        
 
 class OrderListPagination(PageNumberPagination):
     page_size = 4
@@ -41,8 +44,19 @@ class OrderListAPIView(generics.ListAPIView):
         return Order.objects.filter(user=user)
     
 @extend_schema(summary="Получение заявки по ID", tags=["Заявки"])
-class EventDetailRetrieveAPIView(generics.RetrieveAPIView):
+class OrderDetailRetrieveAPIView(generics.RetrieveAPIView):
     permission_classes = [IsOrderRelatedUser]
     queryset = Order.objects.all()
     serializer_class = GetOrderSerializer
     lookup_field = 'id'
+    
+@extend_schema(summary="Привязка команды к заявке", tags=["Заявки"])
+class OrderConnectAPIView(generics.UpdateAPIView):
+    permission_classes = [IsStaff]
+    queryset = Order.objects.all()
+    serializer_class = ConnectOrderSerializer
+    lookup_field = 'id'
+
+    def perform_update(self, serializer):
+        serializer.save(status='inwork')
+    
