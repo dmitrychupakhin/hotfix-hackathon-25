@@ -1,6 +1,8 @@
 import { rtkApi } from '@/shared/api'
 import type { GetTasksRequest, GetTasksResponse, Task } from '../model/Task'
 import { getTasksRequestAdapter } from '../lib/adapters/requestApiAdapters'
+import { snakeToCamelObject } from '@/shared/lib/utils/snakeToCamel'
+import { formatIsoDate } from '@/shared/lib/utils/formatIsoDate'
 
 export const taskApi = rtkApi.injectEndpoints({
   endpoints: build => ({
@@ -17,6 +19,14 @@ export const taskApi = rtkApi.injectEndpoints({
         url: `/orders/${id}`,
         method: 'GET',
       }),
+      transformResponse: (response: Task) => {
+        const camel = snakeToCamelObject<Task>(response)
+
+        return {
+          ...camel,
+          createdAt: camel.createdAt ? formatIsoDate(camel.createdAt) : '',
+        }
+      },
     }),
   }),
 })

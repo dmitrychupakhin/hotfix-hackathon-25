@@ -2,12 +2,18 @@ import { Stack } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router'
 import { getProfileSidebarItems } from '../model/selectors/getProfileSidebarItems'
 import ProfileSidebarItem from './ProfileSidebarItem'
+import { getProfileDataIsStaff } from '@/entities/Profile/model/selectors/getProfileData'
+import { getProfileDataIsTeam } from '@/entities/Profile/model/selectors/getProfileData'
+import { useSelector } from 'react-redux'
 
 const ProfileSidebar = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const sidebarItems = getProfileSidebarItems()
+  const isStaff = useSelector(getProfileDataIsStaff)
+  const isTeam = useSelector(getProfileDataIsTeam)
+
+  const sidebarItems = getProfileSidebarItems(isStaff, isTeam)
 
   return (
     <Stack

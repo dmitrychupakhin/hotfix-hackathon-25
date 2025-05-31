@@ -6,6 +6,8 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import { TaskFilterField } from '@/shared/types/TaskFilterField'
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded'
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
+import { ROUTES } from '@/shared/const/routes'
+import { useNavigate } from 'react-router'
 
 interface TaskProps {
   data: Task
@@ -13,6 +15,7 @@ interface TaskProps {
 
 const TaskItem: FC<TaskProps> = ({ data }) => {
   console.log(data)
+  const navigate = useNavigate()
 
   const theme = useTheme()
   return (
@@ -138,7 +141,14 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
           }
         </Box>
 
-        <Button variant="contained" color="primary" endIcon={<SendRoundedIcon />}>Подробнее</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          endIcon={<SendRoundedIcon />}
+          onClick={() => navigate(ROUTES.PROFILE_TASK(data.id.toString()))}
+        >
+          Подробнее
+        </Button>
       </Box>
 
     </Card>

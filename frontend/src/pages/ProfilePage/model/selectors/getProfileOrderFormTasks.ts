@@ -1,4 +1,5 @@
 export const getProfileOrderFormTasks = (): string[] => {
+  
   return [
     'Проходите регистрацию',
     'Задаете информативное ТЗ',

@@ -9,7 +9,7 @@ export interface Task {
   status: TaskFilterField
   start: null
   end: null
-  created_at: string
+  createdAt: string
 }
 
 export interface GetTasksResponse {

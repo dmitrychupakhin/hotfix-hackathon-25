@@ -9,8 +9,10 @@ import type {
   AuthResetPasswordResponse,
   AuthResetPasswordSchema,
 } from '../model/types/authResetPasswordSchema'
+import { useTranslation } from 'react-i18next'
 
 const AuthResetPasswordForm = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
   const navigate = useNavigate()
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthResetPasswordSchema>({
@@ -71,11 +73,11 @@ const AuthResetPasswordForm = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              Сброс пароля
+              {t('Сброс пароля')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Введите вашу электронную почту
+            {t('Введите вашу электронную почту')}
           </Typography>
         </Stack>
         {formError && (
@@ -87,10 +89,10 @@ const AuthResetPasswordForm = () => {
           name="email"
           control={control}
           rules={{
-            required: 'Введите почту',
+            required: t('Введите почту'),
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Некорректный email адрес',
+              message: t('Некорректный email адрес'),
             },
           }}
           render={({ field, fieldState }) => (
@@ -98,7 +100,7 @@ const AuthResetPasswordForm = () => {
               {...field}
               fullWidth
               variant="outlined"
-              label="Электронная почта"
+              label={t('Электронная почта')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -106,11 +108,11 @@ const AuthResetPasswordForm = () => {
         />
 
         <Button type="submit" disabled={isLoading} variant="contained" color="primary">
-          Сбросить пароль
+          {t('Сбросить пароль')}
         </Button>
         <Typography variant="body2" textAlign="end">
           <MuiLink component={Link} to={ROUTES.AUTH_LOGIN()} variant="body2">
-            Назад к авторизации
+            {t('Назад к авторизации')}
           </MuiLink>
         </Typography>
       </Stack>

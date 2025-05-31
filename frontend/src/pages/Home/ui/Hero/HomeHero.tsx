@@ -3,8 +3,11 @@ import { Box, Button, Stack, Typography } from '@mui/material'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
 import { AnimatePresence } from 'motion/react'
 import { MotionBox } from '@/shared/ui/MotionBox'
+import { useTranslation } from 'react-i18next'
 
 const HomeHero = () => {
+  const { t } = useTranslation()
+
   return (
     <Box sx={{
       minHeight: '100vh',
@@ -61,7 +64,7 @@ const HomeHero = () => {
                 >
                   5
                 </Box>
-                <Typography fontWeight={600}>Сотрудников</Typography>
+                <Typography fontWeight={600}>{t('Сотрудников')}</Typography>
               </Stack>
               <Stack spacing={1} direction="row" alignItems="center">
                 <Box sx={{
@@ -78,7 +81,7 @@ const HomeHero = () => {
                 >
                   3
                 </Box>
-                <Typography fontWeight={600}>Проекта</Typography>
+                <Typography fontWeight={600}>{t('Проекта')}</Typography>
               </Stack>
               <Stack spacing={1} direction="row" alignItems="center">
                 <Box sx={{
@@ -93,9 +96,9 @@ const HomeHero = () => {
                   fontWeight: 600,
                 }}
                 >
-                  120
+                  0
                 </Box>
-                <Typography fontWeight={600}>Багов</Typography>
+                <Typography fontWeight={600}>{t('Багов')}</Typography>
               </Stack>
             </Stack>
           </Box>
@@ -124,7 +127,7 @@ const HomeHero = () => {
             color: theme.palette.invertedSecondary.dark,
           })}
         >
-          SLOBODASOFT — превращаем идеи в эффективные цифровые решения
+          {t('SLOBODASOFT — превращаем идеи в цифровые решения')}
         </Typography>
         <Typography
           variant="h4"
@@ -133,9 +136,9 @@ const HomeHero = () => {
             color: theme.palette.invertedSecondary.main,
           })}
         >
-          Мы не просто делаем WEB, мы даем ему характер!
+          {t('IT не должен быть сложным. Просто начни — мы подскажем, что дальше.')}
         </Typography>
-        <Button variant="contained" endIcon={<RocketLaunchOutlinedIcon />}>Подать заявку</Button>
+        <Button variant="contained" endIcon={<RocketLaunchOutlinedIcon />}>{t('Подать заявку')}</Button>
       </Box>
     </Box>
   )
