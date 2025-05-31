@@ -11,6 +11,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import AddTeamleadModal from '@/features/AddTeamlead/ui/AddTeamleadModal'
 import ProfileTeam from './ProfileTeam'
+import AddTeammateModal from '@/features/AddTeammate/ui/AddTeammateModal'
 
 interface ProfileCardProps {
   user: User
@@ -22,7 +23,8 @@ interface ProfileCardProps {
 
 const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditebleProfileLogo }: ProfileCardProps) => {
   const [isEditTeamLeaders, setIsEditTeamLeaders] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [addTeamleadOpen, setAddTeamleadOpen] = useState(false)
+  const [addTeammateOpen, setAddTeammateOpen] = useState(false)
   return (
     <Grid
       container
@@ -97,7 +99,7 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
                 >
                   {isEditTeamLeaders ? 'Закрыть' : 'Редактировать'}
                 </Button>
-                <Button variant="contained" color="primary" size="small" endIcon={<AddRoundedIcon />} onClick={() => setOpen(true)}>
+                <Button variant="contained" color="primary" size="small" endIcon={<AddRoundedIcon />} onClick={() => setAddTeamleadOpen(true)}>
                   Добавить
                 </Button>
               </Stack>
@@ -126,7 +128,7 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
                   >
                     {isEditTeamLeaders ? 'Закрыть' : 'Редактировать'}
                   </Button>
-                  <Button variant="contained" color="primary" size="small" endIcon={<AddRoundedIcon />} onClick={() => setOpen(true)}>
+                  <Button variant="contained" color="primary" size="small" endIcon={<AddRoundedIcon />} onClick={() => setAddTeammateOpen(true)}>
                     Добавить
                   </Button>
                 </Stack>
@@ -140,9 +142,15 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
         }
       </Grid>
       <AddTeamleadModal
-        open={open}
+        open={addTeamleadOpen}
         handleClose={() => {
-          setOpen(false)
+          setAddTeamleadOpen(false)
+        }}
+      />
+      <AddTeammateModal
+        open={addTeammateOpen}
+        handleClose={() => {
+          setAddTeammateOpen(false)
         }}
       />
     </Grid>
