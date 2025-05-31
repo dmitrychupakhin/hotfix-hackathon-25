@@ -6,8 +6,9 @@ const ProfileOrderForm = () => {
   const tasks = getProfileOrderFormTasks()
   return (
     <Stack spacing={2}>
-      <Typography variant="h2" component="h1">
-        Не стоит ломать голову над разработкой сайта —
+      <Typography variant="h2" component="h1" textAlign="center" sx={{ px: 20 }}>
+        Не стоит ломать голову над разработкой продукта —
+        {' '}
         <Typography variant="h2" component="span" sx={{ backgroundColor: 'primary.light' }}>
           мы все сделаем
         </Typography>
