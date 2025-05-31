@@ -188,6 +188,11 @@ class LeaderCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(is_team=True)
 
+@extend_schema(summary="Удалить тимлида", tags=["Менеджер"])
+class LeaderDestroyAPIView(generics.DestroyAPIView):
+    permission_classes = [IsStaff]
+    queryset = User.objects.all()
+
 @extend_schema(summary="Все тимлиды", tags=["Менеджер"])
 class LeadersListAPIView(generics.ListAPIView):
     permission_classes = [IsStaff]
