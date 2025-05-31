@@ -112,6 +112,13 @@ class UserCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'detail': 'Пароли не совпадают'})
         attrs.pop('confirm', None)
         return attrs
+    
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 
 class GetUserSerializer(serializers.ModelSerializer):
 
