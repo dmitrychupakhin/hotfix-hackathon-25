@@ -3,6 +3,7 @@ import { type FC } from 'react'
 import type { Task } from '../model/Task'
 import TaskItem from './TaskItem'
 import TaskSkeleton from './TaskSkeleton'
+import { useTranslation } from 'react-i18next'
 
 interface TaskListProps {
   tasks: Task[]
@@ -11,6 +12,7 @@ interface TaskListProps {
 }
 
 const TaskList: FC<TaskListProps> = ({ tasks, isLoading, sx }) => {
+  const { t } = useTranslation()
   return (
     <Grid container spacing={3} sx={sx}>
       {isLoading
@@ -27,7 +29,7 @@ const TaskList: FC<TaskListProps> = ({ tasks, isLoading, sx }) => {
       {tasks.length === 0 && !isLoading && (
         <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
           <Typography fontWeight={600} variant="h4">
-            Хм… похоже мероприятия не найдены =(
+            {t('Хм… похоже мероприятия не найдены')} =(
           </Typography>
         </Grid>
       )}
