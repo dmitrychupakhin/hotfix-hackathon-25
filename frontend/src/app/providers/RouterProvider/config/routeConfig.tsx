@@ -6,7 +6,7 @@ import { AuthLoginForm } from '@/features/AuthLogin'
 import { AuthRegisterForm } from '@/features/AuthRegister'
 import { AuthBanner, AuthPageLayout } from '@/pages/AuthPage'
 import { Home } from '@/pages/Home'
-import { ProfileCard } from '@/pages/ProfilePage'
+import { ProfileCard, ProfileOrderForm } from '@/pages/ProfilePage'
 import ProfileLayout from '@/pages/ProfilePage/ui/ProfileLayout'
 import backgroundLight from '@/shared/assets/images/appBackground.jpg'
 import { ROUTES } from '@/shared/const/routes'
@@ -92,6 +92,10 @@ export const routeConfig: AppRouteObject[] = [
               {
                 path: ROUTES.PROFILE(),
                 element: <ProfileCard />,
+              },
+              {
+                path: ROUTES.PROFILE_ORDER(),
+                element: <ProfileOrderForm />,
               },
             ],
           },
