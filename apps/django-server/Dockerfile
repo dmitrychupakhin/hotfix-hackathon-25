@@ -13,4 +13,4 @@ RUN chmod +x /app/entrypoint.sh
 
 ENTRYPOINT ["sh", "/app/entrypoint.sh"]
 
-CMD ["sh", "-c", "python manage.py runserver 0.0.0.0:8000"]
+CMD ["sh", "-c", "python start.py && python manage.py runserver 0.0.0.0:8000"]
