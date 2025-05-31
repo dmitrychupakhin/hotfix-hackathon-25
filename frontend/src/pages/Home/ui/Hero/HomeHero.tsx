@@ -4,9 +4,12 @@ import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
 import { AnimatePresence } from 'motion/react'
 import { MotionBox } from '@/shared/ui/MotionBox'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router'
+import { ROUTES } from '@/shared/const/routes'
 
 const HomeHero = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   return (
     <Box sx={{
@@ -138,7 +141,7 @@ const HomeHero = () => {
         >
           {t('IT не должен быть сложным. Просто начни — мы подскажем, что дальше.')}
         </Typography>
-        <Button variant="contained" endIcon={<RocketLaunchOutlinedIcon />}>{t('Подать заявку')}</Button>
+        <Button variant="contained" endIcon={<RocketLaunchOutlinedIcon />} onClick={() => navigate(ROUTES.PROFILE_ORDER())}>{t('Подать заявку')}</Button>
       </Box>
     </Box>
   )
