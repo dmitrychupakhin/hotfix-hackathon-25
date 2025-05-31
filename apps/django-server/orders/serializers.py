@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+import json
 import os
     
 class CreateOrderSerializer(serializers.ModelSerializer):
@@ -22,10 +23,14 @@ class GetOrderSerializer(serializers.ModelSerializer):
         return f"{obj.user.last_name} {obj.user.first_name}"
 
     def get_plan(self, obj):
-        plan = getattr(obj, 'plan', None)
-        if plan:
-            plan_obj = plan.first()
-            return plan_obj.data if plan_obj else None
+        plan_qs = getattr(obj, 'plan', None)
+        if plan_qs:
+            plan_obj = plan_qs.first()
+            if plan_obj:
+                try:
+                    return json.loads(plan_obj.data)
+                except json.JSONDecodeError:
+                    return None
         return None
     
 class ConnectOrderSerializer(serializers.ModelSerializer):
