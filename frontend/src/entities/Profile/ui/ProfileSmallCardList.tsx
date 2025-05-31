@@ -6,14 +6,15 @@ interface ProfileSmallCardListProps {
   data: User[]
   isEdit: boolean
   setIsEdit: (isEdit: boolean) => void
+  handleRemove: (id: string) => void
 }
 
-const ProfileSmallCardList = ({ data, isEdit, setIsEdit }: ProfileSmallCardListProps) => {
+const ProfileSmallCardList = ({ data, isEdit, setIsEdit, handleRemove }: ProfileSmallCardListProps) => {
   return (
     <Grid container spacing={2}>
       {data.map(item => (
         <Grid size={4}>
-          <ProfileSmallCardItem data={item} isEdit={isEdit} setIsEdit={setIsEdit} />
+          <ProfileSmallCardItem data={item} isEdit={isEdit} handleRemove={handleRemove} />
         </Grid>
       ))}
     </Grid>

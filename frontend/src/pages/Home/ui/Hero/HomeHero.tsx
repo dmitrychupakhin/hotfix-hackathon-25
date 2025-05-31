@@ -127,7 +127,7 @@ const HomeHero = () => {
           variant="h1"
           sx={theme => ({
             fontWeight: theme.typography.fontWeightMedium,
-            color: theme.palette.invertedSecondary.dark,
+            color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
           })}
         >
           {t('SLOBODASOFT — превращаем идеи в цифровые решения')}
@@ -136,12 +136,21 @@ const HomeHero = () => {
           variant="h4"
           sx={theme => ({
             fontWeight: theme.typography.fontWeightLight,
-            color: theme.palette.invertedSecondary.main,
+            color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.invertedSecondary.main,
           })}
         >
           {t('IT не должен быть сложным. Просто начни — мы подскажем, что дальше.')}
         </Typography>
-        <Button variant="contained" endIcon={<RocketLaunchOutlinedIcon />} onClick={() => navigate(ROUTES.PROFILE_ORDER())}>{t('Подать заявку')}</Button>
+        <Button
+          sx={theme => ({
+            color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
+          })}
+          variant="contained"
+          endIcon={<RocketLaunchOutlinedIcon />}
+          onClick={() => navigate(ROUTES.PROFILE_ORDER())}
+        >
+          {t('Подать заявку')}
+        </Button>
       </Box>
     </Box>
   )

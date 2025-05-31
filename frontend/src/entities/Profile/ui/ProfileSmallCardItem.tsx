@@ -7,9 +7,10 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded'
 interface ProfileSmallCardItemProps {
   data: User
   isEdit: boolean
+  handleRemove: (id: string) => void
 }
 
-const ProfileSmallCardItem = ({ data, isEdit }: ProfileSmallCardItemProps) => {
+const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardItemProps) => {
   return (
     <Box sx={theme => ({
       border: `1px solid ${theme.palette.divider}`,
@@ -54,7 +55,7 @@ const ProfileSmallCardItem = ({ data, isEdit }: ProfileSmallCardItemProps) => {
       </Stack>
       {isEdit && (
         <Stack direction="row" spacing={1}>
-          <Button fullWidth variant="contained" color="secondary" size="small" endIcon={<DeleteForeverRoundedIcon />}>
+          <Button fullWidth variant="contained" color="secondary" size="small" endIcon={<DeleteForeverRoundedIcon />} onClick={() => handleRemove(data.id)}>
             Удалить
           </Button>
           <Button fullWidth variant="contained" color="primary" size="small" endIcon={<EditRoundedIcon />}>

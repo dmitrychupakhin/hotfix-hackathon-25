@@ -1,451 +1,131 @@
-import React, { Component, ErrorInfo, useEffect, useState } from 'react'
-import { Gantt, type Task, type TooltipContentProps } from 'gantt-task-react'
-import 'gantt-task-react/dist/index.css'
-import dayjs from 'dayjs'
+import { Box, Card, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material'
+import type { Task } from '../model/Task'
+import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
+import { data, useNavigate } from 'react-router'
+import { TaskFilterField } from '@/shared/types/TaskFilterField'
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded'
+import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
 
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Paper,
-  Slider,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material'
-import {
-  Add as AddIcon,
-  ArrowUpward,
-  ArrowDownward,
-  Delete as DeleteIcon,
-  Edit as EditIcon,
-} from '@mui/icons-material'
-
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-
-// Описание формата входных/выходных данных
-export interface GanttInputItem {
-  name: string
-  start_date: string // ожидаем формат 'YYYY-MM-DD' или ISO
-  end_date: string // ожидаем формат 'YYYY-MM-DD' или ISO
-  progress: number
+interface TaskDetailProps {
+  task: Task
 }
 
-// Кастомный Tooltip, который отображается снизу
-const CustomTooltip: React.FC<TooltipContentProps> = ({ task }) => {
+const TaskDetail = ({ task }: TaskDetailProps) => {
+  const theme = useTheme()
+  const navigate = useNavigate()
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        p: 1,
-        backgroundColor: '#fff',
-        border: '1px solid #ccc',
-        position: 'absolute',
-        top: 70,
-        left: 0,
-        zIndex: 1500,
-        pointerEvents: 'none',
-        whiteSpace: 'nowrap',
-      }}
-    >
-      <Typography variant="body2" fontWeight="bold">
-        {task.name}
-      </Typography>
-      <Typography variant="body2">
-        С
-        {' '}
-        {task.start.toLocaleDateString()}
-        {' '}
-        до
-        {' '}
-        {task.end.toLocaleDateString()}
-      </Typography>
-      <Typography variant="body2">
-        Прогресс:
-        {task.progress}
-        %
-      </Typography>
-    </Paper>
-  )
-}
-
-// Преобразование входного массива GanttInputItem[] в Task[]
-const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
-  return data
-    .map((item, index) => {
-      const parsedStart = dayjs(item.start_date)
-      const parsedEnd = dayjs(item.end_date)
-
-      // Если хотя бы одна из дат невалидна, пропускаем эту запись
-      if (!parsedStart.isValid() || !parsedEnd.isValid()) {
-        console.warn(`Задача "${item.name}" имеет некорректную дату и будет пропущена.`)
-        return null
-      }
-
-      // Если дата окончания раньше даты начала, пропускаем
-      if (parsedEnd.isBefore(parsedStart)) {
-        console.warn(
-          `Для задачи "${item.name}" дата окончания (${parsedEnd.format(
-            'YYYY-MM-DD',
-          )}) раньше даты начала (${parsedStart.format('YYYY-MM-DD')}), задача будет пропущена.`,
-        )
-        return null
-      }
-
-      return {
-        id: `Task-${index + 1}`,
-        name: item.name,
-        start: parsedStart.toDate(),
-        end: parsedEnd.toDate(),
-        type: 'task' as const,
-        progress: item.progress,
-        isDisabled: false,
-      }
-    })
-    .filter((t): t is Task => t !== null)
-}
-
-// Преобразование Task[] обратно в GanttInputItem[]
-const convertToInputItems = (tasks: Task[]): GanttInputItem[] => {
-  return tasks.map(task => ({
-    name: task.name,
-    start_date: dayjs(task.start).format('YYYY-MM-DD'),
-    end_date: dayjs(task.end).format('YYYY-MM-DD'),
-    progress: task.progress,
-  }))
-}
-
-// ErrorBoundary, чтобы приложение не падало при ошибках Gantt
-class GanttErrorBoundary extends Component<
-  { children: React.ReactNode },
-  { hasError: boolean }
-> {
-  constructor(props: any) {
-    super(props)
-    this.state = { hasError: false }
-  }
-
-  static getDerivedStateFromError(_: Error) {
-    return { hasError: true }
-  }
-
-  componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error('Ошибка в Gantt:', error, info)
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <Typography color="error" sx={{ p: 2 }}>
-          Произошла ошибка при отрисовке диаграммы Ганта.
-        </Typography>
-      )
-    }
-    return this.props.children
-  }
-}
-
-interface GanttChartProps {
-  data: GanttInputItem[] | undefined
-  /**
-   * Функция-колбек, которая будет вызвана при любом изменении задач.
-   * Возвращает массив в формате GanttInputItem[].
-   */
-  onDataChange?: (updated: GanttInputItem[]) => void
-
-  /**
-   * Если true, разрешается редактировать только прогресс.
-   * Даты и название задачи нельзя менять.
-   */
-  isEditProgressOnly?: boolean
-}
-
-const GanttChart: React.FC<GanttChartProps> = ({
-  data,
-  onDataChange,
-  isEditProgressOnly = false,
-}) => {
-  // Инициализируем задачи из входных данных (гарантируем, что data — массив)
-  const initialTasks = convertToTasks(Array.isArray(data) ? data : [])
-  const [tasks, setTasks] = useState<Task[]>(initialTasks)
-  const [editTask, setEditTask] = useState<Task | null>(null)
-
-  // Каждый раз, когда tasks меняются, вызываем callback onDataChange
-  useEffect(() => {
-    if (typeof onDataChange === 'function') {
-      const converted = convertToInputItems(tasks)
-      onDataChange(converted)
-    }
-  }, [tasks, onDataChange])
-
-  // Обработчик изменений задачи (дата или прогресс)
-  const handleTaskChange = (task: Task) => {
-    setTasks(prev =>
-      prev.map(t => (t.id === task.id ? { ...task } : t)),
-    )
-  }
-
-  // Когда пользователь сохраняет редактирование через диалог
-  const handleDialogSave = () => {
-    if (editTask) {
-      handleTaskChange(editTask)
-      setEditTask(null)
-    }
-  }
-
-  // Добавляем новую задачу
-  const handleAddTask = () => {
-    const newIndex = tasks.length
-    const today = new Date()
-
-    const newTask: Task = {
-      id: `Task-${newIndex + 1}`,
-      name: `Новая задача ${newIndex + 1}`,
-      start: today,
-      end: dayjs(today).add(3, 'day').toDate(),
-      type: 'task',
-      progress: 0,
-      isDisabled: false,
-    }
-
-    setTasks(prev => [...prev, newTask])
-  }
-
-  // Перемещаем задачу вверх/вниз
-  const moveTask = (id: string, direction: 'up' | 'down') => {
-    setTasks((prev) => {
-      const index = prev.findIndex(t => t.id === id)
-      if (index === -1) return prev
-
-      const newIndex = direction === 'up' ? index - 1 : index + 1
-      if (newIndex < 0 || newIndex >= prev.length) return prev
-
-      const updated = [...prev]
-      const temp = updated[index]
-      updated[index] = updated[newIndex]
-      updated[newIndex] = temp
-
-      return updated.map((task, i) => ({
-        ...task,
-        id: `Task-${i + 1}`,
-      }))
-    })
-  }
-
-  // Удаляем задачу
-  const deleteTask = (id: string) => {
-    setTasks((prev) => {
-      const filtered = prev.filter(t => t.id !== id)
-      return filtered.map((task, i) => ({
-        ...task,
-        id: `Task-${i + 1}`,
-      }))
-    })
-  }
-
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Box p={2}>
-        <Stack direction="row" justifyContent="space-between" mb={2}>
-          <Typography variant="h5">Диаграмма Ганта</Typography>
-          <Button
-            startIcon={<AddIcon />}
-            variant="contained"
-            onClick={handleAddTask}
-            disabled={isEditProgressOnly}
-          >
-            Добавить этап
-          </Button>
-        </Stack>
-
-        <Box
-          sx={{
-            height: '600px',
-            overflowX: 'auto',
-            overflowY: 'hidden',
-            position: 'relative',
-            border: '1px solid #ccc',
-            borderRadius: 2,
-            bgcolor: '#fff',
-          }}
-        >
-          <GanttErrorBoundary>
-            <Gantt
-              tasks={tasks}
-              // Если разрешено редактировать только прогресс, отключаем изменение дат
-              onDateChange={isEditProgressOnly ? undefined : handleTaskChange}
-              onProgressChange={handleTaskChange}
-              onDoubleClick={task => setEditTask(task)}
-              onSelect={(task, isSelected) =>
-                console.log(task.name + ' selected:', isSelected)}
-              TooltipContent={CustomTooltip}
-              listCellWidth="330px"
-              columnWidth={60}
-              ganttHeight={600}
-              TaskListHeader={() => (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    px: 2,
-                    py: 1,
-                    bgcolor: '#f0f0f0',
-                    borderBottom: '1px solid #ddd',
-                  }}
-                >
-                  <Typography variant="body2" fontWeight="bold">
-                    Название
-                  </Typography>
-                </Box>
-              )}
-              TaskListTable={({ rowHeight, tasks: tableTasks }) => (
-                <>
-                  {tableTasks.map((task, index) => (
-                    <Box
-                      key={task.id}
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        px: 2,
-                        height: rowHeight,
-                        borderBottom: '1px solid #eee',
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          flexGrow: 1,
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        }}
-                      >
-                        {task.name}
-                      </Typography>
-                      <IconButton
-                        onClick={() => moveTask(task.id, 'up')}
-                        disabled={index === 0 || isEditProgressOnly}
-                        size="small"
-                        title="Вверх"
-                      >
-                        <ArrowUpward fontSize="small" />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => moveTask(task.id, 'down')}
-                        disabled={index === tableTasks.length - 1 || isEditProgressOnly}
-                        size="small"
-                        title="Вниз"
-                      >
-                        <ArrowDownward fontSize="small" />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => setEditTask(task)}
-                        size="small"
-                        title="Редактировать"
-                      >
-                        <EditIcon fontSize="small" />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => deleteTask(task.id)}
-                        size="small"
-                        title="Удалить"
-                        sx={{ color: 'error.main' }}
-                        disabled={isEditProgressOnly}
-                      >
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
-                    </Box>
-                  ))}
-                </>
-              )}
-            />
-          </GanttErrorBoundary>
+    <Card sx={{ p: 3, borderRadius: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Stack spacing={2}>
+        <Box>
+          <IconButton onClick={() => navigate(-1)}>
+            <ArrowCircleLeftRoundedIcon />
+          </IconButton>
         </Box>
-
-        <Dialog
-          open={!!editTask}
-          onClose={() => setEditTask(null)}
-          maxWidth="sm"
-          fullWidth
-        >
-          <DialogTitle>Редактировать задачу</DialogTitle>
-          {editTask && (
-            <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {/* Если isEditProgressOnly=false, показываем поле Названия и Даты */}
-              {!isEditProgressOnly && (
-                <>
-                  <TextField
-                    label="Название"
-                    value={editTask.name}
-                    onChange={e =>
-                      setEditTask({ ...editTask, name: e.target.value })}
-                    fullWidth
-                  />
-                  <DatePicker
-                    label="Дата начала"
-                    value={dayjs(editTask.start)}
-                    maxDate={dayjs(editTask.end)}
-                    onChange={(date) => {
-                      if (date && date.isValid()) {
-                        const newStart = date.toDate()
-                        if (dayjs(newStart).isAfter(dayjs(editTask.end))) {
-                          return
-                        }
-                        setEditTask({ ...editTask, start: newStart })
-                      }
-                    }}
-                    disablePortal
-                  />
-                  <DatePicker
-                    label="Дата окончания"
-                    value={dayjs(editTask.end)}
-                    minDate={dayjs(editTask.start)}
-                    onChange={(date) => {
-                      if (date && date.isValid()) {
-                        const newEnd = date.toDate()
-                        if (dayjs(newEnd).isBefore(dayjs(editTask.start))) {
-                          return
-                        }
-                        setEditTask({ ...editTask, end: newEnd })
-                      }
-                    }}
-                    disablePortal
-                  />
-                </>
-              )}
-              {/* Всегда показываем слайдер прогресса */}
-              <Box>
-                <Typography variant="body2">
-                  Прогресс:
-                  {editTask.progress}
-                  %
-                </Typography>
-                <Slider
-                  value={editTask.progress}
-                  onChange={(_, value) =>
-                    setEditTask({ ...editTask, progress: value as number })}
-                  min={0}
-                  max={100}
-                />
+        <Divider />
+        <Box display="flex">
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              backgroundColor: 'primary.light',
+              width: 'auto',
+            }}
+          >
+            {task.title}
+          </Typography>
+        </Box>
+        <Typography>
+          {task.description}
+        </Typography>
+        <Typography fontWeight={600}>
+          Дата отправки задания:
+          {' '}
+          <Typography
+            component="span"
+            fontWeight={600}
+            sx={{
+              backgroundColor: 'primary.light',
+            }}
+          >
+            {task.createdAt}
+          </Typography>
+        </Typography>
+        <Box display="flex">
+          {
+            task.status === TaskFilterField.DONE && (
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                border: `1px solid ${theme.palette.success.dark}`,
+                borderRadius: 50,
+                py: 0.5,
+                px: 1 }}
+              >
+                <CheckCircleOutlineRoundedIcon sx={{ color: 'success.dark' }} />
+                <Typography variant="body1" color="success.dark">выполнено</Typography>
               </Box>
-            </DialogContent>
-          )}
-          <DialogActions>
-            <Button onClick={() => setEditTask(null)}>Отмена</Button>
-            <Button onClick={handleDialogSave} variant="contained">
-              Сохранить
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Box>
-    </LocalizationProvider>
+            )
+          }
+
+          {
+            task.status === TaskFilterField.INWORK && (
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                border: `1px solid ${theme.palette.warning.main}`,
+                borderRadius: 50,
+                py: 0.5,
+                px: 1,
+              }}
+              >
+                <AutorenewRoundedIcon sx={{ color: 'warning.main' }} />
+                <Typography variant="body1" color="warning.main">в работе</Typography>
+              </Box>
+            )
+          }
+
+          {
+            task.status === TaskFilterField.WAITING && (
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                border: `1px solid ${theme.palette.grey[600]}`,
+                borderRadius: 50,
+                py: 0.5,
+                px: 1,
+              }}
+              >
+                <SwapVertRoundedIcon sx={{ color: 'grey.600' }} />
+                <Typography variant="body1" color="grey.600">ожидает</Typography>
+              </Box>
+            )
+          }
+
+          {
+            task.status === TaskFilterField.DENIED && (
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                border: `1px solid ${theme.palette.error.main}`,
+                borderRadius: 50,
+                py: 0.5,
+                px: 1,
+              }}
+              >
+                <CheckCircleOutlineRoundedIcon sx={{ color: 'error.main' }} />
+                <Typography variant="body1" color="error.main">отклонено</Typography>
+              </Box>
+            )
+          }
+        </Box>
+      </Stack>
+    </Card>
   )
 }
 
-export default GanttChart
+export default TaskDetail

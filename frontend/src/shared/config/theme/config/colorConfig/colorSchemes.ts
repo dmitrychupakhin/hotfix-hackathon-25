@@ -67,19 +67,19 @@ export const colorSchemes: {
       dark: primary[600],
     },
     secondary: {
-      light: secondary[200],
-      main: secondary[400],
-      dark: secondary[600],
+      light: contentLight[200],
+      main: contentLight[400],
+      dark: contentLight[600],
     },
     invertedSecondary: {
-      light: contentLight[200],
-      main: contentLight[400],
-      dark: contentLight[600],
+      light: contentDark[200],
+      main: contentDark[400],
+      dark: contentDark[600],
     },
     info: {
-      light: contentLight[200],
-      main: contentLight[400],
-      dark: contentLight[600],
+      light: contentDark[200],
+      main: contentDark[400],
+      dark: contentDark[600],
     },
     warning: {
       light: warning[100],

@@ -5,7 +5,7 @@ import httpx
 @shared_task
 def run_ml_prediction_cats(data, order):
     response = httpx.post(
-        'http://predictor:8001/api/predictor/cats',
+        'http://predictor:8001/api/predictor/plan',
         json=data,
         timeout=20.0
     )
