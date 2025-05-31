@@ -53,7 +53,7 @@ services:
         condition: service_healthy
     volumes:
       - static_volume:/static
-      - media_volume:/media
+      - media_volume:/app/media
       - ./apps/django-server:/app
 
   mailer:
