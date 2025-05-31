@@ -25,6 +25,8 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
       photo: null,
       role: TeamRole.FRONTEND,
       stack: '',
+      password: '',
+      confirm: '',
     },
   })
 
@@ -133,7 +135,19 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                         />
                       )}
                     />
-
+                    <Controller
+                      name="password"
+                      control={control}
+                      render={({ field, fieldState }) => (
+                        <TextField
+                          {...field}
+                          label="Пароль"
+                          fullWidth
+                          error={!!fieldState.error}
+                          helperText={fieldState.error?.message}
+                        />
+                      )}
+                    />
                   </Stack>
                 </Grid>
                 <Grid size={4}>
@@ -185,7 +199,19 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                         </TextField>
                       )}
                     />
-
+                    <Controller
+                      name="confirm"
+                      control={control}
+                      render={({ field, fieldState }) => (
+                        <TextField
+                          {...field}
+                          label="Подтверждение пароля"
+                          fullWidth
+                          error={!!fieldState.error}
+                          helperText={fieldState.error?.message}
+                        />
+                      )}
+                    />
                   </Stack>
                 </Grid>
                 <Grid size={4} />
