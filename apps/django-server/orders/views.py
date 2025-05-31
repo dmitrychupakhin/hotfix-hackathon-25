@@ -26,8 +26,9 @@ class OrderListAPIView(generics.ListAPIView):
     serializer_class = GetOrderSerializer
     pagination_class = OrderListPagination
 
-    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     search_fields = ['title']
+    filterset_fields = ['status']
     ordering_fields = ['status', 'created_at', 'start', 'end']
     ordering = ['-created_at']
 
