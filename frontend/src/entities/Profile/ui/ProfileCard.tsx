@@ -10,6 +10,7 @@ import { useState } from 'react'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import AddTeamleadModal from '@/features/AddTeamlead/ui/AddTeamleadModal'
+import ProfileTeam from './ProfileTeam'
 
 interface ProfileCardProps {
   user: User
@@ -107,11 +108,40 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
             </Box>
           </>
         )}
+        {
+          user.isTeam && (
+            <>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 4, py: 2 }}>
+                <Typography variant="h6" fontWeight={600} sx={{ px: 4, py: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <PeopleAltRoundedIcon />
+                  Состав команды
+                </Typography>
+                <Stack direction="row" spacing={1}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => setIsEditTeamLeaders(!isEditTeamLeaders)}
+                    endIcon={<EditRoundedIcon />}
+                  >
+                    {isEditTeamLeaders ? 'Закрыть' : 'Редактировать'}
+                  </Button>
+                  <Button variant="contained" color="primary" size="small" endIcon={<AddRoundedIcon />} onClick={() => setOpen(true)}>
+                    Добавить
+                  </Button>
+                </Stack>
+              </Box>
+              <Divider />
+              <Box sx={{ p: 4 }}>
+                <ProfileTeam isEdit={isEditTeamLeaders} setIsEdit={setIsEditTeamLeaders} />
+              </Box>
+            </>
+          )
+        }
       </Grid>
       <AddTeamleadModal
         open={open}
         handleClose={() => {
-          console.log('123')
           setOpen(false)
         }}
       />

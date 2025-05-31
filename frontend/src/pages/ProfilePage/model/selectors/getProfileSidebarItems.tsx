@@ -24,10 +24,6 @@ export const getProfileSidebarItems = (isStaff: boolean | undefined, isTeam: boo
         path: ROUTES.PROFILE(),
       },
       {
-        Icon: RocketLaunchRoundedIcon,
-        path: ROUTES.PROFILE_ORDER(),
-      },
-      {
         Icon: AssignmentRoundedIcon,
         path: ROUTES.PROFILE_ACTIVE_TASKS(),
       },
