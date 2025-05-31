@@ -5,6 +5,7 @@ import type { TaskSortField } from '@/shared/types/TaskSortField'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import { Grid, InputAdornment, Stack, TextField } from '@mui/material'
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface MainEventsFiltersProps {
   sort: TaskSortField
@@ -23,6 +24,7 @@ const MainEventsFilters: FC<MainEventsFiltersProps> = ({
   filter,
   setFilter,
 }) => {
+  const { t } = useTranslation()
   return (
     <Grid container>
       <Grid size={8}>
@@ -42,7 +44,7 @@ const MainEventsFilters: FC<MainEventsFiltersProps> = ({
       <Grid size={4}>
         <TextField
           fullWidth
-          label="Поиск"
+          label={t('Поиск')}
           value={search}
           onChange={e => setSearch(e.target.value)}
           size="medium"

@@ -1,7 +1,11 @@
-import React, { Component, ErrorInfo, useEffect, useState } from 'react'
+import React, { Component, type ErrorInfo, useEffect, useState } from 'react'
+// @ts-expect-error TooltipContentProps is not exported
 import { Gantt, type Task, type TooltipContentProps } from 'gantt-task-react'
 import 'gantt-task-react/dist/index.css'
 import dayjs from 'dayjs'
+// Подключаем русскую локаль
+import 'dayjs/locale/ru'
+dayjs.locale('ru')
 
 import {
   Box,
@@ -60,14 +64,15 @@ const CustomTooltip: React.FC<TooltipContentProps> = ({ task }) => {
       <Typography variant="body2">
         С
         {' '}
-        {task.start.toLocaleDateString()}
+        {dayjs(task.start).format('DD.MM.YYYY')}
         {' '}
         до
         {' '}
-        {task.end.toLocaleDateString()}
+        {dayjs(task.end).format('DD.MM.YYYY')}
       </Typography>
       <Typography variant="body2">
         Прогресс:
+        {' '}
         {task.progress}
         %
       </Typography>
@@ -77,6 +82,7 @@ const CustomTooltip: React.FC<TooltipContentProps> = ({ task }) => {
 
 // Преобразование входного массива GanttInputItem[] в Task[]
 const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
+  // @ts-expect-error Task is not exported
   return data
     .map((item, index) => {
       const parsedStart = dayjs(item.start_date)
@@ -91,9 +97,7 @@ const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
       // Если дата окончания раньше даты начала, пропускаем
       if (parsedEnd.isBefore(parsedStart)) {
         console.warn(
-          `Для задачи "${item.name}" дата окончания (${parsedEnd.format(
-            'YYYY-MM-DD',
-          )}) раньше даты начала (${parsedStart.format('YYYY-MM-DD')}), задача будет пропущена.`,
+          `Для задачи "${item.name}" дата окончания (${parsedEnd.format('YYYY-MM-DD')}) раньше даты начала (${parsedStart.format('YYYY-MM-DD')}), задача будет пропущена.`,
         )
         return null
       }
@@ -108,6 +112,7 @@ const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
         isDisabled: false,
       }
     })
+    // @ts-expect-error Task is not exported
     .filter((t): t is Task => t !== null)
 }
 
@@ -250,7 +255,8 @@ const GanttChart: React.FC<GanttChartProps> = ({
   }
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    // Указываем локаль "ru", чтобы DatePicker показывал даты в формате дд.мм.гггг
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
       <Box p={2}>
         <Stack direction="row" justifyContent="space-between" mb={2}>
           <Typography variant="h5">Диаграмма Ганта</Typography>
@@ -400,7 +406,8 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         setEditTask({ ...editTask, start: newStart })
                       }
                     }}
-                    disablePortal
+                    // опционально можно явно задать формат, но при adapterLocale="ru" MUI сам поставит «дд.мм.гггг»
+                    // format="DD.MM.YYYY"
                   />
                   <DatePicker
                     label="Дата окончания"
@@ -415,7 +422,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         setEditTask({ ...editTask, end: newEnd })
                       }
                     }}
-                    disablePortal
+                    // format="DD.MM.YYYY"
                   />
                 </>
               )}
@@ -423,6 +430,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
               <Box>
                 <Typography variant="body2">
                   Прогресс:
+                  {' '}
                   {editTask.progress}
                   %
                 </Typography>

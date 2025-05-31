@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 import asyncio
-import logging
 
 router = APIRouter(tags=["Predictor Service"])
 

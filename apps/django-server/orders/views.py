@@ -17,7 +17,6 @@ class OrderCreateAPIView(generics.CreateAPIView):
         order = serializer.save(user=self.request.user)
         run_ml_prediction_cats.delay({"data": "data"}, order.id)
         
-
 class OrderListPagination(PageNumberPagination):
     page_size = 4
     page_size_query_param = 'page_size'
