@@ -97,7 +97,7 @@ const AuthChangePasswordForm = () => {
         <Controller
           name="oldPassword"
           control={control}
-          rules={{ required: t('Введите старый пароль')}}
+          rules={{ required: t('Введите старый пароль') }}
           render={({ field, fieldState }) => (
             <PasswordField
               {...field}

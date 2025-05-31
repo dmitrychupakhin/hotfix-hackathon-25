@@ -8,7 +8,7 @@ import { MotionBox } from '@/shared/ui/MotionBox'
 import { useTranslation } from 'react-i18next'
 
 const HomeAbout = () => {
-const { t } = useTranslation()
+  const { t } = useTranslation()
   return (
     <PageWrapper xPadding>
       <Grid
@@ -56,7 +56,7 @@ const { t } = useTranslation()
                   </Typography>
                   {t(' бывает запустить IT-проект: с чего начать, сколько это займёт времени, каких людей подключить, какие технологии выбрать. Всё звучит сложно — и ')}
                   <Typography component="span" variant="h4" sx={theme => ({ color: theme.palette.primary.main })}>
-                      {t('мы тут, чтобы это упростить.')}
+                    {t('мы тут, чтобы это упростить.')}
                   </Typography>
                 </Typography>
               </Stack>
@@ -97,7 +97,7 @@ const { t } = useTranslation()
             backgroundColor: theme.palette.common.green,
             borderRadius: 3,
             p: 3,
-            height: '100%'
+            height: '100%',
           })}
         >
           <Box sx={{
@@ -124,7 +124,7 @@ const { t } = useTranslation()
               <QuoteIcon style={{
                 width: 100,
                 height: 80,
-                
+
               }}
               />
             </Box>
@@ -140,7 +140,7 @@ const { t } = useTranslation()
           size={6}
           sx={theme => ({
             backgroundColor: theme.palette.primary.main,
-      
+
             borderRadius: 3,
             p: 3,
             display: 'flex',

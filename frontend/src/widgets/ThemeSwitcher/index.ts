@@ -1,1 +1,1 @@
-export { default as ColorModeIconDropdown } from './ui/ColorModeIconDropdown';
+export { default as ColorModeIconDropdown } from './ui/ColorModeIconDropdown'
