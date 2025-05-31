@@ -1,5 +1,6 @@
 // import type { User } from '@/entities/Profile/model/types/User'
-// import useLogout from '@/features/AuthLogout/lib/hooks/useLogout'
+import type { User } from '@/entities/Profile/model/types/User'
+import useLogout from '@/features/AuthLogout/lib/hooks/useLogout'
 import { ROUTES } from '@/shared/const/routes'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
@@ -11,7 +12,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 
 interface UserMenuProps {
-  user: any
+  user: User
 }
 
 const UserMenu = ({ user }: UserMenuProps) => {
@@ -19,13 +20,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
 
-  // const { logout, isLoading: isLoggingOut } = useLogout()
-
-  const logout = () => {
-    console.log('logout')
-  }
-
-  const isLoggingOut = false
+  const { logout, isLoading: isLoggingOut } = useLogout()
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -37,17 +32,17 @@ const UserMenu = ({ user }: UserMenuProps) => {
 
   const handleProfileClick = () => {
     handleClose()
-    // navigate(ROUTES.PROFILE())
+    navigate(ROUTES.PROFILE())
   }
 
   const handleChangeEmailClick = () => {
     handleClose()
-    // navigate(ROUTES.AUTH_CHANGE_EMAIL())
+    navigate(ROUTES.AUTH_CHANGE_EMAIL())
   }
 
   const handleChangePasswordClick = () => {
     handleClose()
-    // navigate(ROUTES.AUTH_CHANGE_PASSWORD())
+    navigate(ROUTES.AUTH_CHANGE_PASSWORD())
   }
 
   const handleLogout = async () => {
@@ -63,14 +58,23 @@ const UserMenu = ({ user }: UserMenuProps) => {
   return (
     <>
       <ButtonBase onClick={handleOpen}>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={theme => ({
+            backgroundColor: theme.palette.background.default,
+            borderRadius: theme.shape.borderRadius * 5,
+            p: 1,
+          })}
+        >
           <Avatar
             sx={theme => ({
               border: `2px solid ${theme.palette.primary.main}`,
               width: 42,
               height: 42,
             })}
-            variant="rounded"
+            variant="circular"
             src={user.photo}
           />
           <Stack spacing={0} alignItems="start">
@@ -83,10 +87,12 @@ const UserMenu = ({ user }: UserMenuProps) => {
               variant="subtitle1"
               sx={theme => ({ color: theme.palette.secondary.light })}
             >
-              Студент
+              {user.isStaff && 'Модератор' }
+              {user.isTeam && 'Команда' }
+              {!user.isStaff && 'Пользователь' }
             </Typography>
           </Stack>
-          <KeyboardArrowDownIcon color="primary" />
+          <KeyboardArrowDownIcon color="secondary" />
         </Stack>
       </ButtonBase>
 

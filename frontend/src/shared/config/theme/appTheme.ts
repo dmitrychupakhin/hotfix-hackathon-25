@@ -8,6 +8,8 @@ import MuiInputBase from './customComponents/MuiInputBase'
 import { MuiInputLabel, MuiOutlinedInput } from './customComponents/MuiOutlinedInput'
 import MuiCheckbox from './customComponents/MuiCheckbox'
 import MuiFormControlLabel from './customComponents/MuiFormControlLabel'
+import MuiMenu from './customComponents/MuiMenu'
+import MuiMenuItem from './customComponents/MuiMenuItem'
 
 const appTheme = createTheme({
   colorSchemes: {
@@ -47,10 +49,16 @@ const appTheme = createTheme({
     MuiCheckbox,
 
     MuiFormControlLabel,
+
+    MuiMenu,
+    MuiMenuItem,
   },
   mixins: {
     toolbar: {
       minHeight: 70,
+    },
+    profileSidebar: {
+      minWidth: 70,
     },
   },
 })

@@ -1,22 +1,20 @@
 // import { getProfileData } from '@/entities/Profile'
 import { LogoLink } from '@/shared/ui/LogoLink/LogoLink'
 // import { ColorModeIconDropdown } from '@/widgets/ThemeSwitcher'
+import { getProfileData } from '@/entities/Profile'
 import { Box, Link as MuiLink, Stack } from '@mui/material'
 import type { FC } from 'react'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router'
 import { getHeaderLinks } from '../model/selectors/getHeaderLinks'
 import AuthSection from './AuthSection'
 import UserMenu from './UserMenu'
-import { useLocation, useNavigate } from 'react-router'
-import { getProfileData } from '@/entities/Profile'
-import { useSelector } from 'react-redux'
 
 const Header: FC = () => {
   const profileData = useSelector(getProfileData)
 
-  const { isError, isLoading: isUserLoading, isSuccess, data: user } = profileData;
-  // const { data: user } = profileData
-
+  const { data: user } = profileData
 
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -70,7 +68,7 @@ const Header: FC = () => {
             borderRadius: theme.shape.borderRadius * 50,
             boxShadow: isScrolled ? theme.shadows[1] : 'none',
             px: 2,
-            py: 1,
+            // py: 1,
             position: 'relative',
             transition: isScrolled ? showTransition : hideTransition,
           }

@@ -1,9 +1,9 @@
-import { alpha, Box, CircularProgress } from '@mui/material';
+import { alpha, Box, CircularProgress } from '@mui/material'
 
 const FormLoader = () => {
   return (
     <Box
-      sx={(theme) => ({
+      sx={theme => ({
         opacity: 1,
         pointerEvents: 1,
         position: 'absolute',
@@ -23,7 +23,7 @@ const FormLoader = () => {
     >
       <CircularProgress size={40} />
     </Box>
-  );
-};
+  )
+}
 
-export default FormLoader;
+export default FormLoader

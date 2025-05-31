@@ -1,1 +1,1 @@
-export { default as MotionBox } from './ui/MotionBox';
+export { default as MotionBox } from './ui/MotionBox'

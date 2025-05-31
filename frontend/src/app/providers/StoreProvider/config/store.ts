@@ -1,13 +1,13 @@
-import type { Reducer, ReducersMapObject } from '@reduxjs/toolkit';
-import { configureStore } from '@reduxjs/toolkit';
+import type { Reducer, ReducersMapObject } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 // import { CombinedState, Reducer } from 'redux';
 // import { counterReducer } from '@/entities/Counter';
 // import { $api } from '@/shared/api/api';
-import { logoutReducer } from '@/features/AuthLogout';
-import { globalLoaderReducer } from '@/features/GlobalLoader';
-import { rtkApi } from '@/shared/api';
-import type { StateSchema, ThunkExtraArg } from './StateSchema';
-import { createReducerManager } from './reducerManager';
+import { logoutReducer } from '@/features/AuthLogout'
+import { globalLoaderReducer } from '@/features/GlobalLoader'
+import { rtkApi } from '@/shared/api'
+import type { StateSchema, ThunkExtraArg } from './StateSchema'
+import { createReducerManager } from './reducerManager'
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -19,29 +19,29 @@ export function createReduxStore(
     logout: logoutReducer,
     globalLoader: globalLoaderReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
-  };
+  }
 
-  const reducerManager = createReducerManager(rootReducers);
+  const reducerManager = createReducerManager(rootReducers)
 
   const extraArg: ThunkExtraArg = {
     // api: $api,
-  };
+  }
 
   const store = configureStore({
     reducer: reducerManager.reduce as Reducer<StateSchema>,
     preloadedState: initialState,
-    middleware: (getDefaultMiddleware) =>
+    middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         thunk: {
           extraArgument: extraArg,
         },
       }).concat(rtkApi.middleware),
-  });
+  })
 
-  // @ts-ignore
-  store.reducerManager = reducerManager;
+  // @ts-expect-error: reducerManager is not typed
+  store.reducerManager = reducerManager
 
-  return store;
+  return store
 }
 
-export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];
+export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch']

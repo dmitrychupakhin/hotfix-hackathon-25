@@ -5,7 +5,7 @@ import { useIsCurrentRoute } from '@/shared/lib/hooks/useIsCurrentRoute'
 import getPagesWithFooter from '../model/selectors/getPagesWithFooter'
 
 const AppLayout = () => {
-  const isFooterShow = useIsCurrentRoute(getPagesWithFooter());
+  const isFooterShow = useIsCurrentRoute(getPagesWithFooter())
   return (
     <>
       <Header />

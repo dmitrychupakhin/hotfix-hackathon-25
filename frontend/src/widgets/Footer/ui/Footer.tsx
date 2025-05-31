@@ -90,7 +90,11 @@ const Footer = ({ sx }: FooterProps) => {
               lineHeight: '100px',
             }}
           >
-            SLOBODA <br /> SOFT
+            SLOBODA
+            {' '}
+            <br />
+            {' '}
+            SOFT
           </Typography>
 
         </Box>

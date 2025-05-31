@@ -1,9 +1,9 @@
-import React from 'react';
-import { IconButton, InputAdornment, TextField, type TextFieldProps } from '@mui/material';
-import { usePasswordToggle } from '@/shared/lib/hooks/usePasswordToggle';
+import React from 'react'
+import { IconButton, InputAdornment, TextField, type TextFieldProps } from '@mui/material'
+import { usePasswordToggle } from '@/shared/lib/hooks/usePasswordToggle'
 
 const PasswordField: React.FC<TextFieldProps> = (props) => {
-  const { type, icon, toggleVisibility } = usePasswordToggle();
+  const { type, icon, toggleVisibility } = usePasswordToggle()
 
   return (
     <TextField
@@ -18,8 +18,8 @@ const PasswordField: React.FC<TextFieldProps> = (props) => {
                 onClick={toggleVisibility}
                 edge="end"
                 sx={{
-                  border: 'none',
-                  background: 'none',
+                  'border': 'none',
+                  'background': 'none',
                   '&:hover': {
                     background: 'none',
                     color: 'primary.dark',
@@ -37,7 +37,7 @@ const PasswordField: React.FC<TextFieldProps> = (props) => {
         },
       }}
     />
-  );
-};
+  )
+}
 
-export default PasswordField;
+export default PasswordField

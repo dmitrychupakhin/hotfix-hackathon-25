@@ -1,52 +1,53 @@
-import { ROUTES } from '@/shared/const/routes';
-import FormLoader from '@/shared/ui/FormLoader/FormLoader';
-import { alpha, Box, Button, Stack, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
-import { useAuthConfirmRegister } from '../api/AuthConfirmRegisterApi';
+import { ROUTES } from '@/shared/const/routes'
+import FormLoader from '@/shared/ui/FormLoader/FormLoader'
+import { alpha, Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
+import { useAuthConfirmRegister } from '../api/AuthConfirmRegisterApi'
 import type {
   AuthConfirmRegisterResponse,
   AuthConfirmRegisterSchema,
-} from '../model/types/AuthConfirmRegisterSchema';
+} from '../model/types/AuthConfirmRegisterSchema'
 
 const AuthConfirmRegisterform = () => {
-  const [formError, setFormError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthConfirmRegisterSchema>({
     defaultValues: {
       code: '',
     },
-  });
+  })
 
-  const [authConfirmRegister, { isLoading }] = useAuthConfirmRegister();
-  const navigate = useNavigate();
+  const [authConfirmRegister, { isLoading }] = useAuthConfirmRegister()
+  const navigate = useNavigate()
 
   const onSubmit = async (data: AuthConfirmRegisterSchema) => {
     try {
-      setFormError(null);
-      clearErrors();
+      setFormError(null)
+      clearErrors()
 
-      await authConfirmRegister(data).unwrap();
-      navigate(ROUTES.AUTH_LOGIN());
-    } catch (err) {
-      const { errors } = err as AuthConfirmRegisterResponse;
-      const { detail, ...fieldErrors } = errors;
+      await authConfirmRegister(data).unwrap()
+      navigate(ROUTES.AUTH_LOGIN())
+    }
+    catch (err) {
+      const { errors } = err as AuthConfirmRegisterResponse
+      const { detail, ...fieldErrors } = errors
       if (detail) {
-        setFormError(Array.isArray(detail) ? detail[0] : detail);
+        setFormError(Array.isArray(detail) ? detail[0] : detail)
       }
 
       Object.entries(fieldErrors).forEach(([field, message]) => {
-        setError(field as keyof AuthConfirmRegisterSchema, { type: 'server', message });
-      });
+        setError(field as keyof AuthConfirmRegisterSchema, { type: 'server', message })
+      })
     }
-  };
+  }
 
   return (
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={(theme) => ({
+      sx={theme => ({
         display: 'flex',
         position: 'relative',
         width: '400px',
@@ -62,9 +63,13 @@ const AuthConfirmRegisterform = () => {
       <Stack spacing={2} width="100%">
         <Stack spacing={1}>
           <Box>
-            <Typography variant="h6" component="span" sx={(theme) => ({
-              backgroundColor: theme.palette.primary.light,
-            })}>
+            <Typography
+              variant="h6"
+              component="span"
+              sx={theme => ({
+                backgroundColor: theme.palette.primary.light,
+              })}
+            >
               Подтверждение регистрации
             </Typography>
           </Box>
@@ -97,6 +102,6 @@ const AuthConfirmRegisterform = () => {
         </Button>
       </Stack>
     </Box>
-  );
-};
-export default AuthConfirmRegisterform;
+  )
+}
+export default AuthConfirmRegisterform

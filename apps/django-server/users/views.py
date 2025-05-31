@@ -7,6 +7,7 @@ from rest_framework import generics, status
 from rest_framework.views import APIView
 from django.core.cache import cache
 import string, random, requests
+from .permissions import IsStaff
 
 from .utils.auth import set_auth_cookies
 from services.email_sender import EmailSender
@@ -178,11 +179,26 @@ class VKAuthView(APIView):
 
 
 # IsAuthenticated
+@extend_schema(summary="Создать тимлида", tags=["Менеджер"])
+class LeaderCreateAPIView(generics.CreateAPIView):
+    permission_classes = [IsStaff]
+    serializer_class = UserCreateSerializer
+    queryset = User.objects.all()
 
+    def perform_create(self, serializer):
+        serializer.save(is_team=True)
+
+@extend_schema(summary="Все тимлиды", tags=["Менеджер"])
+class LeadersListAPIView(generics.ListAPIView):
+    permission_classes = [IsStaff]
+    serializer_class = GetUserSerializer
+    queryset = User.objects.filter(is_team=True)
+    
 @extend_schema(summary="Обновление данных пользователя", tags=["Пользователь"])
 class UserUpdateAPIView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = EditUserSerializer
+    http_method_names = ['put']
 
     def get_object(self):
         return self.request.user

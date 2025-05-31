@@ -1,3 +1,6 @@
-export { profileApi } from './api/ProfileApi';
-export { useGetProfile, useLazyGetProfile } from './api/ProfileApi';
-export { getProfileData } from './model/selectors/getProfileData';
+export { profileApi } from './api/ProfileApi'
+export { useGetProfile, useLazyGetProfile } from './api/ProfileApi'
+export { getProfileData } from './model/selectors/getProfileData'
+export type { User } from './model/types/User'
+export { default as ProfileData } from './ui/ProfileData'
+export { default as ProfileCard } from './ui/ProfileCard'

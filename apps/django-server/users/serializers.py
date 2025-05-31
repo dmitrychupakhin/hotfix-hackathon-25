@@ -100,11 +100,16 @@ class ResetPasswordSerializer(serializers.Serializer):
         attrs.pop('confirm', None)
         return attrs
 
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo')
+
 class GetUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staff', 'is_team')
+        fields = ('id', 'username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staff', 'is_team')
 
 class EditUserSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(required=True)

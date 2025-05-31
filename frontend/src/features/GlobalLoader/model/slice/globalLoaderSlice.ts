@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export const globalLoaderSlice = createSlice({
   name: 'globalLoader',
@@ -9,16 +9,16 @@ export const globalLoaderSlice = createSlice({
     showLoader: (state) => {
       return {
         isLoading: state.isLoading + 1,
-      };
+      }
     },
     hideLoader: (state) => {
       return {
         // isLoading: Math.max(state.isLoading - 1, 0),
         isLoading: state.isLoading - 1,
-      };
+      }
     },
   },
-});
+})
 
-export const { showLoader, hideLoader } = globalLoaderSlice.actions;
-export const globalLoaderReducer = globalLoaderSlice.reducer;
+export const { showLoader, hideLoader } = globalLoaderSlice.actions
+export const globalLoaderReducer = globalLoaderSlice.reducer

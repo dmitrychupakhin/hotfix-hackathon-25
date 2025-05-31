@@ -1,11 +1,11 @@
 import { ROUTES } from '@/shared/const/routes'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { Link } from 'react-router'
 
 const AuthSection = () => {
   return (
-    <>
+    <Box sx={{ display: 'flex', gap: 1, p: 1 }}>
       <Button
         component={Link}
         to={ROUTES.AUTH_REGISTER()}
@@ -25,7 +25,7 @@ const AuthSection = () => {
       >
         Войти
       </Button>
-    </>
+    </Box>
   )
 }
 

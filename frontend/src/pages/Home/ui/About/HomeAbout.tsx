@@ -7,7 +7,7 @@ import notebookImage from '@/shared/assets/images/notbook.png'
 
 const HomeAbout = () => {
   return (
-    <PageWrapper>
+    <PageWrapper xPadding>
       <Grid
         container
         spacing={3}
@@ -42,7 +42,9 @@ const HomeAbout = () => {
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>
                     IT-идеи
                   </Typography>
-                  {' '}в{' '}
+                  {' '}
+                  в
+                  {' '}
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>проекты</Typography>
                   , которые реально работают.
                 </Typography>

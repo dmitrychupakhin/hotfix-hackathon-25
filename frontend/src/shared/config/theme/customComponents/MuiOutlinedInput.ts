@@ -1,10 +1,9 @@
 import {
-  alpha,
   type Components,
   inputLabelClasses,
   outlinedInputClasses,
   type Theme,
-} from '@mui/material';
+} from '@mui/material'
 
 export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
   styleOverrides: {
@@ -41,7 +40,7 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
       },
     }),
   },
-};
+}
 
 export const MuiInputLabel: Components<Theme>['MuiInputLabel'] = {
   styleOverrides: {

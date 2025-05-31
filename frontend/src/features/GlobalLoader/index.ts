@@ -1,1 +1,1 @@
-export { globalLoaderReducer, showLoader, hideLoader } from './model/slice/globalLoaderSlice';
+export { globalLoaderReducer, showLoader, hideLoader } from './model/slice/globalLoaderSlice'
