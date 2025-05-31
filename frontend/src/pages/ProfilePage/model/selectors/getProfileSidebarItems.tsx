@@ -1,7 +1,8 @@
 import { ROUTES } from '@/shared/const/routes'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
-import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined'
+import RocketLaunchRoundedIcon from '@mui/icons-material/RocketLaunchRounded'
 import type { ProfileSidebarItem } from '../types/ProfileSidebar'
+import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded'
 
 export const getProfileSidebarItems = (): ProfileSidebarItem[] => {
   return [
@@ -10,8 +11,12 @@ export const getProfileSidebarItems = (): ProfileSidebarItem[] => {
       path: ROUTES.PROFILE(),
     },
     {
-      Icon: EmojiEventsOutlinedIcon,
-      path: ROUTES.PROFILE_ACTIVE_EVENTS(),
+      Icon: RocketLaunchRoundedIcon,
+      path: ROUTES.PROFILE_ORDER(),
+    },
+    {
+      Icon: AssignmentRoundedIcon,
+      path: ROUTES.PROFILE_ACTIVE_TASKS(),
     },
   ]
 }

@@ -14,9 +14,8 @@ export const ROUTES = {
   AUTH_CHANGE_PASSWORD: () => '/auth/change-password',
 
   PROFILE: () => '/profile',
-  PROFILE_ACTIVE_EVENTS: () => '/profile/active-events',
-
-  EVENT_DETAIL: (id: string) => `/event/${id}`,
+  PROFILE_ORDER: () => '/profile/order',
+  PROFILE_ACTIVE_TASKS: () => '/profile/active-tasks',
 
   NOT_FOUND: () => '*',
 } as const

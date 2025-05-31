@@ -118,7 +118,6 @@ const EditebleProfileData = ({ user, setIsEdit }: EditebleProfileDataProps) => {
           <Controller
             name="middleName"
             control={control}
-            rules={{ required: 'Введите отчество' }}
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
@@ -136,7 +135,6 @@ const EditebleProfileData = ({ user, setIsEdit }: EditebleProfileDataProps) => {
           <Controller
             name="phone"
             control={control}
-            rules={{ required: 'Введите телефон' }}
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
@@ -154,7 +152,6 @@ const EditebleProfileData = ({ user, setIsEdit }: EditebleProfileDataProps) => {
           <Controller
             name="tg"
             control={control}
-            rules={{ required: 'Введите Telegram' }}
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
