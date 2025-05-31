@@ -55,17 +55,7 @@ const HomeAbout = () => {
             </Grid>
             <Grid size={4} sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <MotionBox
-                component="img"
-                sx={{
-                  height: 'auto',
-                  maxHeight: '100%',
-                  width: 'auto',
-                  maxWidth: '100%',
-                  borderRadius: 2,
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
-                src={notebookImage}
+
                 animate={{
                   rotate: [-1.5, 1.5, -1.5],
                 }}
@@ -74,7 +64,21 @@ const HomeAbout = () => {
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-              />
+              >
+                <Box
+                  component="img"
+                  sx={{
+                    height: 'auto',
+                    maxHeight: '100%',
+                    width: 'auto',
+                    maxWidth: '100%',
+                    borderRadius: 2,
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                  src={notebookImage}
+                />
+              </MotionBox>
             </Grid>
           </Grid>
 

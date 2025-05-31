@@ -11,11 +11,11 @@ import { useOrderForm } from '../api/orderFormApi'
 import type { OrderFormSchema } from '../model/types/OrderFormSchema'
 
 const OrderForm = () => {
-  const [orderForm, { isLoading, error }] = useOrderForm()
+  const [orderForm, { isLoading }] = useOrderForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { handleSubmit, control, setError, clearErrors } = useForm<OrderFormSchema>({
+  const { handleSubmit, control } = useForm<OrderFormSchema>({
     defaultValues: {
       title: '',
       description: '',

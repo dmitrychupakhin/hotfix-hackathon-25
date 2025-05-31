@@ -12,12 +12,6 @@ interface TaskProps {
 }
 
 const TaskItem: FC<TaskProps> = ({ data }) => {
-//   const navigate = useNavigate()
-
-  const handleClick = () => {
-    // navigate(ROUTES.EVENT_DETAIL(data.id.toString()))
-  }
-
   console.log(data)
 
   const theme = useTheme()
