@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from .models import Thread, Message
 from .serializers import ThreadSer, MessageSer
+from django.db.models import Q
 
 class MyThreads(generics.ListAPIView):
     serializer_class = ThreadSer
@@ -8,7 +9,7 @@ class MyThreads(generics.ListAPIView):
 
     def get_queryset(self):
         u = self.request.user
-        return Thread.objects.filter(models.Q(customer=u) | models.Q(manager=u))
+        return Thread.objects.filter(Q(customer=u) | Q(manager=u))
 
 class ThreadMessages(generics.ListCreateAPIView):
     serializer_class = MessageSer
