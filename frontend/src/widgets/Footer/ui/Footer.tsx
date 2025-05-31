@@ -28,7 +28,13 @@ const Footer = ({ sx }: FooterProps) => {
             {t('цифровую реальность!')}
           </Typography>
           <Box>
-            <Button size="medium" endIcon={<ArrowUpwardIcon />}>{t('Вверх')}</Button>
+            <Button
+              size="medium"
+              endIcon={<ArrowUpwardIcon />}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              {t('Вверх')}
+            </Button>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>

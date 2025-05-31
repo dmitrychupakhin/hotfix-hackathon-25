@@ -10,8 +10,10 @@ import type {
   AuthConfirmChangeEmailResponse,
   AuthConfirmChangeEmailSchema,
 } from '../model/types/AuthConfirmChangeEmail'
+import { useTranslation } from 'react-i18next'
 
 const AuthConfirmChangeEmailForm = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthConfirmChangeEmailSchema>({
@@ -73,11 +75,11 @@ const AuthConfirmChangeEmailForm = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              Подтверждение почты
+              {t('Подтверждение почты')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Код подтверждения отправлен на почту
+            {t('Код подтверждения отправлен на почту')}
           </Typography>
         </Stack>
         {formError && (
@@ -88,20 +90,20 @@ const AuthConfirmChangeEmailForm = () => {
         <Controller
           name="code"
           control={control}
-          rules={{ required: 'Введите пароль' }}
+          rules={{ required: t('Введите код подтверждения') }}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
               fullWidth
               variant="outlined"
-              label="Код подтверждения"
+              label={t('Код подтверждения')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
           )}
         />
         <Button type="submit" disabled={isLoading} variant="contained" color="primary">
-          Отправить
+          {t('Отправить')}
         </Button>
       </Stack>
     </Box>

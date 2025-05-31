@@ -21,8 +21,10 @@ import { Controller, useForm } from 'react-hook-form'
 import { Link } from 'react-router'
 import { useLogin } from '../lib/hooks/useLogin'
 import type { AuthLoginResponse, AuthLoginSchema } from '../model/types/AuthLoginSchema'
+import { useTranslation } from 'react-i18next'
 
 const AuthLoginForm = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, clearErrors } = useForm<AuthLoginSchema>({
@@ -99,11 +101,11 @@ const AuthLoginForm = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              С возвращением!
+              {t('С возвращением!')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Войдите в аккаунт
+            {t('Войдите в аккаунт')}
           </Typography>
         </Stack>
         {formError && (
@@ -115,14 +117,14 @@ const AuthLoginForm = () => {
           name="username"
           control={control}
           rules={{
-            required: 'Введите логин или почту',
+            required: t('Введите логин или почту'),
           }}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
               fullWidth
               variant="outlined"
-              label="Логин или почта"
+              label={t('Логин или почта')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -131,13 +133,13 @@ const AuthLoginForm = () => {
         <Controller
           name="password"
           control={control}
-          rules={{ required: 'Введите пароль' }}
+          rules={{ required: t('Введите пароль') }}
           render={({ field, fieldState }) => (
             <PasswordField
               {...field}
               fullWidth
               variant="outlined"
-              label="Пароль"
+              label={t('Пароль')}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -150,7 +152,7 @@ const AuthLoginForm = () => {
             render={({ field }) => (
               <FormControlLabel
                 control={<Checkbox {...field} checked={field.value} disableRipple />}
-                label="Запомнить меня"
+                label={t('Запомнить меня')}
                 labelPlacement="end"
                 slotProps={{
                   typography: {
@@ -161,11 +163,11 @@ const AuthLoginForm = () => {
             )}
           />
           <MuiLink component={Link} color="secondary" to={ROUTES.AUTH_RESET_PASSWORD()} variant="body2">
-            Забыли пароль?
+            {t('Забыли пароль?')}
           </MuiLink>
         </Box>
         <Button type="submit" disabled={isLoginLoading} variant="contained" color="primary">
-          Войти
+          {t('Войти')}
         </Button>
         <Divider
           sx={theme => ({
@@ -176,15 +178,15 @@ const AuthLoginForm = () => {
           })}
           textAlign="center"
         >
-          ИЛИ
+          {t('ИЛИ')}
         </Divider>
         <VkLoginButton
-          title="Войти через VK-ID"
+          title={t('Войти через VK-ID')}
           handleVkLogin={handleVkLogin}
           disabled={isVkLoginLoading}
         />
         <Typography variant="body2" textAlign="end">
-          Нет аккаунта?
+          {t('Нет аккаунта?')}
           {' '}
           <MuiLink
             component={Link}
@@ -195,7 +197,7 @@ const AuthLoginForm = () => {
               color: theme.palette.secondary.main,
             })}
           >
-            Зарегестрироваться
+            {t('Зарегистрироваться')}
           </MuiLink>
         </Typography>
       </Stack>

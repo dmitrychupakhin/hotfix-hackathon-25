@@ -6,12 +6,14 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import { Avatar, Box, Stack } from '@mui/material'
 import type { ChangeEvent, FC } from 'react'
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export interface ProfileLogoProps {
   user: User
 }
 
 const ProfileLogo: FC<ProfileLogoProps> = ({ user }) => {
+  const { t } = useTranslation()
   const [getProfile] = useLazyGetProfile()
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [authChangePhoto] = useAuthChangePhoto()
@@ -34,7 +36,7 @@ const ProfileLogo: FC<ProfileLogoProps> = ({ user }) => {
     //   showNotification('Фото успешно обновлено', 'success')
     }
     catch (error) {
-      console.error('Ошибка при загрузке фото:', error)
+      console.error(t('Ошибка при загрузке фото:'), error)
     //   showNotification('Ошибка при загрузке фото', 'error')
     }
   }

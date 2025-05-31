@@ -15,8 +15,10 @@ import { Controller, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router'
 import { useAuthRegister } from '../api/AuthRegisterApi'
 import type { AuthRegisterResponse, AuthRegisterSchema } from '../model/types/AuthRegisterSchema'
+import { useTranslation } from 'react-i18next'
 
 const AuthRegisterForm = () => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
 
   const { handleSubmit, control, setError, watch, clearErrors } = useForm<AuthRegisterSchema>({
@@ -82,11 +84,11 @@ const AuthRegisterForm = () => {
                 backgroundColor: theme.palette.primary.light,
               })}
             >
-              Добро пожаловать!
+              {t('Добро пожаловать!')}
             </Typography>
           </Box>
           <Typography variant="h4" fontWeight={600}>
-            Создайте учетную запись
+            {t('Создайте учетную запись')}
           </Typography>
         </Stack>
         {formError && (
@@ -99,14 +101,14 @@ const AuthRegisterForm = () => {
             name="username"
             control={control}
             rules={{
-              required: 'Введите логин',
+              required: t('Введите логин'),
             }}
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
                 fullWidth
                 variant="outlined"
-                label="Логин"
+                label={t('Логин')}
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />
@@ -120,7 +122,7 @@ const AuthRegisterForm = () => {
                 {...field}
                 fullWidth
                 variant="outlined"
-                label="Почта"
+                label={t('Почта')}
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />
@@ -130,14 +132,14 @@ const AuthRegisterForm = () => {
             name="password"
             control={control}
             rules={{
-              required: 'Введите пароль',
+              required: t('Введите пароль'),
             }}
             render={({ field, fieldState }) => (
               <PasswordField
                 {...field}
                 fullWidth
                 variant="outlined"
-                label="Пароль"
+                label={t('Пароль')}
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />
@@ -147,15 +149,15 @@ const AuthRegisterForm = () => {
             name="confirm"
             control={control}
             rules={{
-              required: 'Подтвердите пароль',
-              validate: value => value === password || 'Пароли не совпадают',
+              required: t('Подтвердите пароль'),
+              validate: value => value === password || t('Пароли не совпадают'),
             }}
             render={({ field, fieldState }) => (
               <PasswordField
                 {...field}
                 fullWidth
                 variant="outlined"
-                label="Подтверждение пароля"
+                label={t('Подтверждение пароля')}
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />
@@ -163,10 +165,10 @@ const AuthRegisterForm = () => {
           />
         </Stack>
         <Button type="submit" disabled={isLoading} variant="contained" color="primary">
-          Зарегистрироваться
+          {t('Зарегистрироваться')}
         </Button>
         <Typography variant="body2" textAlign="end">
-          Уже есть учетная запись?
+          {t('Уже есть учетная запись?')}
           <br />
           <MuiLink
             component={Link}
@@ -177,7 +179,7 @@ const AuthRegisterForm = () => {
               color: theme.palette.secondary.main,
             })}
           >
-            Войдите прямо сейчас
+            {t('Войдите прямо сейчас')}
           </MuiLink>
         </Typography>
       </Stack>

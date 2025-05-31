@@ -90,10 +90,10 @@ const UserMenu = ({ user }: UserMenuProps) => {
               sx={theme => ({ color: theme.palette.secondary.light })}
             >
               {user.isStaff
-                ? 'Модератор'
+                ? t('Модератор')
                 : user.isTeam
-                  ? 'Команда'
-                  : 'Пользователь'}
+                  ? t('Команда')
+                  : t('Пользователь')}
             </Typography>
           </Stack>
           <KeyboardArrowDownIcon color="secondary" />
