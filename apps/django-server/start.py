@@ -12,7 +12,8 @@ if not User.objects.exists():
         username="admin",
         email="skisterev78@mail.ru",
         password=make_password("password"),
-        is_superuser=True
+        is_superuser=True,
+        is_staff=True
     )
     User.objects.create(
         username="staff",
