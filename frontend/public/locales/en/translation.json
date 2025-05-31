@@ -106,5 +106,17 @@
   "Начало работы ↑": "Work start ↑",
   "Начало работы ↓": "Work start ↓",
   "Окончание работы ↑": "Work end ↑",
-  "Окончание работы ↓": "Work end ↓"
+  "Окончание работы ↓": "Work end ↓",
+  "Активные задачи":"Active tasks",
+  "Поиск":"Search",
+  "От черновика до ": "From draft to",
+  "готового продукта": "a finished product",
+  "Ваша задача — дать нам чёткое техническое задание и быть на связи для согласований. Остальное — наша забота: дизайн, разработка, запуск. Мы на связи 24/7 и всегда готовы обсудить любые вопросы.": "Your task is to give us a clear technical specification and stay in touch for approvals. The rest is our job: design, development, launch. We're available 24/7 and ready to discuss anything.",
+  "Регестрируйся": "Register",
+  "Подробно опиши свою идею проекта": "Describe your project idea in detail",
+  "Менеджер получит её. Обратной дороги уже нет.": "The manager receives it. There’s no way back.",
+  "Рассчитаем время и сложность проекта": "We estimate the time and complexity of the project",
+  "Лучшие разработчики уже начали творить": "The best developers are already creating",
+  "Следите за прогрессом выполнения": "Track the progress of the work",
+  "Можно выдохнуть — у вас теперь есть продукт": "You can breathe easy — you now have a product"
 }
