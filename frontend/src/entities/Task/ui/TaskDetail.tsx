@@ -1,76 +1,59 @@
-import { Box, Button, Card, Stack, Typography, useTheme } from '@mui/material'
-import type { FC } from 'react'
+import { Box, Card, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material'
 import type { Task } from '../model/Task'
-import SendRoundedIcon from '@mui/icons-material/SendRounded'
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
+import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
+import { data, useNavigate } from 'react-router'
 import { TaskFilterField } from '@/shared/types/TaskFilterField'
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded'
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
-import { ROUTES } from '@/shared/const/routes'
-import { useNavigate } from 'react-router'
 
-interface TaskProps {
-  data: Task
+interface TaskDetailProps {
+  task: Task
 }
 
-const TaskItem: FC<TaskProps> = ({ data }) => {
-  console.log(data)
-  const navigate = useNavigate()
-
+const TaskDetail = ({ task }: TaskDetailProps) => {
   const theme = useTheme()
+  const navigate = useNavigate()
   return (
-    <Card
-      elevation={0}
-      variant="outlined"
-      sx={{
-        p: 2,
-        borderRadius: 3,
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        gap: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-      }}
-    >
-
-      <Stack spacing={1}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Card sx={{ p: 3, borderRadius: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Stack spacing={2}>
+        <Box>
+          <IconButton onClick={() => navigate(-1)}>
+            <ArrowCircleLeftRoundedIcon />
+          </IconButton>
+        </Box>
+        <Divider />
+        <Box display="flex">
           <Typography
-
-            variant="h5"
-            color="secondary"
-            fontWeight="600"
+            variant="h6"
+            fontWeight={600}
             sx={{
               backgroundColor: 'primary.light',
-              lineHeight: 2,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
+              width: 'auto',
             }}
           >
-            {data.title}
+            {task.title}
           </Typography>
         </Box>
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}
-        >
-          {data.description}
+        <Typography>
+          {task.description}
         </Typography>
-      </Stack>
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-        <Box>
+        <Typography fontWeight={600}>
+          Дата отправки задания:
+          {' '}
+          <Typography
+            component="span"
+            fontWeight={600}
+            sx={{
+              backgroundColor: 'primary.light',
+            }}
+          >
+            {task.createdAt}
+          </Typography>
+        </Typography>
+        <Box display="flex">
           {
-            data.status === TaskFilterField.DONE && (
+            task.status === TaskFilterField.DONE && (
               <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -87,7 +70,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
           }
 
           {
-            data.status === TaskFilterField.INWORK && (
+            task.status === TaskFilterField.INWORK && (
               <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -105,7 +88,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
           }
 
           {
-            data.status === TaskFilterField.WAITING && (
+            task.status === TaskFilterField.WAITING && (
               <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -123,7 +106,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
           }
 
           {
-            data.status === TaskFilterField.DENIED && (
+            task.status === TaskFilterField.DENIED && (
               <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -140,19 +123,9 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
             )
           }
         </Box>
-
-        <Button
-          variant="contained"
-          color="primary"
-          endIcon={<SendRoundedIcon />}
-          onClick={() => navigate(ROUTES.PROFILE_TASK(data.id.toString()))}
-        >
-          Подробнее
-        </Button>
-      </Box>
-
+      </Stack>
     </Card>
   )
 }
 
-export default TaskItem
+export default TaskDetail

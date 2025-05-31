@@ -16,6 +16,7 @@ export const ROUTES = {
   PROFILE: () => '/profile',
   PROFILE_ORDER: () => '/profile/order',
   PROFILE_ACTIVE_TASKS: () => '/profile/active-tasks',
+  PROFILE_TASK: (id: string) => `/profile/task/${id}`,
 
   NOT_FOUND: () => '*',
 } as const
