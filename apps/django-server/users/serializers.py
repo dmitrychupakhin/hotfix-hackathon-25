@@ -114,7 +114,7 @@ class GetUserSerializer(serializers.ModelSerializer):
 class EditUserSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
-    phone = serializers.CharField(required=True)
+    phone = serializers.CharField(required=True, min_length=11, max_length=11)
     
     class Meta:
         model = User
