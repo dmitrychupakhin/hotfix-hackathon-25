@@ -38,7 +38,6 @@ export const routeConfig: AppRouteObject[] = [
               {
                 path: ROUTES.AUTH(),
                 element: <AuthPageLayout banner={<AuthBanner />} />,
-                redirectIfAuth: true,
                 children: [
                   {
                     index: true,

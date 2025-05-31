@@ -16,7 +16,7 @@ const ProfileDataItem = ({ label, value, Icon }: ProfileDataItemProps) => {
       })}
       spacing={1}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, backgroundColor: 'primary.light' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, backgroundColor: 'primary.light', px: 1 }}>
         <Icon style={{ color: 'black' }} />
         <Typography variant="body1">{label}</Typography>
       </Box>
