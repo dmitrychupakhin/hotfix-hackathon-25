@@ -1,4 +1,5 @@
 export interface User {
+  id: string
   username: string
   vkId: string
   email: string
@@ -10,4 +11,12 @@ export interface User {
   tg: string
   isStaff: boolean
   isTeam: boolean
+}
+
+export enum TeamRole {
+  BACKEND = 'backend',
+  FRONTEND = 'frontend',
+  DESIGN = 'design',
+  ML = 'ml',
+  DEVOPS = 'devops',
 }

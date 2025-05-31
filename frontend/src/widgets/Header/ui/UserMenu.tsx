@@ -89,9 +89,9 @@ const UserMenu = ({ user }: UserMenuProps) => {
               variant="subtitle1"
               sx={theme => ({ color: theme.palette.secondary.light })}
             >
-              {user.isStaff && t('Модератор') }
-              {user.isTeam && t('Команда') }
-              {!user.isStaff && t('Пользователь') }
+              {user.isStaff && 'Модератор' }
+              {user.isTeam && 'Команда' }
+              {!user.isStaff && 'Пользователь' }
             </Typography>
           </Stack>
           <KeyboardArrowDownIcon color="secondary" />
