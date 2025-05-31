@@ -21,13 +21,13 @@ async def send_email(recipient_email: str, code: str, email_type: int):
     
     if email_type == 1:
         template_name = "confirm_registration.html"
-        subject = "Подтверждение регистрации Sportium"
+        subject = "Подтверждение регистрации SlobodaSoft"
     elif email_type == 2:
         template_name = "rebuild_password.html"
-        subject = "Восстановление пароля Sportium"
+        subject = "Восстановление пароля SlobodaSoft"
     elif email_type == 3:
         template_name = "vk_registration.html"
-        subject = "Данные от аккаунта Sportium"
+        subject = "Данные от аккаунта SlobodaSoft"
 
     html_content = await load_template(template_name, code)
 
