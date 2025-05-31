@@ -8,7 +8,6 @@ from api import router as api_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    
     yield
     
 app = FastAPI(
