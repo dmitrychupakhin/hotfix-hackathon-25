@@ -52,7 +52,7 @@ services:
       rabbitmq:
         condition: service_healthy
     volumes:
-      - static_volume:/app/static
+      - static_volume:/static
       - media_volume:/app/media
       - ./apps/django-server:/app
 
