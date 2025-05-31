@@ -35,9 +35,9 @@ export const contentDark = {
 } as const
 
 export const paperBackgroundLight = '#FBFAFC'
-export const paperBackgroundDark = '#10130B'
+export const paperBackgroundDark = '#181A1F'
 export const domLight = '#F5F5F5'
-export const domDark = '#10130B'
+export const domDark = '#1C1E21'
 
 export const error = {
   100: '#FFEBEE',

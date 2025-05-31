@@ -15,7 +15,7 @@ const AuthSection = () => {
         variant="contained"
         color="secondary"
       >
-         {t('Зарегистрироваться')}
+        {t('Зарегистрироваться')}
       </Button>
       <Button
         component={Link}
@@ -25,7 +25,7 @@ const AuthSection = () => {
         variant="contained"
         color="primary"
       >
-         {t('Войти')}
+        {t('Войти')}
       </Button>
     </Box>
   )
