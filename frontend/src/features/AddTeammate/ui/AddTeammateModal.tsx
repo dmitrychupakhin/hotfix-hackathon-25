@@ -5,8 +5,8 @@ import ImagePicker from '@/shared/ui/ImagePicker/ImagePicker'
 import { Box, Button, Divider, Grid, MenuItem, Modal, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useAddTeamlead } from '../api/addTeamleadApi'
-import type { AddTeamleadSchema } from '../model/types/AddTeamleadSchema'
+import { useAddTeamlead } from '../api/addTeammateApi'
+import type { AddTeammateSchema } from '../model/types/AddTeammateSchema'
 
 interface AddTeamleadModalProps {
   open: boolean
@@ -15,9 +15,9 @@ interface AddTeamleadModalProps {
 
 const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
   const [formError, setFormError] = useState<string | null>(null)
-  const [addTeamlead, { isLoading }] = useAddTeamlead()
+  const [addTeammate, { isLoading }] = useAddTeamlead()
 
-  const { control, handleSubmit, reset, clearErrors, setError } = useForm<AddTeamleadSchema>({
+  const { control, handleSubmit, reset, clearErrors, setError } = useForm<AddTeammateSchema>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -28,12 +28,11 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
     },
   })
 
-  const onSubmit = async (data: AddTeamleadSchema) => {
+  const onSubmit = async (data: AddTeammateSchema) => {
     try {
       setFormError(null)
       clearErrors()
-
-      await addTeamlead(data).unwrap()
+      await addTeammate(data).unwrap()
       handleClose()
     }
     catch (err) {
@@ -45,7 +44,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
       }
 
       Object.entries(fieldErrors).forEach(([field, message]) => {
-        setError(field as keyof AddTeamleadSchema, { type: 'server', message })
+        setError(field as keyof AddTeammateSchema, { type: 'server', message })
       })
     }
   }
@@ -70,7 +69,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
           {isLoading && <FormLoader />}
           <Stack spacing={2}>
             <Typography variant="h6" fontWeight={600}>
-              Добавить руководителя команды (Teamlead)
+              Добавить разработчика
             </Typography>
             <Divider />
             {formError && (

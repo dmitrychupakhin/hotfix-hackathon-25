@@ -1,7 +1,7 @@
 import type { TeamRole } from '@/entities/Profile/model/types/User'
 import type { FieldErrors } from '@/shared/types/FieldErrors'
 
-interface AddTeamleadSchema {
+interface AddTeammateSchema {
   firstName: string
   lastName: string
   middleName: string
@@ -14,13 +14,13 @@ interface AddTeamleadSchema {
   confirm: string
 }
 
-type AddTeamleadErrors = FieldErrors<AddTeamleadSchema> & {
+type AddTeammateErrors = FieldErrors<AddTeammateSchema> & {
   detail?: string | string[]
 }
 
-type AddTeamleadResponse = {
-  errors: AddTeamleadErrors
+type AddTeammateResponse = {
+  errors: AddTeammateErrors
   status: number
 }
 
-export type { AddTeamleadSchema, AddTeamleadResponse, AddTeamleadErrors }
+export type { AddTeammateErrors, AddTeammateResponse, AddTeammateSchema }
