@@ -3,8 +3,11 @@ import { Box, Button, Stack, Typography } from '@mui/material'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
 import { AnimatePresence } from 'motion/react'
 import { MotionBox } from '@/shared/ui/MotionBox'
+import { useTranslation } from 'react-i18next'
 
 const HomeHero = () => {
+  const { t } = useTranslation()
+
   return (
     <Box sx={{
       minHeight: '100vh',
@@ -124,7 +127,7 @@ const HomeHero = () => {
             color: theme.palette.invertedSecondary.dark,
           })}
         >
-          SLOBODASOFT — превращаем идеи в эффективные цифровые решения
+          {t('SLOBODASOFT — превращаем идеи в эффективные цифровые решения')}
         </Typography>
         <Typography
           variant="h4"

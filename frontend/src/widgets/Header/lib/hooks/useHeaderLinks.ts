@@ -1,10 +1,12 @@
 import { ROUTES } from '@/shared/const/routes'
-import type { HeaderLink } from '../types/Header'
+import type { HeaderLink } from '../../model/types/Header'
+import { useTranslation } from 'react-i18next'
 
-export const getHeaderLinks = (): HeaderLink[] => {
+export const useHeaderLinks = (): HeaderLink[] => {
+  const { t } = useTranslation()
   return [
     {
-      title: 'Главная',
+      title: t('Главная'),
       path: ROUTES.HOME(),
     },
     {

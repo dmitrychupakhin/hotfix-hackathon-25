@@ -2,14 +2,15 @@
 import { LogoLink } from '@/shared/ui/LogoLink/LogoLink'
 // import { ColorModeIconDropdown } from '@/widgets/ThemeSwitcher'
 import { getProfileData } from '@/entities/Profile'
+import { LangSwitcher } from '@/widgets/LangSwitcher'
 import { Box, Link as MuiLink, Stack } from '@mui/material'
 import type { FC } from 'react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
-import { getHeaderLinks } from '../model/selectors/getHeaderLinks'
 import AuthSection from './AuthSection'
 import UserMenu from './UserMenu'
+import { useHeaderLinks } from '../lib/hooks/useHeaderLinks'
 
 const Header: FC = () => {
   const profileData = useSelector(getProfileData)
@@ -34,7 +35,7 @@ const Header: FC = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const headerLinks = getHeaderLinks()
+  const headerLinks = useHeaderLinks()
   const location = useLocation()
 
   return (
@@ -105,6 +106,7 @@ const Header: FC = () => {
           spacing={2}
         >
           {/* <ColorModeIconDropdown /> */}
+          <LangSwitcher />
           {user ? <UserMenu user={user} /> : <AuthSection />}
         </Stack>
       </Box>
