@@ -1,12 +1,19 @@
-import { Box, Button, Stack, TextField } from '@mui/material'
-import { Controller, useForm } from 'react-hook-form'
-import { useOrderForm } from '../api/orderFormApi'
-import type { OrderFormSchema } from '../model/types/OrderFormSchema'
+import { taskApi } from '@/entities/Task/api/taskApi'
+import { ROUTES } from '@/shared/const/routes'
+import FormLoader from '@/shared/ui/FormLoader/FormLoader'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
+import { Box, Button, Stack, TextField } from '@mui/material'
+import { Controller, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { useOrderForm } from '../api/orderFormApi'
+import type { OrderFormSchema } from '../model/types/OrderFormSchema'
 
 const OrderForm = () => {
   const [orderForm, { isLoading, error }] = useOrderForm()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const { handleSubmit, control, setError, clearErrors } = useForm<OrderFormSchema>({
     defaultValues: {
@@ -18,6 +25,8 @@ const OrderForm = () => {
   const onSubmit = (data: OrderFormSchema) => {
     try {
       orderForm(data).unwrap()
+      dispatch(taskApi.util.invalidateTags([{ type: 'Tasks', id: 'LIST' }]))
+      navigate(ROUTES.PROFILE_ACTIVE_TASKS())
     }
     catch (error) {
       console.error(error)
@@ -42,6 +51,7 @@ const OrderForm = () => {
         boxShadow: theme.shadows[1],
       })}
     >
+      {isLoading && <FormLoader />}
       <Controller
         name="title"
         control={control}

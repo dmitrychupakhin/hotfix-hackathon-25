@@ -17,6 +17,8 @@ import { AuthChangeEmailForm } from '@/features/AuthChangeEmail'
 import { AuthConfirmResetPasswordForm } from '@/features/AuthConfirmResetPassword'
 import { AuthResetPasswordForm } from '@/features/AuthResetPassword'
 import { AuthChangePasswordForm } from '@/features/AuthChangePassword'
+import ProfileActiveTasks from '@/pages/ProfilePage/ui/ProfileActiveTasks'
+
 export const routeConfig: AppRouteObject[] = [
   {
     element: <RootLayout />,
@@ -96,6 +98,10 @@ export const routeConfig: AppRouteObject[] = [
               {
                 path: ROUTES.PROFILE_ORDER(),
                 element: <ProfileOrderForm />,
+              },
+              {
+                path: ROUTES.PROFILE_ACTIVE_TASKS(),
+                element: <ProfileActiveTasks />,
               },
             ],
           },
