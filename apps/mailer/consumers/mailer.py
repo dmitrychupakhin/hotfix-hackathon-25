@@ -50,7 +50,6 @@ async def send_email(recipient_email: str, code: str, email_type: int):
     except Exception as e:
         print(e)
 
-
 async def consume():
     try:
         connection = await aio_pika.connect_robust(f"amqp://{settings.rabbit.user}:{settings.rabbit.password}@{settings.rabbit.host}/")

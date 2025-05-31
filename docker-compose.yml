@@ -65,6 +65,8 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
+      django:
+        condition: service_started
 
   nginx:
     container_name: nginx
