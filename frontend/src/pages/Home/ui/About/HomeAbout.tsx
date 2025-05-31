@@ -3,7 +3,8 @@ import { PageWrapper } from '@/shared/ui/PageWrapper'
 import QuoteIcon from '@/shared/assets/images/quotes.svg?react'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import StarIcon from '@/shared/assets/images/star.svg?react'
-import notebookImage from '@/shared/assets/images/notbook.png'
+import notebookImage from '@/shared/assets/images/nootbook.svg'
+import { MotionBox } from '@/shared/ui/MotionBox'
 
 const HomeAbout = () => {
   return (
@@ -27,12 +28,11 @@ const HomeAbout = () => {
             sx={{
               height: '350px',
               maxHeight: '350px',
-              p: 3,
               alignItems: 'stretch',
             }}
           >
             <Grid size={8}>
-              <Stack spacing={2}>
+              <Stack spacing={2} p={3}>
                 <Typography variant="h3" sx={theme => ({ color: theme.palette.invertedSecondary.dark, fontWeight: 600 })}>
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>
                     SlobodaSoft
@@ -53,17 +53,27 @@ const HomeAbout = () => {
                 </Typography>
               </Stack>
             </Grid>
-            <Grid size={4} sx={{ height: '100%' }}>
-              <Box
+            <Grid size={4} sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <MotionBox
                 component="img"
                 sx={{
-                  height: '100%',
-                  width: '100%',
+                  height: 'auto',
+                  maxHeight: '100%',
+                  width: 'auto',
+                  maxWidth: '100%',
                   borderRadius: 2,
                   objectFit: 'cover',
                   display: 'block',
                 }}
                 src={notebookImage}
+                animate={{
+                  rotate: [-1.5, 1.5, -1.5],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
               />
             </Grid>
           </Grid>

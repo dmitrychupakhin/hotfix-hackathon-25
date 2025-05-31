@@ -97,38 +97,38 @@ const MuiButton: Components<Theme>['MuiButton'] = {
     //     },
     //   }),
     // },
-    // // Secondary outlined
-    // {
-    //   props: { color: 'secondary', variant: 'outlined' },
-    //   style: ({ theme }) => ({
-    //     'color': theme.palette.secondary.main,
-    //     'border': '2px solid',
-    //     'borderColor': theme.palette.secondary.main,
-    //     'backgroundColor': 'transparent',
-    //     '&:hover': {
-    //       color: contentLight[400],
-    //       backgroundImage: 'none',
-    //       backgroundColor: theme.palette.secondary.dark,
-    //       borderColor: theme.palette.secondary.dark,
-    //     },
-    //     '&:active': {
-    //       backgroundColor: theme.palette.secondary.darker,
-    //       borderColor: theme.palette.secondary.darker,
-    //     },
-    //     ...(theme.applyStyles?.('dark', {
-    //       '&:hover': {
-    //         color: contentDark[400],
-    //         backgroundColor: theme.palette.secondary.dark,
-    //         borderColor: theme.palette.secondary.dark,
-    //       },
-    //       '&:active': {
-    //         color: contentDark[400],
-    //         backgroundColor: theme.palette.secondary.darker,
-    //         borderColor: theme.palette.secondary.darker,
-    //       },
-    //     }) || {}),
-    //   }),
-    // },
+    // Secondary outlined
+    {
+      props: { color: 'secondary', variant: 'outlined' },
+      style: ({ theme }) => ({
+        'color': theme.palette.secondary.main,
+        'border': '2px solid',
+        'borderColor': theme.palette.secondary.main,
+        'backgroundColor': 'transparent',
+        '&:hover': {
+          color: theme.palette.secondary.dark,
+          backgroundImage: 'none',
+          // backgroundColor: theme.palette.secondary.dark,
+          borderColor: theme.palette.secondary.dark,
+        },
+        '&:active': {
+          // backgroundColor: theme.palette.secondary.dark,
+          borderColor: theme.palette.secondary.dark,
+        },
+        ...(theme.applyStyles?.('dark', {
+          '&:hover': {
+            color: theme.palette.secondary.dark,
+            backgroundColor: theme.palette.secondary.dark,
+            borderColor: theme.palette.secondary.dark,
+          },
+          '&:active': {
+            color: theme.palette.secondary.dark,
+            backgroundColor: theme.palette.secondary.dark,
+            borderColor: theme.palette.secondary.dark,
+          },
+        }) || {}),
+      }),
+    },
     // // Text button
 
     // // todo
