@@ -1,14 +1,16 @@
 import { Box, Button, Divider, Stack, Typography, type SxProps } from '@mui/material'
 import VkIcon from '@/shared/assets/icons/VK.svg?react'
 import TelegramIcon from '@/shared/assets/icons/TG.svg?react'
-import appBackground from '@/shared/assets/images/appBackground.jpg'
+import profileBackground from '@/shared/assets/images/profileBackground.png'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import { useTranslation } from 'react-i18next'
 
 interface FooterProps {
   sx?: SxProps
 }
 
 const Footer = ({ sx }: FooterProps) => {
+  const { t } = useTranslation()
   return (
     <Box sx={{ position: 'relative', overflow: 'hidden', ...sx }}>
       <Stack spacing={3} sx={theme => ({ px: 4, py: 3, backgroundColor: theme.palette.common.black })}>
@@ -19,28 +21,28 @@ const Footer = ({ sx }: FooterProps) => {
               color: theme.palette.invertedSecondary.dark,
             })}
           >
-            Выбирайте лучшее,
+            {t('Воплощайте свою идею в')},
             {' '}
             <br />
             {' '}
-            путешестуйте с комфортом
+            {t('цифровую реальность!')}
           </Typography>
           <Box>
-            <Button size="medium" endIcon={<ArrowUpwardIcon />}>Вверх</Button>
+            <Button size="medium" endIcon={<ArrowUpwardIcon />}>{t('Вверх')}</Button>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
           <Stack spacing={2}>
             <Typography sx={theme => ({ color: theme.palette.invertedSecondary.dark })}>
-              Проект разработан командой “Слобода” в рамках учебной и ислледовательской
+              {t('Проект разработан командой “Слобода” в рамках учебной и ислледовательской')}
               <br />
-              деятельности. В общем всем спасибо, здесь еще куча чего можно написать и нужно
+              {t('деятельности. Этот проект — результат командной работы, экспериментов и')}
               <br />
-              бы, но мне лень. Хочу спать, надоело это все!
+              {t('желания сделать IT ближе к людям.')}
             </Typography>
             <Stack spacing={1}>
               <Typography variant="body1" fontWeight={600} sx={theme => ({ color: theme.palette.invertedSecondary.dark })}>
-                Наши контакты
+                {t('Наши контакты')}
               </Typography>
               <Stack direction="row" spacing={2}>
                 <Box
@@ -79,7 +81,7 @@ const Footer = ({ sx }: FooterProps) => {
             component="h2"
             fontSize="100px"
             sx={{
-              backgroundImage: `url(${appBackground})`,
+              backgroundImage: `url(${profileBackground})`,
               backgroundSize: 'cover',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
@@ -90,11 +92,11 @@ const Footer = ({ sx }: FooterProps) => {
               lineHeight: '100px',
             }}
           >
-            SLOBODA
+            {t('SLOBODA')}
             {' '}
             <br />
             {' '}
-            SOFT
+            {t('SOFT')}
           </Typography>
 
         </Box>
@@ -105,19 +107,19 @@ const Footer = ({ sx }: FooterProps) => {
             fontWeight="600"
             sx={theme => ({ color: theme.palette.invertedSecondary.dark })}
           >
-            © 2025 Эверест. Все права защищены
+            {t('© 2025 SLOBODA. Все права защищены')}
           </Typography>
           <Typography
             variant="body2"
             sx={theme => ({ color: theme.palette.invertedSecondary.dark })}
           >
-            Политика конфиденциальности
+            {t('Политика конфиденциальности')}
           </Typography>
           <Typography
             variant="body2"
             sx={theme => ({ color: theme.palette.invertedSecondary.dark })}
           >
-            Пользовательское соглашение
+            {t('Пользовательское соглашение')}
           </Typography>
         </Stack>
       </Stack>

@@ -9,6 +9,7 @@ import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import { Avatar, ButtonBase, Menu, MenuItem, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 
 interface UserMenuProps {
@@ -16,6 +17,7 @@ interface UserMenuProps {
 }
 
 const UserMenu = ({ user }: UserMenuProps) => {
+  const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
@@ -87,9 +89,9 @@ const UserMenu = ({ user }: UserMenuProps) => {
               variant="subtitle1"
               sx={theme => ({ color: theme.palette.secondary.light })}
             >
-              {user.isStaff && 'Модератор' }
-              {user.isTeam && 'Команда' }
-              {!user.isStaff && 'Пользователь' }
+              {user.isStaff && t('Модератор') }
+              {user.isTeam && t('Команда') }
+              {!user.isStaff && t('Пользователь') }
             </Typography>
           </Stack>
           <KeyboardArrowDownIcon color="secondary" />
@@ -105,19 +107,19 @@ const UserMenu = ({ user }: UserMenuProps) => {
       >
         <MenuItem sx={{ gap: 1 }} onClick={handleProfileClick}>
           <AccountCircleOutlinedIcon />
-          <Typography>Профиль</Typography>
+          <Typography>{t('Профиль')}</Typography>
         </MenuItem>
         <MenuItem sx={{ gap: 1 }} onClick={handleChangeEmailClick}>
           <EmailOutlinedIcon />
-          <Typography>Смена почты</Typography>
+          <Typography>{t('Смена почты')}</Typography>
         </MenuItem>
         <MenuItem sx={{ gap: 1 }} onClick={handleChangePasswordClick}>
           <KeyOutlinedIcon />
-          <Typography>Смена пароля</Typography>
+          <Typography>{t('Смена пароля')}</Typography>
         </MenuItem>
         <MenuItem sx={{ gap: 1 }} onClick={handleLogout} disabled={isLoggingOut}>
           <LogoutOutlinedIcon color="error" />
-          <Typography color="error">Выйти</Typography>
+          <Typography color="error">{t('Выйти')}</Typography>
         </MenuItem>
       </Menu>
     </>

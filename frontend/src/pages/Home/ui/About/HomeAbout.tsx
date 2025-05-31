@@ -5,8 +5,10 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import StarIcon from '@/shared/assets/images/star.svg?react'
 import notebookImage from '@/shared/assets/images/nootbook.svg'
 import { MotionBox } from '@/shared/ui/MotionBox'
+import { useTranslation } from 'react-i18next'
 
 const HomeAbout = () => {
+const { t } = useTranslation()
   return (
     <PageWrapper xPadding>
       <Grid
@@ -37,19 +39,25 @@ const HomeAbout = () => {
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>
                     SlobodaSoft
                   </Typography>
-                  — превращаем
+                  {t('— превращаем')}
                   {' '}
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>
-                    IT-идеи
+                    {t('IT-идеи')}
                   </Typography>
                   {' '}
-                  в
+                  {t('в')}
                   {' '}
-                  <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>проекты</Typography>
-                  , которые реально работают.
+                  <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>{t('проекты')}</Typography>
+                  {t(', которые реально работают.')}
                 </Typography>
                 <Typography variant="h4" sx={theme => ({ color: theme.palette.invertedSecondary.main, fontWeight: 400 })}>
-                  Мы знаем, как сложно бывает запустить IT-проект: с чего начать, сколько это займёт времени, каких людей подключить, какие технологии выбрать. Всё звучит сложно — и мы тут, чтобы это упростить.
+                  <Typography component="span" variant="h4" sx={theme => ({ color: theme.palette.primary.main })}>
+                    {t('Мы знаем, как сложно')}
+                  </Typography>
+                  {t(' бывает запустить IT-проект: с чего начать, сколько это займёт времени, каких людей подключить, какие технологии выбрать. Всё звучит сложно — и ')}
+                  <Typography component="span" variant="h4" sx={theme => ({ color: theme.palette.primary.main })}>
+                      {t('мы тут, чтобы это упростить.')}
+                  </Typography>
                 </Typography>
               </Stack>
             </Grid>
@@ -87,9 +95,9 @@ const HomeAbout = () => {
           size={6}
           sx={theme => ({
             backgroundColor: theme.palette.common.green,
-            height: '350px',
             borderRadius: 3,
             p: 3,
+            height: '100%'
           })}
         >
           <Box sx={{
@@ -111,16 +119,20 @@ const HomeAbout = () => {
                   fontWeight: 600,
                 })}
               >
-                Про нашу нейросеть
+                {t('Наш сервис — это не просто форма “оставьте заявку и мы перезвоним”')}
               </Typography>
               <QuoteIcon style={{
-                width: 42,
-                height: 42,
+                width: 100,
+                height: 80,
+                
               }}
               />
             </Box>
             <Typography variant="h5" sx={theme => ({ color: theme.palette.invertedSecondary.main, fontWeight: 400 })}>
-              Данную модель разработал лучший студент всея матушки России - Сашка Пахомов Сашка Пахомов Сашка Пахомов Сашка Пахомов Сашка Пахомов . В разработку вкладывались любовь, дорбота и трепетное отношение к осуществлюяемому делу. Сашка породил сие творение на свет для благих дел.
+              {t('Мы на лету оцениваем вашу идею, подсказываем, сколько времени понадобится на реализацию, какой стек технологий выбрать, и кто из команды возьмется за реализацию прямо сейчас.')}
+            </Typography>
+            <Typography variant="h5" sx={theme => ({ color: theme.palette.invertedSecondary.main, fontWeight: 400 })}>
+              {t('Наш сервис помогает не тратить недели на подготовку к разработке, а сразу двигаться к сути')}
             </Typography>
           </Box>
         </Grid>
@@ -128,7 +140,7 @@ const HomeAbout = () => {
           size={6}
           sx={theme => ({
             backgroundColor: theme.palette.primary.main,
-            height: '350px',
+      
             borderRadius: 3,
             p: 3,
             display: 'flex',
@@ -158,14 +170,14 @@ const HomeAbout = () => {
             <StarIcon style={{ width: '48px', height: '48px' }} />
           </Box>
           <Typography variant="h1" component="h2">+10</Typography>
-          <Typography variant="h5">Интересных мест, которые вы можетет найти в “Инетересном”</Typography>
+          <Typography variant="h5">{t('Успешных проектов, которые мы создали по идеям наших заказчиков')}</Typography>
           <Box>
             <Button
               variant="contained"
               color="secondary"
               endIcon={<SendOutlinedIcon />}
             >
-              В интересное
+              {t('К проектам')}
             </Button>
           </Box>
         </Grid>
