@@ -4,9 +4,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema
 from .serializers import *
+from rest_framework.views import APIView
 from core.tasks import run_ml_prediction_cats
 from users.permissions import IsStaff, IsOrderRelatedUser
 from .models import *
+from rest_framework.response import Response
+from rest_framework import status
 
 @extend_schema(summary="Создание заявки заказчиком", tags=["Заявки"])
 class OrderCreateAPIView(generics.CreateAPIView):
@@ -58,4 +61,19 @@ class OrderConnectAPIView(generics.UpdateAPIView):
 
     def perform_update(self, serializer):
         serializer.save(status='inwork')
+
+@extend_schema(summary="Отклонить заявку", tags=["Заявки"])
+class OrderCancelView(APIView):
+    permission_classes = [IsStaff]
+
+    def post(self, request, id):
+        try:
+            order = Order.objects.get(id=id)
+        except Order.DoesNotExist:
+            return Response({'detail': ['Заявка не найдена']}, status=status.HTTP_404_NOT_FOUND)
+
+        order.status = 'denied'
+        order.save()
+
+        return Response(status=status.HTTP_200_OK)
     

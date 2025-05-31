@@ -1,10 +1,19 @@
 from orders.models import Order
+from .models import Plan
+import json
 
 def edit_order(data, order_id):
-    predict_category = data.get("predict_category")
-    predict_team = int(data.get("predict_team"))
-    order = Order.objects.get(id=order_id)
-    order.category = predict_category
-    order.predicted_team = predict_team
-    order.save()
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        return {"detail": ["Заявка не найдена"]}
+
+    
+    plan_data = json.dumps(data) if isinstance(data, dict) else data
+
+    plan_obj, created = Plan.objects.update_or_create(
+        order=order,
+        defaults={'data': plan_data}
+    )
+
     return {"status": "updated", "order_id": order.id}
