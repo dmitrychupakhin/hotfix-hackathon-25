@@ -37,7 +37,6 @@ RABBITMQ = {
 }
 
 INSTALLED_APPS = [
-    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +50,6 @@ INSTALLED_APPS = [
     'users',
     'orders',
     'teams',
-    'channels',
     'chats'
 ]
 
@@ -84,16 +82,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-ASGI_APPLICATION = "core.asgi.application"
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": ["redis://redis:6379/2"],
-        },
-    }
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
