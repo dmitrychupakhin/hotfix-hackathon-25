@@ -21,7 +21,8 @@ const Footer = ({ sx }: FooterProps) => {
               color: theme.palette.invertedSecondary.dark,
             })}
           >
-            {t('Воплощайте свою идею в')},
+            {t('Воплощайте свою идею в')}
+            ,
             {' '}
             <br />
             {' '}

@@ -1,4 +1,4 @@
-import { Grid, Stack } from '@mui/material'
+import { Grid } from '@mui/material'
 import type { User } from '../model/types/User'
 import ProfileSmallCardItem from './ProfileSmallCardItem'
 
@@ -9,7 +9,7 @@ interface ProfileSmallCardListProps {
   handleRemove: (id: string) => void
 }
 
-const ProfileSmallCardList = ({ data, isEdit, setIsEdit, handleRemove }: ProfileSmallCardListProps) => {
+const ProfileSmallCardList = ({ data, isEdit, handleRemove }: ProfileSmallCardListProps) => {
   return (
     <Grid container spacing={2}>
       {data.map(item => (

@@ -11,8 +11,9 @@ interface TaskFilterSelectorProps {
 }
 
 const TaskFilterSelector: FC<TaskFilterSelectorProps> = ({ sort, setSort, sx, selectProps }) => {
-  const sortFieldOptions = () => {
   const { t } = useTranslation()
+
+  const sortFieldOptions = () => {
     return [
       { value: TaskFilterField.ALL, label: t('Все') },
       { value: TaskFilterField.DONE, label: t('Выполнено') },

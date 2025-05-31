@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 
-export const getProfileOrderFormTasks = (): string[] => {
+export const useProfileOrderFormTasks = (): string[] => {
   const { t } = useTranslation()
   return [
     t('Регестрируйся'),

@@ -29,7 +29,9 @@ const TaskList: FC<TaskListProps> = ({ tasks, isLoading, sx }) => {
       {tasks.length === 0 && !isLoading && (
         <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
           <Typography fontWeight={600} variant="h4">
-            {t('Хм… похоже мероприятия не найдены')} =(
+            {t('Хм… похоже мероприятия не найдены')}
+            {' '}
+            =(
           </Typography>
         </Grid>
       )}

@@ -1,11 +1,11 @@
 import OrderForm from '@/features/OrderForm/ui/OrderForm'
 import { Box, Grid, ListItemText, ListItem, Stack, Typography } from '@mui/material'
-import { getProfileOrderFormTasks } from '../model/selectors/getProfileOrderFormTasks'
+import { useProfileOrderFormTasks } from '../model/selectors/getProfileOrderFormTasks'
 import { useTranslation } from 'react-i18next'
 
 const ProfileOrderForm = () => {
   const { t } = useTranslation()
-  const tasks = getProfileOrderFormTasks()
+  const tasks = useProfileOrderFormTasks()
   return (
     <Stack spacing={2}>
       <Typography variant="h2" component="h1" textAlign="center" sx={{ px: 20 }}>
