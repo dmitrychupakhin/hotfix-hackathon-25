@@ -42,7 +42,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [cancelTask, { isLoading: isCancelling }] = useCancelTask()
+  const [cancelTask] = useCancelTask()
 
   const handleCancelTask = async () => {
     try {
