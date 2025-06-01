@@ -8,12 +8,14 @@ import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded'
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
 import { ROUTES } from '@/shared/const/routes'
 import { useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 
 interface TaskProps {
   data: Task
 }
 
 const TaskItem: FC<TaskProps> = ({ data }) => {
+  const { t } = useTranslation()
   console.log(data)
   const navigate = useNavigate()
 
@@ -82,7 +84,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
                 px: 1 }}
               >
                 <CheckCircleOutlineRoundedIcon sx={{ color: 'success.dark' }} />
-                <Typography variant="body1" color="success.dark">выполнено</Typography>
+                <Typography variant="body1" color="success.dark">{t('выполнено')}</Typography>
               </Box>
             )
           }
@@ -100,7 +102,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
               }}
               >
                 <AutorenewRoundedIcon sx={{ color: 'warning.main' }} />
-                <Typography variant="body1" color="warning.main">в работе</Typography>
+                <Typography variant="body1" color="warning.main">{t('в работе')}</Typography>
               </Box>
             )
           }
@@ -118,7 +120,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
               }}
               >
                 <SwapVertRoundedIcon sx={{ color: 'grey.600' }} />
-                <Typography variant="body1" color="grey.600">ожидает</Typography>
+                <Typography variant="body1" color="grey.600">{t('ожидает')}</Typography>
               </Box>
             )
           }
@@ -136,7 +138,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
               }}
               >
                 <CheckCircleOutlineRoundedIcon sx={{ color: 'error.main' }} />
-                <Typography variant="body1" color="error.main">отклонено</Typography>
+                <Typography variant="body1" color="error.main">{t('отклонено')}</Typography>
               </Box>
             )
           }
@@ -148,7 +150,7 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
           endIcon={<SendRoundedIcon />}
           onClick={() => navigate(ROUTES.PROFILE_TASK(data.id.toString()))}
         >
-          Подробнее
+          {t('Подробнее')}
         </Button>
       </Box>
 

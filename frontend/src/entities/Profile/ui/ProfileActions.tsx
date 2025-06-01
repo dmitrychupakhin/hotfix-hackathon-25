@@ -7,12 +7,14 @@ import KeyRoundedIcon from '@mui/icons-material/KeyRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { ROUTES } from '@/shared/const/routes'
+import { useTranslation } from 'react-i18next'
 
 interface ProfileActionsProps {
   setIsEdit: (isEdit: boolean) => void
 }
 
 const ProfileActions = ({ setIsEdit }: ProfileActionsProps) => {
+  const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
@@ -55,7 +57,7 @@ const ProfileActions = ({ setIsEdit }: ProfileActionsProps) => {
         }}
         onClick={handleClick}
         role="button"
-        aria-label="Открыть меню действий"
+        aria-label={t('Открыть меню действий')}
         tabIndex={0}
       >
         <Box sx={theme => ({
@@ -74,7 +76,7 @@ const ProfileActions = ({ setIsEdit }: ProfileActionsProps) => {
         >
           <AccountCircleRoundedIcon />
         </Box>
-        <Typography variant="body1" fontWeight={600}>Действия с аккаунтом</Typography>
+        <Typography variant="body1" fontWeight={600}>{t('Действия с аккаунтом')}</Typography>
         <KeyboardArrowDownIcon color="secondary" />
       </Stack>
       <Divider orientation="horizontal" flexItem />
@@ -86,15 +88,15 @@ const ProfileActions = ({ setIsEdit }: ProfileActionsProps) => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       >
         <MenuItem sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1 }} onClick={goToEditProfile}>
-          Редактировать профиль
+          {t('Редактировать профиль')}
           <EditRoundedIcon />
         </MenuItem>
         <MenuItem sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1 }} onClick={goToChangePassword}>
-          Сменить пароль
+          {t('Сменить пароль')}
           <KeyRoundedIcon />
         </MenuItem>
         <MenuItem sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1 }} onClick={goToChangeEmail}>
-          Сменить email
+          {t('Сменить email')}
           <EmailRoundedIcon />
         </MenuItem>
       </Menu>

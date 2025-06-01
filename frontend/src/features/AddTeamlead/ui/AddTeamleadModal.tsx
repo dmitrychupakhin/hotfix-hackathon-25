@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useAddTeamlead } from '../api/addTeamleadApi'
 import type { AddTeamleadSchema } from '../model/types/AddTeamleadSchema'
+import { useTranslation } from 'react-i18next'
 
 interface AddTeamleadModalProps {
   open: boolean
@@ -14,6 +15,7 @@ interface AddTeamleadModalProps {
 }
 
 const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
+  const { t } = useTranslation()
   const [formError, setFormError] = useState<string | null>(null)
   const [addTeamlead, { isLoading }] = useAddTeamlead()
 
@@ -72,7 +74,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
           {isLoading && <FormLoader />}
           <Stack spacing={2}>
             <Typography variant="h6" fontWeight={600}>
-              Добавить руководителя команды (Teamlead)
+              {t('Добавить руководителя команды (Teamlead)')}
             </Typography>
             <Divider />
             {formError && (
@@ -102,7 +104,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                       render={({ field, fieldState }) => (
                         <TextField
                           {...field}
-                          label="Имя"
+                          label={t('Имя')}
                           fullWidth
                           error={!!fieldState.error}
                           helperText={fieldState.error?.message}
@@ -115,7 +117,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                       render={({ field, fieldState }) => (
                         <TextField
                           {...field}
-                          label="Отчество"
+                          label={t('Отчество')}
                           fullWidth
                           error={!!fieldState.error}
                           helperText={fieldState.error?.message}
@@ -141,7 +143,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                       render={({ field, fieldState }) => (
                         <TextField
                           {...field}
-                          label="Пароль"
+                          label={t('Пароль')}
                           fullWidth
                           error={!!fieldState.error}
                           helperText={fieldState.error?.message}
@@ -158,7 +160,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                       render={({ field, fieldState }) => (
                         <TextField
                           {...field}
-                          label="Фамилия"
+                          label={t('Фамилия')}
                           fullWidth
                           error={!!fieldState.error}
                           helperText={fieldState.error?.message}
@@ -171,7 +173,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                       render={({ field, fieldState }) => (
                         <TextField
                           {...field}
-                          label="Логин"
+                          label={t('Логин')}
                           fullWidth
                           error={!!fieldState.error}
                           helperText={fieldState.error?.message}
@@ -185,7 +187,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                         <TextField
                           {...field}
                           select
-                          label="Роль"
+                          label={t('Роль')}
                           fullWidth
                           required
                           error={!!fieldState.error}
@@ -205,7 +207,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                       render={({ field, fieldState }) => (
                         <TextField
                           {...field}
-                          label="Подтверждение пароля"
+                          label={t('Подтверждение пароля')}
                           fullWidth
                           error={!!fieldState.error}
                           helperText={fieldState.error?.message}
@@ -222,7 +224,7 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                     render={({ field, fieldState }) => (
                       <TextField
                         {...field}
-                        label="Стек технологий"
+                        label={t('Стек технологий')}
                         fullWidth
                         error={!!fieldState.error}
                         helperText={fieldState.error?.message}
@@ -239,10 +241,10 @@ const AddTeamleadModal = ({ open, handleClose }: AddTeamleadModalProps) => {
                     handleClose()
                   }}
                 >
-                  Отмена
+                  {t('Отмена')}
                 </Button>
                 <Button type="submit" variant="contained">
-                  Сохранить
+                  {t('Сохранить')}
                 </Button>
               </Box>
             </Box>
