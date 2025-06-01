@@ -11,11 +11,14 @@ from drf_spectacular.utils import extend_schema
 class OrderPredictionResultView(APIView):
     def get(self, request, id):
         order = Order.objects.filter(id=id).first()
-        if order: return Response({'status': 'success'})
+        if order.gen_status == 1: return Response({'status': 'success'})
         return Response({'status': 'pending'})
 
 @extend_schema(summary="Сгенерировать план", tags=["План"])
 class OrderPredictionStartView(APIView):
     def post(self, request, id):
+        order = Order.objects.get(id=id)
+        order.gen_status = 0
+        order.save()
         task = run_ml_prediction.delay({"data": "data"}, id)
         return Response({'task_id': task.id}, status=status.HTTP_202_ACCEPTED)

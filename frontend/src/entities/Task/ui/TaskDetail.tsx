@@ -1,29 +1,33 @@
 // src/features/TaskDetail/TaskDetail.tsx
-import React, { type FC, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded'
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
+import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
 import {
+  Box,
   Button,
   Card,
   Divider,
   IconButton,
   Stack,
+  TextField,
   Typography,
-  Box,
   useTheme,
 } from '@mui/material'
-import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRounded'
-import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded'
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
-import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
+import React, { type FC, useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 
 import { getProfileDataIsStaff, getProfileDataIsTeam } from '@/entities/Profile/model/selectors/getProfileData'
 import { TaskFilterField } from '@/shared/types/TaskFilterField'
 import FormLoader from '@/shared/ui/FormLoader/FormLoader'
-import GanttChart from '@/shared/ui/GanttChartComponent/ui/GanttChart'
+import GanttChart, { type GanttInputItem } from '@/shared/ui/GanttChartComponent/ui/GanttChart'
 
-import { taskApi, useStartPlan, useLazyGetPlanResult } from '../api/taskApi'
-import type { Task } from '../model/Task'
+import { taskApi, useLazyGetPlanResult, useStartPlan, useUpdateTask } from '../api/taskApi'
+import type { Task, UpdateTaskRequest } from '../model/Task'
+
+// Используем ваш готовый хук дебаунса
+import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import { useTranslation } from 'react-i18next'
 
 interface TaskDetailProps {
@@ -36,8 +40,46 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  // Локальные состояния для контролируемых полей
+  const [localTitle, setLocalTitle] = useState<string>(task.title)
+  const [localDescription, setLocalDescription] = useState<string>(task.description)
+  const [ganttData, setGanttData] = useState<GanttInputItem[]>(task.plan || [])
+
   const isStaff = useSelector(getProfileDataIsStaff)
   const isTeam = useSelector(getProfileDataIsTeam)
+
+  const [updateTask, { isLoading: isUpdating }] = useUpdateTask()
+
+  // Мемоизированный коллбэк для запуска мутации
+  const handleUpdateTask = React.useCallback(
+    async (data: UpdateTaskRequest) => {
+      await updateTask({ id: task.id, data }).unwrap()
+    },
+    [task.id, updateTask],
+  )
+
+  // Задебаунсенные значения — будут обновляться не сразу, а через 500 мс после последнего изменения
+  const debouncedTitle = useDebounce(localTitle, 500)
+  const debouncedDescription = useDebounce(localDescription, 500)
+  const debouncedPlan = useDebounce(ganttData, 500)
+
+  // Чтобы пропустить первоначальный монт (и не слать updateTask сразу при рендере)
+  const isFirstRun = useRef(true)
+
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false
+      return
+    }
+
+    // Когда любое из debounced-значений реально поменялось (после 500 мс паузы),
+    // шлём единый запрос с тремя полями:
+    handleUpdateTask({
+      title: debouncedTitle,
+      description: debouncedDescription,
+      plan: JSON.stringify(debouncedPlan),
+    })
+  }, [debouncedTitle, debouncedDescription, debouncedPlan, handleUpdateTask])
 
   // 1) Хук для запуска мутации startPlan
   const [startPlan, { isLoading: isStarting }] = useStartPlan()
@@ -45,7 +87,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
   // 2) Локальный флаг, отвечающий за включённый polling
   const [shouldPoll] = useState(false)
 
-  // 3) Используем useGetPlanResultQuery с pollingInterval и skip
+  // 3) Используем useLazyGetPlanResult для опроса статуса «формирования плана»
   const [
     triggerGetPlanResult,
     { data: planResultData, isFetching: isFetchingPlanResult },
@@ -57,11 +99,11 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
     try {
       await startPlan({ id: task.id }).unwrap()
 
-      // Если до этого был старый setInterval — очищаем
+      // Если был старый интервал – очищаем
       if (pollIntervalId) {
         clearInterval(pollIntervalId)
       }
-      // Запускаем периодический опрос
+      // Запускаем новый интервал опроса
       const newInterval = window.setInterval(() => {
         triggerGetPlanResult({ id: task.id })
       }, 1000)
@@ -77,13 +119,12 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
 
     // @ts-expect-error TODO: fix this
     if (planResultData.status === 'success') {
-      // Останавливаем polling
+      // Остановить polling
       if (pollIntervalId) {
         clearInterval(pollIntervalId)
         setPollIntervalId(null)
       }
-
-      // Инвалидируем данные таска
+      // Инвалидировать кэш задачи, чтобы подтянуть свежие поля
       dispatch(
         taskApi.util.invalidateTags([
           { type: 'Tasks', id: task.id },
@@ -101,10 +142,19 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
     }
   }, [planResultData, dispatch, task.id, pollIntervalId])
 
+  // Обработчики на изменение полей сразу обновляют локальный стейт.
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalTitle(e.target.value)
+  }
+
+  const onDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalDescription(e.target.value)
+  }
+
   return (
     <Card sx={{ p: 3, borderRadius: 3, display: 'flex', flexDirection: 'column', gap: 2, position: 'relative' }}>
       {/* Показываем загрузчик, если идёт отправка мутации или polling status */}
-      {(isStarting || isFetchingPlanResult) && <FormLoader />}
+      {(isStarting || isFetchingPlanResult || isUpdating) && <FormLoader />}
 
       <Stack spacing={2}>
         <Box>
@@ -113,20 +163,46 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
           </IconButton>
         </Box>
         <Divider />
-        <Box display="flex">
-          <Typography
-            variant="h6"
-            fontWeight={600}
-            sx={theme => ({
-              backgroundColor: 'primary.light',
-              width: 'auto',
-              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
-            })}
-          >
-            {task.title}
-          </Typography>
+        <Box display="flex" flexDirection="column" gap={1}>
+          {isStaff
+            ? (
+                <>
+                  <TextField
+                    label="Название"
+                    value={localTitle}
+                    onChange={onTitleChange}
+                    fullWidth
+                  />
+                  <TextField
+                    label="Описание"
+                    value={localDescription}
+                    multiline
+                    rows={4}
+                    onChange={onDescriptionChange}
+                    fullWidth
+                  />
+                </>
+              )
+            : (
+                <>
+                  <Typography
+                    variant="h6"
+                    fontWeight={600}
+                    sx={theme => ({
+                      backgroundColor: 'primary.light',
+                      width: 'auto',
+                      color: theme.palette.mode === 'dark'
+                        ? theme.palette.invertedSecondary.dark
+                        : theme.palette.secondary.dark,
+                    })}
+                  >
+                    {task.title}
+                  </Typography>
+                  <Typography>{task.description}</Typography>
+                </>
+              )}
         </Box>
-        <Typography>{task.description}</Typography>
+
         <Typography fontWeight={600}>
           {t('Дата отправки задания:')}
           {' '}
@@ -135,12 +211,15 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
             fontWeight={600}
             sx={theme => ({
               backgroundColor: 'primary.light',
-              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+              color: theme.palette.mode === 'dark'
+                ? theme.palette.invertedSecondary.dark
+                : theme.palette.secondary.dark,
             })}
           >
             {task.createdAt}
           </Typography>
         </Typography>
+
         <Box display="flex">
           {task.status === TaskFilterField.DONE && (
             <Box
@@ -218,12 +297,15 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
       </Stack>
 
       {(isStaff || isTeam) && (
-        <>
-          {/* Если план уже есть — рисуем диаграмму */}
+        <Box sx={{ position: 'relative' }}>
           {task.plan && (
             <Box sx={{ mt: 2 }}>
               <Typography variant="subtitle1">План (Ганта):</Typography>
-              <GanttChart data={task.plan} isEditProgressOnly={isTeam} />
+              <GanttChart
+                data={task.plan}
+                isEditProgressOnly={isTeam}
+                onDataChange={setGanttData}
+              />
             </Box>
           )}
 
@@ -248,7 +330,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
               {isStarting || shouldPoll ? t('Формируется…') : t('Сформировать план')}
             </Button>
           </Box>
-        </>
+        </Box>
       )}
     </Card>
   )

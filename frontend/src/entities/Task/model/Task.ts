@@ -28,3 +28,9 @@ export interface GetTasksRequest {
   pageSize?: number
   search?: string
 }
+
+export interface UpdateTaskRequest {
+  plan: string | null
+  title: string
+  description: string
+}
