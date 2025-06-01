@@ -29,6 +29,7 @@ import type { Task, UpdateTaskRequest } from '../model/Task'
 // Используем ваш готовый хук дебаунса
 import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import { useTranslation } from 'react-i18next'
+import { TaskTeamleadSelector } from '@/features/TaskTeamleadSelector'
 
 interface TaskDetailProps {
   task: Task
@@ -199,6 +200,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
                     {task.title}
                   </Typography>
                   <Typography>{task.description}</Typography>
+                  <TaskTeamleadSelector value={task.team?.id || ''} onChange={() => {}} />
                 </>
               )}
         </Box>

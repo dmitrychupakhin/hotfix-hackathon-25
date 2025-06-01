@@ -28,8 +28,7 @@ const HomeAbout = () => {
             spacing={3}
             container
             sx={{
-              height: '350px',
-              maxHeight: '350px',
+              height: '100%',
               alignItems: 'stretch',
             }}
           >
