@@ -11,15 +11,17 @@ def add_plan(data, order_id):
     except Order.DoesNotExist:
         return {"detail": ["Заявка не найдена"]}
 
-    if isinstance(data, dict):
-        predict_team = data.get("predict_team")
-        if predict_team is not None:
-            order.predicted_team = predict_team
-        
-        project_plan = data.get("project_plan", [])
-        plan_data = json.dumps(project_plan, ensure_ascii=False)
-    else:
-        plan_data = data
+    # Извлекаем и обрабатываем project_plan
+    project_plan = data.get("project_plan", [])
+
+    for item in project_plan:
+        item["progress"] = 0
+
+    plan_data = json.dumps(project_plan, ensure_ascii=False)
+
+    predict_team = data.get("predict_team")
+    if predict_team != "":
+        order.predicted_team = int(predict_team)
 
     order.plan = plan_data
     order.gen_status = 1
