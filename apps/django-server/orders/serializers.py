@@ -20,9 +20,6 @@ class GetOrderSerializer(serializers.ModelSerializer):
             'start', 'end', 'created_at', 'predicted_team', 'plan'
         ]
 
-    def get_user(self, obj):
-        return f"{obj.user.last_name} {obj.user.first_name}"
-
     def get_plan(self, obj):
         if obj.plan:
             return ast.literal_eval(obj.plan)

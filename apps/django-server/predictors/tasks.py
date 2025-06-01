@@ -1,9 +1,9 @@
 from celery import shared_task
-from predictors.utils import edit_order
+from predictors.utils import add_plan
 import httpx
 
 @shared_task
-def run_ml_prediction_cats(data, order):
+def run_ml_prediction(data, order):
     response = httpx.post(
         'http://predictor:8001/api/predictor/plan',
         json=data,
@@ -17,6 +17,6 @@ def run_ml_prediction_cats(data, order):
         }
     
     result_json = response.json()
-    edit_order(result_json, order)
+    add_plan(result_json, order)
         
     return {"status": "success"}

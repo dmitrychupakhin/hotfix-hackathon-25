@@ -225,6 +225,13 @@ class UserMeAPIView(generics.RetrieveAPIView):
 
     def get_object(self):
         return User.objects.get(id=self.request.user.id)
+    
+@extend_schema(summary="Получение данных пользователя по id", tags=["Пользователь"])
+class UserDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = GetUserSerializer
+    queryset = User.objects.all()
+    lookup_field = 'id'
 
 @extend_schema(summary="Изменение фото профиля", tags=["Пользователь"])
 class UpdateUserPhotoView(APIView):
