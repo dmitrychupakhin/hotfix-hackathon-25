@@ -1,6 +1,6 @@
 Развёрнутый проект: slobodasoft.ru
 swagger: https://slobodasoft.ru/api/docs/swagger/
-figma: 
+figma: https://www.figma.com/design/vM0oUVQP0b4JWkXQYAaY88/SlobodaSoft?node-id=88-4835&t=we2mC3zjGi79YVXc-1
 Для запуска используйте dev ветку (main настроена на деплой)
 Удалены ключи на YandexGPT и пароли от почты для подключения через smtp
 Поэтому ветка dev будет возвращать заранее сгенерированный план, проверить работу YandexGPT можно на развёрнутом сайте.
