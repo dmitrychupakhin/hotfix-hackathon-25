@@ -1,6 +1,6 @@
 import { useGetTeamLeaders } from '@/entities/Profile/api/ProfileApi'
 import { MenuItem, Select } from '@mui/material'
-import type { FC } from 'react'
+import { useEffect, type FC } from 'react'
 
 interface TaskTeamleadSelectorProps {
   value: string
@@ -10,7 +10,8 @@ interface TaskTeamleadSelectorProps {
 const TaskTeamleadSelector: FC<TaskTeamleadSelectorProps> = ({ value, onChange }) => {
   const { data: teamLeaders } = useGetTeamLeaders()
 
-  console.log(teamLeaders)
+  useEffect(() => {
+  }, [teamLeaders])
 
   return (
     <Select

@@ -5,7 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema
 from .serializers import *
 from rest_framework.views import APIView
-from users.permissions import IsStaff, IsOrderRelatedUser
+from users.permissions import IsStaff, IsOrderRelatedUser, IsLeader
 from .models import *
 from rest_framework.response import Response
 from rest_framework import status
@@ -52,7 +52,7 @@ class OrderDetailRetrieveAPIView(generics.RetrieveAPIView):
 
 @extend_schema(summary="Изменение заявки по ID", tags=["Заявки"])
 class OrderUpdateAPIView(generics.UpdateAPIView):
-    permission_classes = [IsStaff, ]
+    permission_classes = [IsStaff, IsLeader]
     queryset = Order.objects.all()
     serializer_class = UpdateOrderSerializer
     lookup_field = 'id'
