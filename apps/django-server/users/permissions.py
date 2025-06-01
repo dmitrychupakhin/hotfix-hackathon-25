@@ -8,6 +8,14 @@ class IsStaff(BasePermission):
             (request.user.is_staff or request.user.is_superuser)
         )
 
+class IsLeaderOrStaff(BasePermission):
+    def has_permission(self, request, view):
+        return bool(
+            request.user and
+            request.user.is_authenticated and
+            (request.user.is_team or request.user.is_staff or request.user.is_superuser)
+        )
+        
 class IsLeader(BasePermission):
     def has_permission(self, request, view):
         return bool(

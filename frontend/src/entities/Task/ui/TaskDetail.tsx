@@ -22,14 +22,15 @@ import { getProfileDataIsStaff, getProfileDataIsTeam } from '@/entities/Profile/
 import { TaskFilterField } from '@/shared/types/TaskFilterField'
 import FormLoader from '@/shared/ui/FormLoader/FormLoader'
 import GanttChart, { type GanttInputItem } from '@/shared/ui/GanttChartComponent/ui/GanttChart'
-
-import { taskApi, useLazyGetPlanResult, useStartPlan, useUpdateTask } from '../api/taskApi'
+import RocketLaunchRoundedIcon from '@mui/icons-material/RocketLaunchRounded'
+import { taskApi, useCancelTask, useLazyGetPlanResult, useStartPlan, useUpdateTask } from '../api/taskApi'
 import type { Task, UpdateTaskRequest } from '../model/Task'
 
 // Используем ваш готовый хук дебаунса
 import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import { useTranslation } from 'react-i18next'
 import { TaskTeamleadSelector } from '@/features/TaskTeamleadSelector'
+import { ROUTES } from '@/shared/const/routes'
 
 interface TaskDetailProps {
   task: Task
@@ -40,6 +41,18 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const [cancelTask] = useCancelTask()
+
+  const handleCancelTask = async () => {
+    try {
+      await cancelTask({ id: task.id }).unwrap()
+      navigate(ROUTES.PROFILE_ACTIVE_TASKS())
+    }
+    catch (err) {
+      console.error(t('Не удалось отклонить заявку:'), err)
+    }
+  }
 
   // Локальное состояние для контролируемых полей
   const [localTitle, setLocalTitle] = useState<string>(task.title)
@@ -335,22 +348,32 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
           )}
 
           <Box display="flex" gap={2} justifyContent="flex-end" sx={{ mt: 2 }}>
-            <Button
-              variant="contained"
-              color="secondary"
-              disabled={task.plan === null}
-              onClick={() => {
-                /* ваша логика «Отправить на разработку» */
-              }}
-            >
-              {t('Отправить на разработку')}
-            </Button>
-
+            {isStaff && (
+              <Button
+                variant="contained"
+                color="secondary"
+                disabled={task.plan === null}
+                onClick={handleCancelTask}
+              >
+                {t('Отклонить заявку')}
+              </Button>
+            )}
+            {isTeam && (
+              <Button
+                variant="contained"
+                color="secondary"
+                endIcon={<RocketLaunchRoundedIcon />}
+                onClick={() => navigate(ROUTES.PROFILE_TASK(task.id.toString()))}
+              >
+                {t('Завершить задачу')}
+              </Button>
+            )}
             <Button
               variant="contained"
               color="primary"
               disabled={isStarting || shouldPoll}
               onClick={handleStartClick}
+
             >
               {isStarting || shouldPoll ? t('Формируется…') : t('Сформировать план')}
             </Button>

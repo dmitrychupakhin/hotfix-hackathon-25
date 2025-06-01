@@ -5,7 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema
 from .serializers import *
 from rest_framework.views import APIView
-from users.permissions import IsStaff, IsOrderRelatedUser, IsLeader
+from users.permissions import IsStaff, IsOrderRelatedUser, IsLeader, IsLeaderOrStaff
 from .models import *
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,7 +16,7 @@ class OrderCreateAPIView(generics.CreateAPIView):
     serializer_class = CreateOrderSerializer
     
     def perform_create(self, serializer):
-        order = serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user)
         
 class OrderListPagination(PageNumberPagination):
     page_size = 4
@@ -52,7 +52,7 @@ class OrderDetailRetrieveAPIView(generics.RetrieveAPIView):
 
 @extend_schema(summary="Изменение заявки по ID", tags=["Заявки"])
 class OrderUpdateAPIView(generics.UpdateAPIView):
-    permission_classes = [IsStaff, IsLeader]
+    permission_classes = [IsLeaderOrStaff]
     queryset = Order.objects.all()
     serializer_class = UpdateOrderSerializer
     lookup_field = 'id'
@@ -71,6 +71,21 @@ class OrderCancelView(APIView):
             return Response({'detail': ['Заявка не найдена']}, status=status.HTTP_404_NOT_FOUND)
 
         order.status = 'denied'
+        order.save()
+
+        return Response(status=status.HTTP_200_OK)
+    
+@extend_schema(summary="Завершить заявку", tags=["Заявки"])
+class OrderDoneView(APIView):
+    permission_classes = [IsLeaderOrStaff]
+
+    def post(self, request, id):
+        try:
+            order = Order.objects.get(id=id)
+        except Order.DoesNotExist:
+            return Response({'detail': ['Заявка не найдена']}, status=status.HTTP_404_NOT_FOUND)
+
+        order.status = 'done'
         order.save()
 
         return Response(status=status.HTTP_200_OK)

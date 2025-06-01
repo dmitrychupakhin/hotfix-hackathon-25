@@ -19,7 +19,7 @@ export const taskApi = rtkApi.injectEndpoints({
         url: `/orders/${id}`,
         method: 'GET',
       }),
-      providesTags: (result, error, { id }) => [{ type: 'Tasks', id: id }],
+      providesTags: (_result, _error, { id }) => [{ type: 'Tasks', id: id }],
       transformResponse: (response: Task) => {
         const camel = snakeToCamelObject<Task>(response)
 
@@ -48,9 +48,16 @@ export const taskApi = rtkApi.injectEndpoints({
         body: data,
       }),
     }),
+    cancelTask: build.mutation<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `/orders/${id}/cancel`,
+        method: 'POST',
+      }),
+    }),
   }),
 })
 
+export const useCancelTask = taskApi.useCancelTaskMutation
 export const useUpdateTask = taskApi.useUpdateTaskMutation
 export const useLazyGetPlanResult = taskApi.useLazyGetPlanResultQuery
 export const useStartPlan = taskApi.useStartPlanMutation

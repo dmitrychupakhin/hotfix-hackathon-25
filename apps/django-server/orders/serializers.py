@@ -1,11 +1,10 @@
 from rest_framework import serializers
 from .models import *
 from users.serializers import GetUserSerializer
-import os
-import json
 import ast
     
 class CreateOrderSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Order
         fields = ['title', 'description']
@@ -28,6 +27,7 @@ class GetOrderSerializer(serializers.ModelSerializer):
         return None
 
 class UpdateOrderSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Order
         fields = [

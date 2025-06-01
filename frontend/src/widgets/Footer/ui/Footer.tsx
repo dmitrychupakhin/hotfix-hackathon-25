@@ -22,7 +22,9 @@ const Footer = () => {
                 : theme.palette.invertedSecondary.dark,
             }}
           >
-            {t('Воплощайте свою идею в')},{' '}
+            {t('Воплощайте свою идею в')}
+            ,
+            {' '}
             <br />
             {t('цифровую реальность!')}
           </Typography>
