@@ -5,7 +5,6 @@ from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema
 from .serializers import *
 from rest_framework.views import APIView
-from core.tasks import run_ml_prediction_cats
 from users.permissions import IsStaff, IsOrderRelatedUser
 from .models import *
 from rest_framework.response import Response
@@ -18,7 +17,6 @@ class OrderCreateAPIView(generics.CreateAPIView):
     
     def perform_create(self, serializer):
         order = serializer.save(user=self.request.user)
-        run_ml_prediction_cats.delay({"data": "data"}, order.id)
         
 class OrderListPagination(PageNumberPagination):
     page_size = 4

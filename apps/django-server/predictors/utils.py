@@ -1,7 +1,7 @@
 from orders.models import Order
 import json
 
-def edit_order(data, order_id):
+def add_plan(data, order_id):
     try:
         order = Order.objects.get(id=order_id)
     except Order.DoesNotExist:
