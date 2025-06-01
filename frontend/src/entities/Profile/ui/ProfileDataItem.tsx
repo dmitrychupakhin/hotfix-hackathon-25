@@ -13,7 +13,7 @@ const ProfileDataItem = ({ label, value, Icon }: ProfileDataItemProps) => {
         border: `1px solid ${theme.palette.divider}`,
         borderRadius: 3,
         p: 2,
-        width: '100%'
+        width: '100%',
       })}
       spacing={1}
     >

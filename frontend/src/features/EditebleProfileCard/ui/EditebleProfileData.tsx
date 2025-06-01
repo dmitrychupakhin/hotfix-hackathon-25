@@ -185,21 +185,21 @@ const EditebleProfileData = ({ user, setIsEdit }: EditebleProfileDataProps) => {
               )
         }
       </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            gap: 2,
-            justifyContent: 'flex-end',
-            flexDirection: {
-              xs: 'column', // до 600px
-              sm: 'row',    // от 600px и выше
-            },
-            alignItems: {
-              xs: 'stretch',
-              sm: 'center',
-            },
-          }}
-        >
+      <Box
+        sx={{
+          display: 'flex',
+          gap: 2,
+          justifyContent: 'flex-end',
+          flexDirection: {
+            xs: 'column', // до 600px
+            sm: 'row', // от 600px и выше
+          },
+          alignItems: {
+            xs: 'stretch',
+            sm: 'center',
+          },
+        }}
+      >
         <Button variant="contained" color="secondary" onClick={() => setIsEdit(false)} endIcon={<CloseRoundedIcon />}>Отменить</Button>
         <Button variant="contained" color="primary" type="submit" endIcon={<SendRoundedIcon />}>Сохранить</Button>
       </Box>

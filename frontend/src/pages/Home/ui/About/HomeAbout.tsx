@@ -16,7 +16,7 @@ const HomeAbout = () => {
     <PageWrapper xPadding>
       <Grid container spacing={3}>
         <Grid
-          size={{xs: 12}}
+          size={{ xs: 12 }}
           sx={{
             backgroundColor: theme.palette.common.black,
             borderRadius: 3,
@@ -147,7 +147,7 @@ const HomeAbout = () => {
           </Box>
         </Grid>
 
-        <Grid 
+        <Grid
           size={{ xs: 12, md: 6 }}
           order={{ xs: 2, md: 2 }} // При <800px — идёт вторым, при >=800px — первым
           sx={{
@@ -163,12 +163,12 @@ const HomeAbout = () => {
         >
           <Box
             sx={{
-              position: 'absolute',
-              right: 0,
-              bottom: 0,
-              p: 2,
-              animation: 'rotate 4s linear infinite',
-              transformOrigin: 'center',
+              'position': 'absolute',
+              'right': 0,
+              'bottom': 0,
+              'p': 2,
+              'animation': 'rotate 4s linear infinite',
+              'transformOrigin': 'center',
               '@keyframes rotate': {
                 '0%': { transform: 'rotate(0deg)' },
                 '100%': { transform: 'rotate(360deg)' },

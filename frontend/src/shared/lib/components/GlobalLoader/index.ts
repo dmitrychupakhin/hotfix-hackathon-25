@@ -1,1 +1,1 @@
-export { GlobalLoader } from './ui/GlobalLoader';
+export { GlobalLoader } from './ui/GlobalLoader'

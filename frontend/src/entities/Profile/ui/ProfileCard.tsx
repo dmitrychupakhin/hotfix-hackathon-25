@@ -50,16 +50,17 @@ const ProfileCard = ({
         borderRadius: 3,
       }}
     >
-      <Grid size={{ xs: 12}} sx={{ px: 4 }}>
+      <Grid size={{ xs: 12 }} sx={{ px: 4 }}>
         {EditebleProfileLogo}
       </Grid>
 
-      <Grid size={{ xs: 12}}
+      <Grid
+        size={{ xs: 12 }}
         sx={theme => ({
           backgroundColor: theme.palette.background.paper,
           borderRadius: 3,
           boxShadow: theme.shadows[1],
-        })} 
+        })}
       >
         <Box
           sx={{
@@ -94,7 +95,11 @@ const ProfileCard = ({
             }}
           >
             <Typography variant="h5" fontWeight={400} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              {user?.firstName} {user?.lastName} {user?.middleName}
+              {user?.firstName}
+              {' '}
+              {user?.lastName}
+              {' '}
+              {user?.middleName}
             </Typography>
             <Typography variant="body2" sx={theme => ({ color: theme.palette.secondary.light })}>
               {user.isStaff ? t('Модератор') : user.isTeam ? t('Команда') : t('Пользователь')}
