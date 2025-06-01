@@ -17,3 +17,4 @@ class Order(models.Model):
     start = models.DateTimeField(verbose_name="Начало", null=True, blank=True)
     end = models.DateTimeField(verbose_name="Конец", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
+    progress = models.IntegerField(default=0)
