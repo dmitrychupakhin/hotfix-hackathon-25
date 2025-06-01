@@ -12,6 +12,7 @@ const Home = () => {
   return (
     <Stack
       spacing={8}
+      pb={8}
     >
       <HomeHero />
       <HomeAbout />
