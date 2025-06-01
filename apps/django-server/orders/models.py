@@ -18,3 +18,4 @@ class Order(models.Model):
     end = models.DateTimeField(verbose_name="Конец", null=True, blank=True)
     plan = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
+    gen_status = models.IntegerField(null=True, blank=True, default=0)
