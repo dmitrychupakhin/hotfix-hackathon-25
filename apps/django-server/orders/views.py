@@ -52,7 +52,7 @@ class OrderDetailRetrieveAPIView(generics.RetrieveAPIView):
 
 @extend_schema(summary="Изменение заявки по ID", tags=["Заявки"])
 class OrderUpdateAPIView(generics.UpdateAPIView):
-    permission_classes = [IsStaff]
+    permission_classes = [IsStaff, ]
     queryset = Order.objects.all()
     serializer_class = UpdateOrderSerializer
     lookup_field = 'id'
