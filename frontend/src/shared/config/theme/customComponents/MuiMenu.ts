@@ -1,6 +1,7 @@
 import type { Components, Theme } from '@mui/material'
 import { buttonBaseClasses, dividerClasses } from '@mui/material'
 import { primary } from '../config/colorConfig/colors'
+import { color } from 'motion/react'
 
 const MuiMenu: Components<Theme>['MuiMenu'] = {
   defaultProps: {
@@ -38,6 +39,23 @@ const MuiMenu: Components<Theme>['MuiMenu'] = {
         },
       },
       ...theme.applyStyles('dark', {
+        [`& .${buttonBaseClasses.root}`]: {
+          '&.Mui-selected': {
+            'backgroundColor': 'transparent',
+            'color': theme.palette.primary.dark,
+            '&:hover': {
+              backgroundColor: primary[200],
+            },
+          },
+          '&:hover': {
+            backgroundColor: primary[200],
+            color: theme.palette.invertedSecondary.main,
+          },
+          '&:active': {
+            backgroundColor: primary[300],
+            color: theme.palette.invertedSecondary.dark,
+          },
+        },
         boxShadow:
             'hsla(220, 30%, 5%, 0.7) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.8) 0px 8px 16px -5px',
       }),
