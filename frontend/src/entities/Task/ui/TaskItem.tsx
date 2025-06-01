@@ -9,6 +9,9 @@ import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded'
 import { ROUTES } from '@/shared/const/routes'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { getProfileDataIsTeam } from '@/entities/Profile/model/selectors/getProfileData'
+import RocketLaunchRoundedIcon from '@mui/icons-material/RocketLaunchRounded'
 
 interface TaskProps {
   data: Task
@@ -18,6 +21,8 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
   const { t } = useTranslation()
   console.log(data)
   const navigate = useNavigate()
+
+  const isTeamlead = useSelector(getProfileDataIsTeam)
 
   const theme = useTheme()
   return (
@@ -144,14 +149,31 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
           }
         </Box>
 
-        <Button
-          variant="contained"
-          color="primary"
-          endIcon={<SendRoundedIcon />}
-          onClick={() => navigate(ROUTES.PROFILE_TASK(data.id.toString()))}
-        >
-          {t('Подробнее')}
-        </Button>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            endIcon={<SendRoundedIcon />}
+            size="small"
+            onClick={() => navigate(ROUTES.PROFILE_TASK(data.id.toString()))}
+          >
+            {t('Подробнее')}
+          </Button>
+          {
+            isTeamlead && (
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                endIcon={<RocketLaunchRoundedIcon />}
+                onClick={() => navigate(ROUTES.PROFILE_TASK(data.id.toString()))}
+              >
+                {t('Завершить задачу ')}
+              </Button>
+            )
+          }
+        </Box>
+
       </Box>
 
     </Card>

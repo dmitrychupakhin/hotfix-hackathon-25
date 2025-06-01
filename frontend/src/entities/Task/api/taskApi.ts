@@ -48,9 +48,16 @@ export const taskApi = rtkApi.injectEndpoints({
         body: data,
       }),
     }),
+    cancelTask: build.mutation<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `/orders/${id}/cancel`,
+        method: 'POST',
+      }),
+    }),
   }),
 })
 
+export const useCancelTask = taskApi.useCancelTaskMutation
 export const useUpdateTask = taskApi.useUpdateTaskMutation
 export const useLazyGetPlanResult = taskApi.useLazyGetPlanResultQuery
 export const useStartPlan = taskApi.useStartPlanMutation
