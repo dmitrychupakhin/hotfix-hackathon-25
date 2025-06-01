@@ -10,7 +10,6 @@ class CreateOrderSerializer(serializers.ModelSerializer):
         fields = ['title', 'description']
         
 class GetOrderSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField()
     plan = serializers.SerializerMethodField()
     
     class Meta:
