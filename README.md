@@ -1,40 +1,63 @@
-Развёрнутый проект: slobodasoft.ru
-swagger: https://slobodasoft.ru/api/docs/swagger/
-figma: https://www.figma.com/design/vM0oUVQP0b4JWkXQYAaY88/SlobodaSoft?node-id=88-4835&t=we2mC3zjGi79YVXc-1
-Для запуска используйте dev ветку (main настроена на деплой)
-Удалены ключи на YandexGPT и пароли от почты для подключения через smtp
-Поэтому ветка dev будет возвращать заранее сгенерированный план, проверить работу YandexGPT можно на развёрнутом сайте.
-Пользователи по умолчанию:
-admin - админ
-password
+# SlobodaSoft
 
-staff - менеджер
-password
+**Полный развёрнутый проект**: [slobodasoft.ru](https://slobodasoft.ru)  
+**Swagger API**: [https://slobodasoft.ru/api/docs/swagger/](https://slobodasoft.ru/api/docs/swagger/)  
+**Дизайн (Figma)**: [https://www.figma.com/design/vM0oUVQP0b4JWkXQYAaY88/SlobodaSoft?node-id=88-4835&t=we2mC3zjGi79YVXc-1](https://www.figma.com/design/vM0oUVQP0b4JWkXQYAaY88/SlobodaSoft?node-id=88-4835&t=we2mC3zjGi79YVXc-1)
 
-leader - тимлид
-password
+> **Важно:**  
+> - Для локальной разработки используйте ветку `dev`. Ветка `main` настроена на автоматический деплой и может содержать изменения, не готовые для локальной проверки.  
+> - В ветке `dev` удалены ключи от YandexGPT и пароли для SMTP-сервиса. По этой причине при локальном запуске будет возвращаться заранее сгенерированный план. Проверить реальную работу YandexGPT можно на развёрнутом сайте по адресу выше.
 
-user - заказчик
-password
+---
 
-### hotfix-hackathon-25
+## Содержание
 
-React + TypeScript
-Архитектура - FSD https://mui.com/material-ui/getting-started/ 
-Material-UI (MUI) в качестве библиотеки компонентов
-Конфигурация MUI src/shared/config/theme/appTheme.ts
-Vite как сборщик (конфигурация, плагины, запуск)
-React Router для маршрутизации
-Константы маршрутов: src/shared/const/routes.ts
-Конфигурация маршрутов: src/app/providers/RouteProvider/config/routeConfig.ts
-Redux Toolkit для управления состоянием
-ESLint + плагин eslint-plugin-stylistic для поддержания единых правил кодирования
-i18next для интернационализации (локализации)
-react-hook-form для работы с формами
+1. [Описание проекта](#описание-проекта)  
+2. [Технологический стек](#технологический-стек)  
+3. [Структура папок](#структура-папок)  
+4. [Установка и запуск](#установка-и-запуск)  
+5. [Переменные окружения](#переменные-окружения)  
+6. [Пользователи по умолчанию](#пользователи-по-умолчанию)  
+7. [API-документация](#api-документация)  
+8. [Дизайн и стили](#дизайн-и-стили)  
+9. [Контрибьюция](#контрибьюция)  
 
-Запуск на порте 80 для работы ВК авторизации!
+---
 
-MacOs: sudo npm run dev
-Windows: npm run dev
+## Описание проекта
 
+Этот репозиторий содержит frontend-часть проекта SlobodaSoft. Основная цель — предоставить удобный интерфейс для управления задачами и взаимодействия с бэкендом через REST API (YandexGPT).  
+Ветка `hotfix-hackathon-25` содержит актуальный код на React + TypeScript со следующими особенностями:
 
+- **Архитектура FSD (Feature-Sliced Design)**  
+- **Material-UI (MUI)** в качестве библиотеки компонентов  
+- **Вёрстка и темы** на базе MUI, центральная точка настроек — `src/shared/config/theme/appTheme.ts`  
+- **Vite** как сборщик, дополненный собственными конфигурациями и плагинами  
+- **React Router** для клиентской маршрутизации:  
+  - Константы маршрутов хранятся в `src/shared/const/routes.ts`  
+  - Конфигурация маршрутов — `src/app/providers/RouteProvider/config/routeConfig.ts`  
+- **Redux Toolkit** для управления глобальным состоянием  
+- **ESLint + eslint-plugin-stylistic** для единого кодстайла  
+- **i18next** для интернационализации (локализация интерфейса)  
+- **react-hook-form** для работы с формами и валидации  
+
+> **Запуск на порте 80** необходим для корректной работы VK-авторизации.
+
+---
+
+## Технологический стек
+
+- **Язык:** TypeScript (React)  
+- **Сборщик:** Vite  
+- **UI-библиотека:** Material-UI (MUI)  
+- **Менеджер состояния:** Redux Toolkit  
+- **Маршрутизация:** React Router v6+  
+- **Локализация:** i18next  
+- **Формы:** react-hook-form  
+- **Linting:** ESLint + eslint-plugin-stylistic  
+- **CSS-in-JS:** стили MUI (теки, темы)  
+- **Инструменты разработки:**  
+  - Node.js (рекомендуемая версия ≥ 16)  
+  - npm или yarn  
+
+---
