@@ -1,0 +1,26 @@
+{
+    "predict_team": 3,
+    "task": "мне нужно сделать онлайн-платформу для просмотра и скачивания фильмов",
+    "teams": [
+      {
+        "team": 3,
+        "last_end_date": "2026-06-10",
+        "stack": "HTML, js, typescript, fast-api, docker",
+        "count_frontend": 2,
+        "count_backend": 1,
+        "count_ml": 1,
+        "count_designer": 1,
+        "count_devops": 0
+      },
+      {
+        "team": 4,
+        "last_end_date": "2026-07-06",
+        "stack": "Java, Flutter, Kotlin",
+        "count_frontend": 2,
+        "count_backend": 1,
+        "count_ml": 2,
+        "count_designer": 1,
+        "count_devops": 1
+      }
+    ]
+}
