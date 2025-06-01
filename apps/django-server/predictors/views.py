@@ -6,7 +6,6 @@ from celery.result import AsyncResult
 from rest_framework import status
 from orders.models import Order
 from teams.models import TeamMember
-from predictors.models import Plan
 
 class PredictionResultView(APIView):
     def get(self, request, id):
