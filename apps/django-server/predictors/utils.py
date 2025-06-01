@@ -3,6 +3,7 @@ from collections import Counter
 from django.utils.timezone import now
 from users.models import User
 from teams.models import TeamMember
+from datetime import datetime
 import json
 
 def add_plan(data, order_id):
@@ -11,7 +12,6 @@ def add_plan(data, order_id):
     except Order.DoesNotExist:
         return {"detail": ["Заявка не найдена"]}
 
-    # Извлекаем и обрабатываем project_plan
     project_plan = data.get("project_plan", [])
 
     for item in project_plan:
@@ -19,6 +19,15 @@ def add_plan(data, order_id):
 
     plan_data = json.dumps(project_plan, ensure_ascii=False)
 
+    if project_plan:
+        try:
+            start_dates = [datetime.strptime(i["startDate"], "%Y-%m-%d") for i in project_plan]
+            end_dates = [datetime.strptime(i["endDate"], "%Y-%m-%d") for i in project_plan]
+            order.start = min(start_dates)
+            order.end = max(end_dates)
+        except Exception as e:
+            return {"detail": [f"Ошибка обработки дат: {str(e)}"]}
+        
     predict_team = data.get("predict_team")
     if predict_team != "":
         order.predicted_team = int(predict_team)
