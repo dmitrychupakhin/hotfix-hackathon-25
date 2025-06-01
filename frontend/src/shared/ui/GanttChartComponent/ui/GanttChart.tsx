@@ -180,12 +180,17 @@ const GanttChart: React.FC<GanttChartProps> = ({
   isEditProgressOnly = false,
 }) => {
   const { t } = useTranslation()
-  // Инициализируем задачи из входных данных (гарантируем, что data — массив)
-  const initialTasks = convertToTasks(Array.isArray(data) ? data : [])
-  const [tasks, setTasks] = useState<Task[]>(initialTasks)
+
+  // Инициализируем state задачами из пропа data (или пустым массивом)
+  const [tasks, setTasks] = useState<Task[]>(convertToTasks(data || []))
   const [editTask, setEditTask] = useState<Task | null>(null)
 
-  // Каждый раз, когда tasks меняются, вызываем callback onDataChange
+  // Если проп data изменился, пересоздаём tasks
+  useEffect(() => {
+    setTasks(convertToTasks(data || []))
+  }, [data])
+
+  // При любом изменении tasks вызываем onDataChange
   useEffect(() => {
     if (typeof onDataChange === 'function') {
       const converted = convertToInputItems(tasks)
@@ -410,8 +415,6 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         setEditTask({ ...editTask, start: newStart })
                       }
                     }}
-                    // опционально можно явно задать формат, но при adapterLocale="ru" MUI сам поставит «дд.мм.гггг»
-                    // format="DD.MM.YYYY"
                   />
                   <DatePicker
                     label={t('Дата окончания')}
@@ -426,7 +429,6 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         setEditTask({ ...editTask, end: newEnd })
                       }
                     }}
-                    // format="DD.MM.YYYY"
                   />
                 </>
               )}

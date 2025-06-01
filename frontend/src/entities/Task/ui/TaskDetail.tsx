@@ -23,7 +23,7 @@ import { TaskFilterField } from '@/shared/types/TaskFilterField'
 import FormLoader from '@/shared/ui/FormLoader/FormLoader'
 import GanttChart, { type GanttInputItem } from '@/shared/ui/GanttChartComponent/ui/GanttChart'
 import RocketLaunchRoundedIcon from '@mui/icons-material/RocketLaunchRounded'
-import { taskApi, useCancelTask, useLazyGetPlanResult, useStartPlan, useUpdateTask } from '../api/taskApi'
+import { taskApi, useCancelTask, useDoneTask, useLazyGetPlanResult, useStartPlan, useUpdateTask } from '../api/taskApi'
 import type { Task, UpdateTaskRequest } from '../model/Task'
 
 // Используем ваш готовый хук дебаунса
@@ -66,6 +66,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
   const isTeam = useSelector(getProfileDataIsTeam)
 
   const [updateTask, { isLoading: isUpdating }] = useUpdateTask()
+  const [doneTask, { isLoading: isDoneLoading }] = useDoneTask()
 
   // Мемоизированный коллбэк для запуска мутации
   const handleUpdateTask = React.useCallback(
@@ -74,6 +75,16 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
     },
     [task.id, updateTask],
   )
+
+  const handleDoneTask = async () => {
+    try {
+      await doneTask({ id: task.id }).unwrap()
+      navigate(ROUTES.PROFILE_ACTIVE_TASKS())
+    }
+    catch (err) {
+      console.error(t('Не удалось завершить задачу:'), err)
+    }
+  }
 
   // Задебаунсенные значения
   const debouncedTitle = useDebounce(localTitle, 500)
@@ -104,6 +115,8 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
     handleUpdateTask,
   ])
 
+  const [isUpdatingTask, setIsUpdatingTask] = useState(false)
+
   // 1) Хук для запуска мутации startPlan
   const [startPlan, { isLoading: isStarting }] = useStartPlan()
 
@@ -120,6 +133,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
 
   const handleStartClick = async () => {
     try {
+      setIsUpdatingTask(true)
       await startPlan({ id: task.id }).unwrap()
 
       // Если был старый интервал – очищаем
@@ -153,6 +167,8 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
           { type: 'Tasks', id: task.id },
         ]),
       )
+
+      setIsUpdatingTask(false)
     }
 
     // @ts-expect-error TODO: fix this
@@ -162,6 +178,8 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
         clearInterval(pollIntervalId)
         setPollIntervalId(null)
       }
+
+      setIsUpdatingTask(false)
     }
   }, [planResultData, dispatch, task.id, pollIntervalId])
 
@@ -185,10 +203,14 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
     })
   }
 
+  useEffect(() => {
+    console.log(task)
+  }, [task])
+
   return (
     <Card sx={{ p: 3, borderRadius: 3, display: 'flex', flexDirection: 'column', gap: 2, position: 'relative' }}>
       {/* Показываем загрузчик, если идёт отправка мутации или polling status */}
-      {(isStarting || isFetchingPlanResult || isUpdating) && <FormLoader />}
+      {(isStarting || isFetchingPlanResult || isUpdating || isDoneLoading || isUpdatingTask) && <FormLoader />}
 
       <Stack spacing={2}>
         <Box>
@@ -338,12 +360,15 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
         <Box sx={{ position: 'relative' }}>
           {task.plan && (
             <Box sx={{ mt: 2 }}>
-              <Typography variant="subtitle1">План (Ганта):</Typography>
-              <GanttChart
-                data={task.plan}
-                isEditProgressOnly={isTeam}
-                onDataChange={setGanttData}
-              />
+              {
+                task.plan.length > 0 && (
+                  <GanttChart
+                    data={task.plan}
+                    isEditProgressOnly={isTeam}
+                    onDataChange={setGanttData}
+                  />
+                )
+              }
             </Box>
           )}
 
@@ -363,7 +388,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
                 variant="contained"
                 color="secondary"
                 endIcon={<RocketLaunchRoundedIcon />}
-                onClick={() => navigate(ROUTES.PROFILE_TASK(task.id.toString()))}
+                onClick={handleDoneTask}
               >
                 {t('Завершить задачу')}
               </Button>

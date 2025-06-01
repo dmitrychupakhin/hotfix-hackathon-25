@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import type { RouteObject } from 'react-router'
-// import { GlobalLoader } from '@/shared/lib/components/GlobalLoader'
+import { GlobalLoader } from '@/shared/lib/components/GlobalLoader'
 import type { AppRouteObject } from '../types/router'
 import { RequireAuth } from '../ui/RequireAuth'
 import { RedirectIfAuth } from '../ui/RedirectIfAuth'
@@ -13,8 +13,7 @@ const wrapComponent = (
     skeleton,
   }: Pick<AppRouteObject, 'authOnly' | 'redirectIfAuth' | 'skeleton'>,
 ) => {
-  // <GlobalLoader />}
-  const withSuspense = <Suspense fallback={skeleton || null}>{node}</Suspense>
+  const withSuspense = <Suspense fallback={skeleton || <GlobalLoader />}>{node}</Suspense>
   const withAuth = authOnly ? <RequireAuth>{withSuspense}</RequireAuth> : withSuspense
   return redirectIfAuth ? <RedirectIfAuth>{withAuth}</RedirectIfAuth> : withAuth
 }
