@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import *
-import json
 import os
+import json
+import ast
     
 class CreateOrderSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,14 +24,13 @@ class GetOrderSerializer(serializers.ModelSerializer):
         return f"{obj.user.last_name} {obj.user.first_name}"
 
     def get_plan(self, obj):
-        plan_qs = getattr(obj, 'plan', None)
-        if plan_qs:
-            plan_obj = plan_qs.first()
+        plan = getattr(obj, 'plan', None)
+        if plan:
+            plan_obj = plan.first()
             if plan_obj:
-                try:
-                    return json.loads(plan_obj.data)
-                except json.JSONDecodeError:
-                    return None
+                # Преобразуем строку в список словарей
+                data = ast.literal_eval(plan_obj.data)
+                return data  # просто возвращаем как объект
         return None
     
 class ConnectOrderSerializer(serializers.ModelSerializer):
