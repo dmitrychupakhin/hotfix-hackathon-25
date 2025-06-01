@@ -58,10 +58,10 @@ const Header: FC = () => {
           fontWeight={600}
           onClick={() => setDrawerOpen(false)}
           sx={{
-            backgroundColor: link.path === location.pathname
+            'backgroundColor': link.path === location.pathname
               ? theme.palette.primary.light
               : 'transparent',
-            color: link.path === location.pathname
+            'color': link.path === location.pathname
               ? theme.palette.mode === 'dark'
                 ? theme.palette.invertedSecondary.main
                 : theme.palette.secondary.main
@@ -71,9 +71,9 @@ const Header: FC = () => {
                 ? theme.palette.invertedSecondary.main
                 : theme.palette.secondary.main,
             },
-            lineHeight: 2,
-            px: 1,
-            borderRadius: 1,
+            'lineHeight': 2,
+            'px': 1,
+            'borderRadius': 1,
           }}
         >
           {link.title}

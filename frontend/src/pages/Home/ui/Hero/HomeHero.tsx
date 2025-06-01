@@ -16,8 +16,8 @@ const HomeHero = () => {
   const isXs = useMediaQuery('(max-width:600px)')
   const hideStats = useMediaQuery('(max-width:490px)')
 
-  const CornerImage =
-    theme.palette.mode === 'dark' ? ImgCornerVectorBlack : ImgCornerVector
+  const CornerImage
+    = theme.palette.mode === 'dark' ? ImgCornerVectorBlack : ImgCornerVector
 
   return (
     <Box
