@@ -22,14 +22,15 @@ import { getProfileDataIsStaff, getProfileDataIsTeam } from '@/entities/Profile/
 import { TaskFilterField } from '@/shared/types/TaskFilterField'
 import FormLoader from '@/shared/ui/FormLoader/FormLoader'
 import GanttChart, { type GanttInputItem } from '@/shared/ui/GanttChartComponent/ui/GanttChart'
-
-import { taskApi, useLazyGetPlanResult, useStartPlan, useUpdateTask } from '../api/taskApi'
+import RocketLaunchRoundedIcon from '@mui/icons-material/RocketLaunchRounded'
+import { taskApi, useCancelTask, useLazyGetPlanResult, useStartPlan, useUpdateTask } from '../api/taskApi'
 import type { Task, UpdateTaskRequest } from '../model/Task'
 
 // Используем ваш готовый хук дебаунса
 import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import { useTranslation } from 'react-i18next'
 import { TaskTeamleadSelector } from '@/features/TaskTeamleadSelector'
+import { ROUTES } from '@/shared/const/routes'
 
 interface TaskDetailProps {
   task: Task
@@ -41,10 +42,25 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // Локальные состояния для контролируемых полей
+  const [cancelTask] = useCancelTask()
+
+  const handleCancelTask = async () => {
+    try {
+      await cancelTask({ id: task.id }).unwrap()
+      navigate(ROUTES.PROFILE_ACTIVE_TASKS())
+    }
+    catch (err) {
+      console.error(t('Не удалось отклонить заявку:'), err)
+    }
+  }
+
+  // Локальное состояние для контролируемых полей
   const [localTitle, setLocalTitle] = useState<string>(task.title)
   const [localDescription, setLocalDescription] = useState<string>(task.description)
   const [ganttData, setGanttData] = useState<GanttInputItem[]>(task.plan || [])
+
+  // Локальное состояние для выбранного тимлида
+  const [localTeamLeadId, setLocalTeamLeadId] = useState<string>(task.team?.id || '')
 
   const isStaff = useSelector(getProfileDataIsStaff)
   const isTeam = useSelector(getProfileDataIsTeam)
@@ -59,12 +75,12 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
     [task.id, updateTask],
   )
 
-  // Задебаунсенные значения — будут обновляться не сразу, а через 500 мс после последнего изменения
+  // Задебаунсенные значения
   const debouncedTitle = useDebounce(localTitle, 500)
   const debouncedDescription = useDebounce(localDescription, 500)
   const debouncedPlan = useDebounce(ganttData, 500)
 
-  // Чтобы пропустить первоначальный монт (и не слать updateTask сразу при рендере)
+  // Чтобы пропустить первоначальный монт
   const isFirstRun = useRef(true)
 
   useEffect(() => {
@@ -73,22 +89,28 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
       return
     }
 
-    // Когда любое из debounced-значений реально поменялось (после 500 мс паузы),
-    // шлём единый запрос с тремя полями:
+    // При изменении title, description, плана или тимлида — отправляем обновлённые поля
     handleUpdateTask({
       title: debouncedTitle,
       description: debouncedDescription,
       plan: JSON.stringify(debouncedPlan),
+      team: Number(localTeamLeadId),
     })
-  }, [debouncedTitle, debouncedDescription, debouncedPlan, handleUpdateTask])
+  }, [
+    debouncedTitle,
+    debouncedDescription,
+    debouncedPlan,
+    localTeamLeadId,
+    handleUpdateTask,
+  ])
 
   // 1) Хук для запуска мутации startPlan
   const [startPlan, { isLoading: isStarting }] = useStartPlan()
 
-  // 2) Локальный флаг, отвечающий за включённый polling
+  // 2) Локальный флаг для polling
   const [shouldPoll] = useState(false)
 
-  // 3) Используем useLazyGetPlanResult для опроса статуса «формирования плана»
+  // 3) Используем useLazyGetPlanResult для опроса статуса
   const [
     triggerGetPlanResult,
     { data: planResultData, isFetching: isFetchingPlanResult },
@@ -120,12 +142,12 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
 
     // @ts-expect-error TODO: fix this
     if (planResultData.status === 'success') {
-      // Остановить polling
+      // Останавливаем polling
       if (pollIntervalId) {
         clearInterval(pollIntervalId)
         setPollIntervalId(null)
       }
-      // Инвалидировать кэш задачи, чтобы подтянуть свежие поля
+      // Инвалидируем кэш задачи, чтобы подтянуть свежие поля
       dispatch(
         taskApi.util.invalidateTags([
           { type: 'Tasks', id: task.id },
@@ -150,6 +172,17 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
 
   const onDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocalDescription(e.target.value)
+  }
+
+  // Обработчик выбора тимлида
+  const onTeamLeadChange = (newId: string) => {
+    setLocalTeamLeadId(newId)
+    handleUpdateTask({
+      plan: JSON.stringify(debouncedPlan),
+      title: debouncedTitle,
+      description: debouncedDescription,
+      team: Number(newId),
+    })
   }
 
   return (
@@ -182,6 +215,10 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
                     onChange={onDescriptionChange}
                     fullWidth
                   />
+                  <TaskTeamleadSelector
+                    value={localTeamLeadId}
+                    onChange={onTeamLeadChange}
+                  />
                 </>
               )
             : (
@@ -200,7 +237,6 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
                     {task.title}
                   </Typography>
                   <Typography>{task.description}</Typography>
-                  <TaskTeamleadSelector value={task.team?.id || ''} onChange={() => {}} />
                 </>
               )}
         </Box>
@@ -312,22 +348,32 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
           )}
 
           <Box display="flex" gap={2} justifyContent="flex-end" sx={{ mt: 2 }}>
-            <Button
-              variant="contained"
-              color="secondary"
-              disabled={task.plan === null}
-              onClick={() => {
-                /* ваша логика «Отправить на разработку» */
-              }}
-            >
-              {t('Отправить на разработку')}
-            </Button>
-
+            {isStaff && (
+              <Button
+                variant="contained"
+                color="secondary"
+                disabled={task.plan === null}
+                onClick={handleCancelTask}
+              >
+                {t('Отклонить заявку')}
+              </Button>
+            )}
+            {isTeam && (
+              <Button
+                variant="contained"
+                color="secondary"
+                endIcon={<RocketLaunchRoundedIcon />}
+                onClick={() => navigate(ROUTES.PROFILE_TASK(task.id.toString()))}
+              >
+                {t('Завершить задачу')}
+              </Button>
+            )}
             <Button
               variant="contained"
               color="primary"
               disabled={isStarting || shouldPoll}
               onClick={handleStartClick}
+
             >
               {isStarting || shouldPoll ? t('Формируется…') : t('Сформировать план')}
             </Button>

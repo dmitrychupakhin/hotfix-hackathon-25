@@ -10,7 +10,7 @@ const AppLayout = () => {
     <>
       <Header />
       <Outlet />
-      {isFooterShow && <Footer sx={{ mt: 8 }} />}
+      {isFooterShow && <Footer />}
     </>
   )
 }

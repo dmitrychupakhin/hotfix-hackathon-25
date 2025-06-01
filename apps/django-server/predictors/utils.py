@@ -7,8 +7,10 @@ def add_plan(data, order_id):
     except Order.DoesNotExist:
         return {"detail": ["Заявка не найдена"]}
 
-    
-    plan_data = json.dumps(data) if isinstance(data, dict) else data
+    if isinstance(data, dict):
+        plan_data = json.dumps(data, ensure_ascii=False)
+    else:
+        plan_data = data
 
     order.plan = plan_data
     order.gen_status = 1

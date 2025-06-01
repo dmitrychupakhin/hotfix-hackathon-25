@@ -7,6 +7,33 @@ from rest_framework import status
 from orders.models import Order
 from drf_spectacular.utils import extend_schema
 
+data = {
+  "predict_team": 3,
+  "task": "мне нужно сделать онлайн-платформу для просмотра и скачивания фильмов",
+  "teams": [
+    {
+      "team": 3,
+      "last_end_date": "2026-06-10",
+      "stack": "HTML, js, typescript, fast-api, docker",
+      "count_frontend": 2,
+      "count_backend": 1,
+      "count_ml": 1,
+      "count_designer": 1,
+      "count_devops": 0
+    },
+    {
+      "team": 4,
+      "last_end_date": "2026-07-06",
+      "stack": "Java, Flutter, Kotlin",
+      "count_frontend": 2,
+      "count_backend": 1,
+      "count_ml": 2,
+      "count_designer": 1,
+      "count_devops": 1
+    }
+  ]
+}
+
 @extend_schema(summary="Узнать состояние плана", tags=["План"])
 class OrderPredictionResultView(APIView):
     def get(self, request, id):
@@ -20,5 +47,5 @@ class OrderPredictionStartView(APIView):
         order = Order.objects.get(id=id)
         order.gen_status = 0
         order.save()
-        task = run_ml_prediction.delay({"data": "data"}, id)
+        task = run_ml_prediction.delay(data, id)
         return Response({'task_id': task.id}, status=status.HTTP_202_ACCEPTED)

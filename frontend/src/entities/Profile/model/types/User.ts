@@ -11,6 +11,7 @@ export interface User {
   tg: string
   isStaff: boolean
   isTeam: boolean
+  role: TeamRole
 }
 
 export enum TeamRole {
