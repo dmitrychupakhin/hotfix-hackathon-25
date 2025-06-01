@@ -20,7 +20,7 @@ const ProfileSidebarItem = ({ Icon, active, onClick }: ProfileSidebarItemProps) 
           color:
             theme.palette.mode === 'light'
               ? theme.palette.secondary.dark
-              : theme.palette.secondary.dark,
+              : theme.palette.invertedSecondary.dark,
         },
         '&:active .iconBox': {
           backgroundColor: 'primary.darker',
@@ -44,10 +44,10 @@ const ProfileSidebarItem = ({ Icon, active, onClick }: ProfileSidebarItemProps) 
           backgroundColor: active ? 'primary.main' : 'transparent',
           color:
             theme.palette.mode === 'light'
-              ? active
-                ? theme.palette.secondary.main
-                : theme.palette.secondary.main
-              : theme.palette.secondary.main,
+              ? theme.palette.secondary.main
+              : active
+                ? theme.palette.invertedSecondary.main
+                : theme.palette.secondary.main,
           borderRadius: 50,
         })}
       >

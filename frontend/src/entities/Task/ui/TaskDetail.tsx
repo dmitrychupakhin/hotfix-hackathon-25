@@ -115,10 +115,11 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
           <Typography
             variant="h6"
             fontWeight={600}
-            sx={{
+            sx={theme => ({
               backgroundColor: 'primary.light',
               width: 'auto',
-            }}
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+            })}
           >
             {task.title}
           </Typography>
@@ -130,9 +131,10 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
           <Typography
             component="span"
             fontWeight={600}
-            sx={{
+            sx={theme => ({
               backgroundColor: 'primary.light',
-            }}
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+            })}
           >
             {task.createdAt}
           </Typography>

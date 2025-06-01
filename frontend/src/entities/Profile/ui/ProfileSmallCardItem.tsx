@@ -31,7 +31,7 @@ const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardIt
           <Typography
             variant="body1"
             fontWeight={600}
-            sx={{
+            sx={theme => ({
               backgroundColor: 'primary.light',
               lineHeight: 2,
               width: '100%',
@@ -39,7 +39,8 @@ const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardIt
               alignItems: 'center',
               gap: 1,
               px: 1,
-            }}
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+            })}
           >
             <CodeOffRoundedIcon />
             Temlead

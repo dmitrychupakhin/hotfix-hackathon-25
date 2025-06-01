@@ -272,15 +272,15 @@ const GanttChart: React.FC<GanttChartProps> = ({
         </Stack>
 
         <Box
-          sx={{
+          sx={theme => ({
             height: '600px',
             overflowX: 'auto',
             overflowY: 'hidden',
             position: 'relative',
-            border: '1px solid #ccc',
+            border: `1px solid ${theme.palette.divider}`,
             borderRadius: 2,
-            bgcolor: '#fff',
-          }}
+            bgcolor: theme.palette.background.paper,
+          })}
         >
           <GanttErrorBoundary>
             <Gantt
@@ -297,15 +297,15 @@ const GanttChart: React.FC<GanttChartProps> = ({
               ganttHeight={600}
               TaskListHeader={() => (
                 <Box
-                  sx={{
+                  sx={theme => ({
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     px: 2,
                     py: 1,
-                    bgcolor: '#f0f0f0',
-                    borderBottom: '1px solid #ddd',
-                  }}
+                    bgcolor: theme.palette.background.paper,
+                    borderBottom: `1px solid ${theme.palette.divider}`,
+                  })}
                 >
                   <Typography variant="body2" fontWeight="bold">
                     Название
@@ -317,13 +317,13 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   {tableTasks.map((task, index) => (
                     <Box
                       key={task.id}
-                      sx={{
+                      sx={theme => ({
                         display: 'flex',
                         alignItems: 'center',
                         px: 2,
                         height: rowHeight,
-                        borderBottom: '1px solid #eee',
-                      }}
+                        borderBottom: `1px solid ${theme.palette.divider}`,
+                      })}
                     >
                       <Typography
                         sx={{

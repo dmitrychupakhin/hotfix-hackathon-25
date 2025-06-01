@@ -11,11 +11,11 @@ export const useHeaderLinks = (): HeaderLink[] => {
     },
     {
       title: t('Наши работы'),
-      path: '/projects',
+      path: '#',
     },
     {
       title: t('О нас'),
-      path: '/about',
+      path: '#',
     },
   ]
 }

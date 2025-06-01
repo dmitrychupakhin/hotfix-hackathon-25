@@ -10,7 +10,7 @@ const AuthBanner = () => {
         fontWeight={600}
         component="h2"
         sx={theme => ({
-          color: theme.palette.invertedSecondary.dark,
+          color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
         })}
       >
         {t('Здесь начинается путь от идеи к рабочему решению.')}

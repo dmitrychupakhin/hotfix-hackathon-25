@@ -1,7 +1,6 @@
 import type { Components, Theme } from '@mui/material'
 import { buttonBaseClasses, dividerClasses } from '@mui/material'
 import { primary } from '../config/colorConfig/colors'
-import { color } from 'motion/react'
 
 const MuiMenu: Components<Theme>['MuiMenu'] = {
   defaultProps: {

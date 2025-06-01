@@ -58,7 +58,7 @@ const ProfileActions = ({ setIsEdit }: ProfileActionsProps) => {
         aria-label="Открыть меню действий"
         tabIndex={0}
       >
-        <Box sx={{
+        <Box sx={theme => ({
           'cursor': 'pointer',
           'backgroundColor': 'primary.main',
           'borderRadius': 1,
@@ -66,10 +66,11 @@ const ProfileActions = ({ setIsEdit }: ProfileActionsProps) => {
           'display': 'inline-flex',
           'alignItems': 'center',
           'justifyContent': 'center',
+          'color': theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
           '&:hover': {
-            backgroundColor: 'primary.main',
+            backgroundColor: theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.light,
           },
-        }}
+        })}
         >
           <AccountCircleRoundedIcon />
         </Box>

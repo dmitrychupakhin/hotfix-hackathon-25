@@ -41,13 +41,14 @@ const TaskItem: FC<TaskProps> = ({ data }) => {
             variant="h5"
             color="secondary"
             fontWeight="600"
-            sx={{
+            sx={theme => ({
               backgroundColor: 'primary.light',
               lineHeight: 2,
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-            }}
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+            })}
           >
             {data.title}
           </Typography>

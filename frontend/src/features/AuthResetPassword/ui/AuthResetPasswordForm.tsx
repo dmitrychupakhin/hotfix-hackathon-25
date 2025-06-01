@@ -111,7 +111,15 @@ const AuthResetPasswordForm = () => {
           {t('Сбросить пароль')}
         </Button>
         <Typography variant="body2" textAlign="end">
-          <MuiLink component={Link} to={ROUTES.AUTH_LOGIN()} variant="body2">
+          <MuiLink
+            component={Link}
+            to={ROUTES.AUTH_LOGIN()}
+            variant="body2"
+            sx={theme => ({
+              backgroundColor: theme.palette.primary.light,
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
+            })}
+          >
             {t('Назад к авторизации')}
           </MuiLink>
         </Typography>
