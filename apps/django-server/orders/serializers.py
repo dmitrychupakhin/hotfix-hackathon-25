@@ -17,7 +17,7 @@ class GetOrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = [
             'id', 'user', 'team', 'title', 'description', 'status',
-            'start', 'end', 'created_at', 'predicted_team', 'plan'
+            'start', 'end', 'created_at', 'predicted_team', 'plan', 'progress'
         ]
 
     def get_user(self, obj):
