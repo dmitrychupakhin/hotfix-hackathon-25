@@ -82,6 +82,7 @@ const AuthRegisterForm = () => {
               component="span"
               sx={theme => ({
                 backgroundColor: theme.palette.primary.light,
+                color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
               })}
             >
               {t('Добро пожаловать!')}
@@ -176,7 +177,7 @@ const AuthRegisterForm = () => {
             variant="body2"
             sx={theme => ({
               backgroundColor: theme.palette.primary.light,
-              color: theme.palette.secondary.main,
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
             })}
           >
             {t('Войдите прямо сейчас')}

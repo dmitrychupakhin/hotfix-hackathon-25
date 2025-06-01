@@ -99,6 +99,7 @@ const AuthLoginForm = () => {
               component="span"
               sx={theme => ({
                 backgroundColor: theme.palette.primary.light,
+                color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
               })}
             >
               {t('С возвращением!')}
@@ -194,7 +195,7 @@ const AuthLoginForm = () => {
             variant="body2"
             sx={theme => ({
               backgroundColor: theme.palette.primary.light,
-              color: theme.palette.secondary.main,
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
             })}
           >
             {t('Зарегистрироваться')}

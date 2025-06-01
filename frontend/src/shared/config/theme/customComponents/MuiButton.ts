@@ -56,6 +56,12 @@ const MuiButton: Components<Theme>['MuiButton'] = {
         '&:active': {
           backgroundColor: theme.palette.primary.dark,
         },
+        ...(theme.applyStyles?.('dark', {
+          'color': theme.palette.invertedSecondary.main,
+          '&:hover': {
+            color: theme.palette.invertedSecondary.dark,
+          },
+        }) || {}),
       }),
     },
     // // Secondary contained

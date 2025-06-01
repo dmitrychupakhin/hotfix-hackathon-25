@@ -36,8 +36,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 // Описание формата входных/выходных данных
 export interface GanttInputItem {
   name: string
-  start_date: string // ожидаем формат 'YYYY-MM-DD' или ISO
-  end_date: string // ожидаем формат 'YYYY-MM-DD' или ISO
+  startDate: string // ожидаем формат 'YYYY-MM-DD' или ISO
+  endDate: string // ожидаем формат 'YYYY-MM-DD' или ISO
   progress: number
 }
 
@@ -85,8 +85,8 @@ const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
   // @ts-expect-error Task is not exported
   return data
     .map((item, index) => {
-      const parsedStart = dayjs(item.start_date)
-      const parsedEnd = dayjs(item.end_date)
+      const parsedStart = dayjs(item.startDate)
+      const parsedEnd = dayjs(item.endDate)
 
       // Если хотя бы одна из дат невалидна, пропускаем эту запись
       if (!parsedStart.isValid() || !parsedEnd.isValid()) {
@@ -120,8 +120,8 @@ const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
 const convertToInputItems = (tasks: Task[]): GanttInputItem[] => {
   return tasks.map(task => ({
     name: task.name,
-    start_date: dayjs(task.start).format('YYYY-MM-DD'),
-    end_date: dayjs(task.end).format('YYYY-MM-DD'),
+    startDate: dayjs(task.start).format('YYYY-MM-DD'),
+    endDate: dayjs(task.end).format('YYYY-MM-DD'),
     progress: task.progress,
   }))
 }
@@ -272,15 +272,15 @@ const GanttChart: React.FC<GanttChartProps> = ({
         </Stack>
 
         <Box
-          sx={{
+          sx={theme => ({
             height: '600px',
             overflowX: 'auto',
             overflowY: 'hidden',
             position: 'relative',
-            border: '1px solid #ccc',
+            border: `1px solid ${theme.palette.divider}`,
             borderRadius: 2,
-            bgcolor: '#fff',
-          }}
+            bgcolor: theme.palette.background.paper,
+          })}
         >
           <GanttErrorBoundary>
             <Gantt
@@ -297,15 +297,15 @@ const GanttChart: React.FC<GanttChartProps> = ({
               ganttHeight={600}
               TaskListHeader={() => (
                 <Box
-                  sx={{
+                  sx={theme => ({
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     px: 2,
                     py: 1,
-                    bgcolor: '#f0f0f0',
-                    borderBottom: '1px solid #ddd',
-                  }}
+                    bgcolor: theme.palette.background.paper,
+                    borderBottom: `1px solid ${theme.palette.divider}`,
+                  })}
                 >
                   <Typography variant="body2" fontWeight="bold">
                     Название
@@ -317,13 +317,13 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   {tableTasks.map((task, index) => (
                     <Box
                       key={task.id}
-                      sx={{
+                      sx={theme => ({
                         display: 'flex',
                         alignItems: 'center',
                         px: 2,
                         height: rowHeight,
-                        borderBottom: '1px solid #eee',
-                      }}
+                        borderBottom: `1px solid ${theme.palette.divider}`,
+                      })}
                     >
                       <Typography
                         sx={{

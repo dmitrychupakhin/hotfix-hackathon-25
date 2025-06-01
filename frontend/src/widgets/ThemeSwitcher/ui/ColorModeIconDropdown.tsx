@@ -40,7 +40,7 @@ const ColorModeIconDropdown = (props: IconButtonOwnProps) => {
   }
   const resolvedMode = (systemMode || mode) as 'light' | 'dark'
   const icon = {
-    light: <LightModeIcon />,
+    light: <LightModeIcon style={{ color: '#0B1120' }} />,
     dark: <DarkModeIcon />,
   }[resolvedMode]
   return (

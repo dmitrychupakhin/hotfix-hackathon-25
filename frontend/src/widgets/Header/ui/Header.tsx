@@ -7,7 +7,7 @@ import { Box, Link as MuiLink, Stack } from '@mui/material'
 import type { FC } from 'react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import AuthSection from './AuthSection'
 import UserMenu from './UserMenu'
 import { useHeaderLinks } from '../lib/hooks/useHeaderLinks'
@@ -84,12 +84,15 @@ const Header: FC = () => {
           {headerLinks.map(link => (
             <MuiLink
               key={link.path}
+              component={Link}
+              to={link.path}
               variant="body2"
               fontWeight={600}
               sx={theme => ({
                 'backgroundColor': link.path === location.pathname ? theme.palette.primary.light : 'transparent',
+                'color': link.path === location.pathname ? theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main : theme.palette.secondary.main,
                 '&:hover': {
-                  color: theme.palette.secondary.main,
+                  color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
                 },
                 'lineHeight': 2,
               })}

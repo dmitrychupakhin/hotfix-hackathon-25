@@ -11,7 +11,13 @@ const ProfileOrderForm = () => {
       <Typography variant="h2" component="h1" textAlign="center" sx={{ px: 20 }}>
         {t('От черновика до ')}
         {' '}
-        <Typography variant="h2" component="span" sx={{ backgroundColor: 'primary.light' }}>
+        <Typography
+          variant="h2"
+          component="span"
+          sx={theme => ({ backgroundColor: 'primary.light',
+            color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+          })}
+        >
           {t('готового продукта')}
         </Typography>
       </Typography>
@@ -21,7 +27,10 @@ const ProfileOrderForm = () => {
         </Grid>
         <Grid size={4}>
           <Stack spacing={2}>
-            <Box sx={{ backgroundColor: 'primary.main', height: '100%', p: 2, borderRadius: 3 }}>
+            <Box sx={theme => ({ backgroundColor: 'primary.main', height: '100%', p: 2, borderRadius: 3,
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+            })}
+            >
               <Typography variant="body2" component="h2">{t('Ваша задача — дать нам чёткое техническое задание и быть на связи для согласований. Остальное — наша забота: дизайн, разработка, запуск. Мы на связи 24/7 и всегда готовы обсудить любые вопросы.')}</Typography>
             </Box>
             <Stack spacing={1} sx={{ backgroundColor: 'common.green', height: '100%', p: 2, borderRadius: 3, position: 'relative' }}>
@@ -45,7 +54,7 @@ const ProfileOrderForm = () => {
                           variant="body2"
                           component="span"
                           fontWeight={600}
-                          sx={{
+                          sx={theme => ({
                             backgroundColor: 'primary.main',
                             p: 1,
                             borderRadius: '50%',
@@ -53,11 +62,21 @@ const ProfileOrderForm = () => {
                             height: 24,
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center' }}
+                            justifyContent: 'center',
+                            color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+                          })}
                         >
                           {`${index + 1}`}
                         </Typography>
-                        <Typography variant="body2" component="span" fontWeight={500} color="invertedSecondary.main" sx={{ ml: 1 }}>
+                        <Typography
+                          variant="body2"
+                          component="span"
+                          fontWeight={500}
+                          sx={theme => ({
+                            color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.invertedSecondary.main,
+                            ml: 1,
+                          })}
+                        >
                           {`${task}`}
                         </Typography>
                       </Box>

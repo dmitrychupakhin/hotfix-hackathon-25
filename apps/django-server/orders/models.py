@@ -16,4 +16,5 @@ class Order(models.Model):
     status = models.CharField(max_length=16, choices=Status.choices, default=Status.WAITING, verbose_name="Статус")
     start = models.DateTimeField(verbose_name="Начало", null=True, blank=True)
     end = models.DateTimeField(verbose_name="Конец", null=True, blank=True)
+    plan = models.TextField(blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")

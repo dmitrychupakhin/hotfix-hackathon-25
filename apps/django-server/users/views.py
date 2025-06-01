@@ -196,7 +196,7 @@ class LeaderDestroyAPIView(generics.DestroyAPIView):
 @extend_schema(summary="Все тимлиды", tags=["Менеджер"])
 class LeadersListAPIView(generics.ListAPIView):
     permission_classes = [IsStaff]
-    serializer_class = GetUserSerializer
+    serializer_class = TeamLeaderSerializer
     queryset = User.objects.filter(is_team=True)
     
 @extend_schema(summary="Обновление данных пользователя", tags=["Пользователь"])

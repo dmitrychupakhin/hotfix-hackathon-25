@@ -61,6 +61,10 @@ export const colorSchemes: {
     },
   },
   dark: {
+    common: {
+      black: '#161616',
+      green: secondary[200],
+    },
     primary: {
       light: primary[200],
       main: primary[400],

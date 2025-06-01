@@ -18,7 +18,7 @@ const Footer = ({ sx }: FooterProps) => {
           <Typography
             variant="h2"
             sx={theme => ({
-              color: theme.palette.invertedSecondary.dark,
+              color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
             })}
           >
             {t('Воплощайте свою идею в')}
@@ -32,6 +32,9 @@ const Footer = ({ sx }: FooterProps) => {
             <Button
               size="medium"
               endIcon={<ArrowUpwardIcon />}
+              sx={theme => ({
+                color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+              })}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               {t('Вверх')}
@@ -40,7 +43,10 @@ const Footer = ({ sx }: FooterProps) => {
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
           <Stack spacing={2}>
-            <Typography sx={theme => ({ color: theme.palette.invertedSecondary.dark })}>
+            <Typography sx={theme => ({
+              color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+            })}
+            >
               {t('Проект разработан командой “Слобода” в рамках учебной и ислледовательской')}
               <br />
               {t('деятельности. Этот проект — результат командной работы, экспериментов и')}
@@ -48,7 +54,13 @@ const Footer = ({ sx }: FooterProps) => {
               {t('желания сделать IT ближе к людям.')}
             </Typography>
             <Stack spacing={1}>
-              <Typography variant="body1" fontWeight={600} sx={theme => ({ color: theme.palette.invertedSecondary.dark })}>
+              <Typography
+                variant="body1"
+                fontWeight={600}
+                sx={theme => ({
+                  color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+                })}
+              >
                 {t('Наши контакты')}
               </Typography>
               <Stack direction="row" spacing={2}>
@@ -112,19 +124,25 @@ const Footer = ({ sx }: FooterProps) => {
           <Typography
             variant="body2"
             fontWeight="600"
-            sx={theme => ({ color: theme.palette.invertedSecondary.dark })}
+            sx={theme => ({
+              color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+            })}
           >
             {t('© 2025 SLOBODA. Все права защищены')}
           </Typography>
           <Typography
             variant="body2"
-            sx={theme => ({ color: theme.palette.invertedSecondary.dark })}
+            sx={theme => ({
+              color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+            })}
           >
             {t('Политика конфиденциальности')}
           </Typography>
           <Typography
             variant="body2"
-            sx={theme => ({ color: theme.palette.invertedSecondary.dark })}
+            sx={theme => ({
+              color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+            })}
           >
             {t('Пользовательское соглашение')}
           </Typography>

@@ -1,9 +1,10 @@
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, useTheme } from '@mui/material'
 import { AnimatePresence } from 'motion/react'
 import { type ReactNode } from 'react'
 import { useLocation, useOutlet } from 'react-router'
 import { MotionBox } from '@/shared/ui/MotionBox'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
+import ImgCornerVectorBlack from '@/shared/assets/images/imgCornerVectorBlack.svg?react'
 import { PageWrapper } from '@/shared/ui/PageWrapper'
 
 interface AuthPageLayoutProps {
@@ -11,12 +12,16 @@ interface AuthPageLayoutProps {
 }
 
 const AuthPageLayout: React.FC<AuthPageLayoutProps> = ({ banner }) => {
+  const theme = useTheme()
+
+  const CornerImage = theme.palette.mode === 'dark' ? ImgCornerVectorBlack : ImgCornerVector
+
   const outlet = useOutlet()
   const location = useLocation()
 
   return (
     <Box>
-      <ImgCornerVector style={{
+      <CornerImage style={{
         position: 'absolute',
         top: -1,
         left: 0,
