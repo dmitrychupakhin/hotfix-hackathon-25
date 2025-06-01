@@ -1,29 +1,49 @@
-Развёрнутый проект: slobodasoft.ru
-swagger: https://slobodasoft.ru/api/docs/swagger/
-figma: 
-Для запуска используйте dev ветку (main настроена на деплой)
-Удалены ключи на YandexGPT и пароли от почты для подключения через smtp
-Поэтому ветка dev будет возвращать заранее сгенерированный план, проверить работу YandexGPT можно на развёрнутом сайте.
-Пользователи по умолчанию:
-admin - админ
-password
+# SlobodaSoft
 
-staff - менеджер
-password
+**Полный развёрнутый проект**: [slobodasoft.ru](https://slobodasoft.ru)  
+**Swagger API**: [https://slobodasoft.ru/api/docs/swagger/](https://slobodasoft.ru/api/docs/swagger/)  
+**Дизайн (Figma)**: [https://www.figma.com/design/vM0oUVQP0b4JWkXQYAaY88/SlobodaSoft?node-id=88-4835&t=we2mC3zjGi79YVXc-1](https://www.figma.com/design/vM0oUVQP0b4JWkXQYAaY88/SlobodaSoft?node-id=88-4835&t=we2mC3zjGi79YVXc-1)
 
-leader - тимлид
-password
+> **Важно:**  
+> - Для локальной разработки используйте ветку `dev` (docker compose up --build -d). Ветка `main` настроена на автоматический деплой и может содержать изменения, не готовые для локальной проверки.  
+> - В ветке `dev` удалены ключи от YandexGPT и пароли для SMTP-сервиса. По этой причине при локальном запуске будет возвращаться заранее сгенерированный план. Проверить реальную работу YandexGPT можно на развёрнутом сайте по адресу выше.
 
-user - заказчик
-password
+---
 
-### hotfix-hackathon-25
+## Описание проекта
 
-## frontend
+Этот репозиторий содержит frontend-часть проекта SlobodaSoft. Основная цель — предоставить удобный интерфейс для управления задачами и взаимодействия с бэкендом через REST API (YandexGPT).  
+Ветка `hotfix-hackathon-25` содержит актуальный код на React + TypeScript со следующими особенностями:
 
-# React + TypeScript + Vite
-# Eslint + Eslint Stylistic
-# MUI
-# React Router
+- **Архитектура FSD (Feature-Sliced Design)**  
+- **Material-UI (MUI)** в качестве библиотеки компонентов  
+- **Вёрстка и темы** на базе MUI, центральная точка настроек — `src/shared/config/theme/appTheme.ts`  
+- **Vite** как сборщик, дополненный собственными конфигурациями и плагинами  
+- **React Router** для клиентской маршрутизации:  
+  - Константы маршрутов хранятся в `src/shared/const/routes.ts`  
+  - Конфигурация маршрутов — `src/app/providers/RouteProvider/config/routeConfig.ts`  
+- **Redux Toolkit** для управления глобальным состоянием  
+- **ESLint + eslint-plugin-stylistic** для единого кодстайла  
+- **i18next** для интернационализации (локализация интерфейса)  
+- **react-hook-form** для работы с формами и валидации  
 
-// shared/const/routes.ts - константы маршрутов
+> **Запуск на порте 80** необходим для корректной работы VK-авторизации.
+
+---
+
+## Технологический стек FRONTEND
+
+- **Язык:** TypeScript (React)  
+- **Сборщик:** Vite  
+- **UI-библиотека:** Material-UI (MUI)  
+- **Менеджер состояния:** Redux Toolkit  
+- **Маршрутизация:** React Router v6+  
+- **Локализация:** i18next  
+- **Формы:** react-hook-form  
+- **Linting:** ESLint + eslint-plugin-stylistic  
+- **CSS-in-JS:** стили MUI (теки, темы)  
+- **Инструменты разработки:**  
+  - Node.js (рекомендуемая версия ≥ 16)  
+  - npm или yarn  
+
+---
