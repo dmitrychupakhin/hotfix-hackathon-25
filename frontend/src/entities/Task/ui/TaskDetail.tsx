@@ -24,12 +24,14 @@ import GanttChart from '@/shared/ui/GanttChartComponent/ui/GanttChart'
 
 import { taskApi, useStartPlan, useLazyGetPlanResult } from '../api/taskApi'
 import type { Task } from '../model/Task'
+import { useTranslation } from 'react-i18next'
 
 interface TaskDetailProps {
   task: Task
 }
 
 const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
+  const { t } = useTranslation()
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -66,7 +68,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
       setPollIntervalId(newInterval)
     }
     catch (err) {
-      console.error('Не удалось запустить план:', err)
+      console.error(t('Не удалось запустить план:'), err)
     }
   }
 
@@ -91,7 +93,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
 
     // @ts-expect-error TODO: fix this
     if (planResultData.status === 'error') {
-      console.error('При формировании плана сервер вернул ошибку')
+      console.error(t('При формировании плана сервер вернул ошибку'))
       if (pollIntervalId) {
         clearInterval(pollIntervalId)
         setPollIntervalId(null)
@@ -126,7 +128,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
         </Box>
         <Typography>{task.description}</Typography>
         <Typography fontWeight={600}>
-          Дата отправки задания:
+          {t('Дата отправки задания:')}
           {' '}
           <Typography
             component="span"
@@ -154,7 +156,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
             >
               <CheckCircleOutlineRoundedIcon sx={{ color: 'success.dark' }} />
               <Typography variant="body1" color="success.dark">
-                выполнено
+                {t('выполнено')}
               </Typography>
             </Box>
           )}
@@ -172,7 +174,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
             >
               <AutorenewRoundedIcon sx={{ color: 'warning.main' }} />
               <Typography variant="body1" color="warning.main">
-                в работе
+                {t('в работе')}
               </Typography>
             </Box>
           )}
@@ -190,7 +192,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
             >
               <SwapVertRoundedIcon sx={{ color: 'grey.600' }} />
               <Typography variant="body1" color="grey.600">
-                ожидает
+                {t('ожидает')}
               </Typography>
             </Box>
           )}
@@ -208,7 +210,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
             >
               <CheckCircleOutlineRoundedIcon sx={{ color: 'error.main' }} />
               <Typography variant="body1" color="error.main">
-                отклонено
+                {t('отклонено')}
               </Typography>
             </Box>
           )}
@@ -234,7 +236,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
                 /* ваша логика «Отправить на разработку» */
               }}
             >
-              Отправить на разработку
+              {t('Отправить на разработку')}
             </Button>
 
             <Button
@@ -243,7 +245,7 @@ const TaskDetail: FC<TaskDetailProps> = ({ task }) => {
               disabled={isStarting || shouldPoll}
               onClick={handleStartClick}
             >
-              {isStarting || shouldPoll ? 'Формируется…' : 'Сформировать план'}
+              {isStarting || shouldPoll ? t('Формируется…') : t('Сформировать план')}
             </Button>
           </Box>
         </>

@@ -3,6 +3,7 @@ import type { User } from '../model/types/User'
 import CodeOffRoundedIcon from '@mui/icons-material/CodeOffRounded'
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
+import { useTranslation } from 'react-i18next'
 
 interface ProfileSmallCardItemProps {
   data: User
@@ -11,6 +12,7 @@ interface ProfileSmallCardItemProps {
 }
 
 const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardItemProps) => {
+  const { t } = useTranslation()
   return (
     <Box sx={theme => ({
       border: `1px solid ${theme.palette.divider}`,
@@ -43,7 +45,7 @@ const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardIt
             })}
           >
             <CodeOffRoundedIcon />
-            Temlead
+            {t('Тимлид')}
           </Typography>
           <Typography variant="body1" fontWeight={600}>
             {data.lastName}
@@ -57,10 +59,10 @@ const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardIt
       {isEdit && (
         <Stack direction="row" spacing={1}>
           <Button fullWidth variant="contained" color="secondary" size="small" endIcon={<DeleteForeverRoundedIcon />} onClick={() => handleRemove(data.id)}>
-            Удалить
+            {t('Удалить')}
           </Button>
           <Button fullWidth variant="contained" color="primary" size="small" endIcon={<EditRoundedIcon />}>
-            Редактировать
+            {t('Редактировать')}
           </Button>
         </Stack>
       )}

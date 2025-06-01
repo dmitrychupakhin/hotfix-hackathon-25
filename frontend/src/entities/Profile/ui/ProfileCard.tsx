@@ -12,6 +12,7 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import AddTeamleadModal from '@/features/AddTeamlead/ui/AddTeamleadModal'
 import ProfileTeam from './ProfileTeam'
 import AddTeammateModal from '@/features/AddTeammate/ui/AddTeammateModal'
+import { useTranslation } from 'react-i18next'
 
 interface ProfileCardProps {
   user: User
@@ -22,6 +23,7 @@ interface ProfileCardProps {
 }
 
 const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditebleProfileLogo }: ProfileCardProps) => {
+  const { t } = useTranslation()
   const [isEditTeamLeaders, setIsEditTeamLeaders] = useState(false)
   const [addTeamleadOpen, setAddTeamleadOpen] = useState(false)
   const [addTeammateOpen, setAddTeammateOpen] = useState(false)
@@ -63,10 +65,10 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
               sx={theme => ({ color: theme.palette.secondary.light })}
             >
               {user.isStaff
-                ? 'Модератор'
+                ? t('Модератор')
                 : user.isTeam
-                  ? 'Команда'
-                  : 'Пользователь'}
+                  ? t('Команда')
+                  : t('Пользователь')}
             </Typography>
           </Box>
           <Box>
@@ -75,7 +77,7 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
         </Box>
         <Typography variant="h6" fontWeight={600} sx={{ px: 4, py: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
           <AccountCircleRoundedIcon />
-          Личная информация
+          {t('Личная информация')}
         </Typography>
         <Divider />
         <Box sx={{ p: 4 }}>
@@ -87,7 +89,7 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 4, py: 2 }}>
               <Typography variant="h6" fontWeight={600} sx={{ px: 4, py: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
                 <PeopleAltRoundedIcon />
-                Тимлиды команд
+                {t('Тимлиды команд')}
               </Typography>
               <Stack direction="row" spacing={1}>
                 <Button
@@ -97,10 +99,10 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
                   onClick={() => setIsEditTeamLeaders(!isEditTeamLeaders)}
                   endIcon={<EditRoundedIcon />}
                 >
-                  {isEditTeamLeaders ? 'Закрыть' : 'Редактировать'}
+                  {isEditTeamLeaders ? t('Закрыть') : t('Редактировать')}
                 </Button>
                 <Button variant="contained" color="primary" size="small" endIcon={<AddRoundedIcon />} onClick={() => setAddTeamleadOpen(true)}>
-                  Добавить
+                  {t('Добавить')}
                 </Button>
               </Stack>
             </Box>
@@ -116,7 +118,7 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 4, py: 2 }}>
                 <Typography variant="h6" fontWeight={600} sx={{ px: 4, py: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
                   <PeopleAltRoundedIcon />
-                  Состав команды
+                  {t('Состав команды')}
                 </Typography>
                 <Stack direction="row" spacing={1}>
                   <Button
@@ -126,10 +128,10 @@ const ProfileCard = ({ user, EditebleProfileData, isEdit, setIsEdit, EditeblePro
                     onClick={() => setIsEditTeamLeaders(!isEditTeamLeaders)}
                     endIcon={<EditRoundedIcon />}
                   >
-                    {isEditTeamLeaders ? 'Закрыть' : 'Редактировать'}
+                    {isEditTeamLeaders ? t('Закрыть') : t('Редактировать')}
                   </Button>
                   <Button variant="contained" color="primary" size="small" endIcon={<AddRoundedIcon />} onClick={() => setAddTeammateOpen(true)}>
-                    Добавить
+                    {t('Добавить')}
                   </Button>
                 </Stack>
               </Box>

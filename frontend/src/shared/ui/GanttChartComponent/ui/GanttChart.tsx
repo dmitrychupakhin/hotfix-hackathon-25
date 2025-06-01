@@ -32,6 +32,7 @@ import {
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { useTranslation } from 'react-i18next'
 
 // Описание формата входных/выходных данных
 export interface GanttInputItem {
@@ -43,6 +44,7 @@ export interface GanttInputItem {
 
 // Кастомный Tooltip, который отображается снизу
 const CustomTooltip: React.FC<TooltipContentProps> = ({ task }) => {
+  const { t } = useTranslation()
   return (
     <Paper
       elevation={3}
@@ -62,16 +64,16 @@ const CustomTooltip: React.FC<TooltipContentProps> = ({ task }) => {
         {task.name}
       </Typography>
       <Typography variant="body2">
-        С
+        {t('С')}
         {' '}
         {dayjs(task.start).format('DD.MM.YYYY')}
         {' '}
-        до
+        {t('до')}
         {' '}
         {dayjs(task.end).format('DD.MM.YYYY')}
       </Typography>
       <Typography variant="body2">
-        Прогресс:
+        {t('Прогресс:')}
         {' '}
         {task.progress}
         %
@@ -82,6 +84,7 @@ const CustomTooltip: React.FC<TooltipContentProps> = ({ task }) => {
 
 // Преобразование входного массива GanttInputItem[] в Task[]
 const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
+  const { t } = useTranslation()
   // @ts-expect-error Task is not exported
   return data
     .map((item, index) => {
@@ -146,10 +149,11 @@ class GanttErrorBoundary extends Component<
   }
 
   render() {
+    const { t } = useTranslation()
     if (this.state.hasError) {
       return (
         <Typography color="error" sx={{ p: 2 }}>
-          Произошла ошибка при отрисовке диаграммы Ганта.
+          {t('Произошла ошибка при отрисовке диаграммы Ганта.')}
         </Typography>
       )
     }
@@ -177,6 +181,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
   onDataChange,
   isEditProgressOnly = false,
 }) => {
+  const { t } = useTranslation()
   // Инициализируем задачи из входных данных (гарантируем, что data — массив)
   const initialTasks = convertToTasks(Array.isArray(data) ? data : [])
   const [tasks, setTasks] = useState<Task[]>(initialTasks)
@@ -212,7 +217,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
 
     const newTask: Task = {
       id: `Task-${newIndex + 1}`,
-      name: `Новая задача ${newIndex + 1}`,
+      name: `${t('Новая задача')} ${newIndex + 1}`,
       start: today,
       end: dayjs(today).add(3, 'day').toDate(),
       type: 'task',
@@ -260,14 +265,14 @@ const GanttChart: React.FC<GanttChartProps> = ({
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
       <Box p={2}>
         <Stack direction="row" justifyContent="space-between" mb={2}>
-          <Typography variant="h5">Диаграмма Ганта</Typography>
+          <Typography variant="h5">{t('Диаграмма Ганта')}</Typography>
           <Button
             startIcon={<AddIcon />}
             variant="contained"
             onClick={handleAddTask}
             disabled={isEditProgressOnly}
           >
-            Добавить этап
+            {t('Добавить этап')}
           </Button>
         </Stack>
 
@@ -308,7 +313,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   })}
                 >
                   <Typography variant="body2" fontWeight="bold">
-                    Название
+                    {t('Название')}
                   </Typography>
                 </Box>
               )}
@@ -339,7 +344,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         onClick={() => moveTask(task.id, 'up')}
                         disabled={index === 0 || isEditProgressOnly}
                         size="small"
-                        title="Вверх"
+                        title={t('Вверх')}
                       >
                         <ArrowUpward fontSize="small" />
                       </IconButton>
@@ -347,21 +352,20 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         onClick={() => moveTask(task.id, 'down')}
                         disabled={index === tableTasks.length - 1 || isEditProgressOnly}
                         size="small"
-                        title="Вниз"
-                      >
+                        title={t('Вниз')}                      >
                         <ArrowDownward fontSize="small" />
                       </IconButton>
                       <IconButton
                         onClick={() => setEditTask(task)}
                         size="small"
-                        title="Редактировать"
+                        title={t('Редактировать')}
                       >
                         <EditIcon fontSize="small" />
                       </IconButton>
                       <IconButton
                         onClick={() => deleteTask(task.id)}
                         size="small"
-                        title="Удалить"
+                        title={t('Удалить')}
                         sx={{ color: 'error.main' }}
                         disabled={isEditProgressOnly}
                       >
@@ -381,21 +385,21 @@ const GanttChart: React.FC<GanttChartProps> = ({
           maxWidth="sm"
           fullWidth
         >
-          <DialogTitle>Редактировать задачу</DialogTitle>
+          <DialogTitle>{t('Редактировать задачу')}</DialogTitle>
           {editTask && (
             <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {/* Если isEditProgressOnly=false, показываем поле Названия и Даты */}
               {!isEditProgressOnly && (
                 <>
                   <TextField
-                    label="Название"
+                    label={t('Название')}
                     value={editTask.name}
                     onChange={e =>
                       setEditTask({ ...editTask, name: e.target.value })}
                     fullWidth
                   />
                   <DatePicker
-                    label="Дата начала"
+                    label={t('Дата начала')}
                     value={dayjs(editTask.start)}
                     maxDate={dayjs(editTask.end)}
                     onChange={(date) => {
@@ -411,7 +415,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
                     // format="DD.MM.YYYY"
                   />
                   <DatePicker
-                    label="Дата окончания"
+                    label={t('Дата окончания')}
                     value={dayjs(editTask.end)}
                     minDate={dayjs(editTask.start)}
                     onChange={(date) => {
@@ -430,7 +434,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
               {/* Всегда показываем слайдер прогресса */}
               <Box>
                 <Typography variant="body2">
-                  Прогресс:
+                  {t('Прогресс:')}
                   {' '}
                   {editTask.progress}
                   %
@@ -446,9 +450,9 @@ const GanttChart: React.FC<GanttChartProps> = ({
             </DialogContent>
           )}
           <DialogActions>
-            <Button onClick={() => setEditTask(null)}>Отмена</Button>
+            <Button onClick={() => setEditTask(null)}>{t('Отмена')}</Button>
             <Button onClick={handleDialogSave} variant="contained">
-              Сохранить
+              {t('Сохранить')}
             </Button>
           </DialogActions>
         </Dialog>
