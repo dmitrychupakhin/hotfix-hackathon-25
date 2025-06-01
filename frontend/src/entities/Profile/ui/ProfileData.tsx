@@ -1,7 +1,7 @@
 import type { User } from '@/entities/Profile'
 import { Grid } from '@mui/material'
 import type { FC } from 'react'
-import { fieldsToDisplay } from '../model/selectors/getfFeldsToDisplay'
+import { useFieldsToDisplay } from '../model/selectors/getfFeldsToDisplay'
 import ProfileDataItem from './ProfileDataItem'
 
 interface ProfileDataProps {
@@ -9,9 +9,10 @@ interface ProfileDataProps {
 }
 
 const ProfileData: FC<ProfileDataProps> = ({ user }) => {
+  const fields = useFieldsToDisplay()
   return (
     <Grid container spacing={2}>
-      {fieldsToDisplay.map(({ key, label, Icon }) => {
+      {fields.map(({ key, label, Icon }) => {
         const value = user[key as keyof User]
 
         return (
