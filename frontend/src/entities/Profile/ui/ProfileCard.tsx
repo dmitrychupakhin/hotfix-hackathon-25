@@ -36,7 +36,6 @@ const ProfileCard = ({
 
   const theme = useTheme()
   const isSmall = useMediaQuery(theme.breakpoints.down('md'))
-  const isExtraSmall = useMediaQuery('(max-width:430px)')
 
   return (
     <Grid
