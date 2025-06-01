@@ -14,6 +14,7 @@ urlpatterns = [
     path('users/vk/logout', VKLogoutView.as_view()),
 
     path('users/me', UserMeAPIView.as_view()),
+    path('users/<int:id>', UserDetailAPIView.as_view()),
     path('users/photo', UpdateUserPhotoView.as_view()),
     path('users/edit', UserUpdateAPIView.as_view()),
     path('users/<int:pk>/delete', LeaderDestroyAPIView.as_view()),
