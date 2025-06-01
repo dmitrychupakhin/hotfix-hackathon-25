@@ -16,7 +16,7 @@ class OrderCreateAPIView(generics.CreateAPIView):
     serializer_class = CreateOrderSerializer
     
     def perform_create(self, serializer):
-        order = serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user)
         
 class OrderListPagination(PageNumberPagination):
     page_size = 4
