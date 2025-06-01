@@ -186,7 +186,7 @@ class LeaderCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
 
     def perform_create(self, serializer):
-        serializer.save(is_team=True, photo='users/none.png')
+        serializer.save(is_team=True)
 
 @extend_schema(summary="Удалить тимлида", tags=["Менеджер"])
 class LeaderDestroyAPIView(generics.DestroyAPIView):

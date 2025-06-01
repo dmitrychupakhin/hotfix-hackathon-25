@@ -115,6 +115,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         password = validated_data.pop('password')
+    
+        if validated_data.get('photo') in (None, ''):
+            validated_data.pop('photo', None)
+        
         user = User(**validated_data)
         user.set_password(password)
         user.save()
