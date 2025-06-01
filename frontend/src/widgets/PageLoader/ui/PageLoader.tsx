@@ -17,7 +17,7 @@ const PageLoader = () => {
         overflow: 'hidden',
       }}
     >
-      <CircularProgress size="4rem" color="primary" />
+      <CircularProgress size="5rem" sx={{ color: 'primary.dark' }} />
     </Box>
   )
 }

@@ -35,7 +35,13 @@ const HomeAbout = () => {
           >
             <Grid size={8}>
               <Stack spacing={2} p={3}>
-                <Typography variant="h3" sx={theme => ({ color: theme.palette.invertedSecondary.dark, fontWeight: 600 })}>
+                <Typography
+                  variant="h3"
+                  sx={theme => ({
+                    color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+                    fontWeight: 600,
+                  })}
+                >
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>
                     SlobodaSoft
                   </Typography>
@@ -50,7 +56,13 @@ const HomeAbout = () => {
                   <Typography component="span" variant="h3" sx={theme => ({ color: theme.palette.primary.main })}>{t('проекты')}</Typography>
                   {t(', которые реально работают.')}
                 </Typography>
-                <Typography variant="h4" sx={theme => ({ color: theme.palette.invertedSecondary.main, fontWeight: 400 })}>
+                <Typography
+                  variant="h4"
+                  sx={theme => ({
+                    color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+                    fontWeight: 400,
+                  })}
+                >
                   <Typography component="span" variant="h4" sx={theme => ({ color: theme.palette.primary.main })}>
                     {t('Мы знаем, как сложно')}
                   </Typography>
@@ -115,7 +127,7 @@ const HomeAbout = () => {
               <Typography
                 variant="h2"
                 sx={theme => ({
-                  color: theme.palette.invertedSecondary.dark,
+                  color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
                   fontWeight: 600,
                 })}
               >
@@ -128,10 +140,20 @@ const HomeAbout = () => {
               }}
               />
             </Box>
-            <Typography variant="h5" sx={theme => ({ color: theme.palette.invertedSecondary.main, fontWeight: 400 })}>
+            <Typography
+              variant="h5"
+              sx={theme => ({
+                color: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : theme.palette.invertedSecondary.dark,
+                fontWeight: 400 })}
+            >
               {t('Мы на лету оцениваем вашу идею, подсказываем, сколько времени понадобится на реализацию, какой стек технологий выбрать, и кто из команды возьмется за реализацию прямо сейчас.')}
             </Typography>
-            <Typography variant="h5" sx={theme => ({ color: theme.palette.invertedSecondary.main, fontWeight: 400 })}>
+            <Typography
+              variant="h5"
+              sx={theme => ({
+                color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.invertedSecondary.main,
+                fontWeight: 400 })}
+            >
               {t('Наш сервис помогает не тратить недели на подготовку к разработке, а сразу двигаться к сути')}
             </Typography>
           </Box>
@@ -169,8 +191,23 @@ const HomeAbout = () => {
           >
             <StarIcon style={{ width: '48px', height: '48px' }} />
           </Box>
-          <Typography variant="h1" component="h2">+10</Typography>
-          <Typography variant="h5">{t('Успешных проектов, которые мы создали по идеям наших заказчиков')}</Typography>
+          <Typography
+            variant="h1"
+            component="h2"
+            sx={theme => ({
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+            })}
+          >
+            +10
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={theme => ({
+              color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
+            })}
+          >
+            {t('Успешных проектов, которые мы создали по идеям наших заказчиков')}
+          </Typography>
           <Box>
             <Button
               variant="contained"

@@ -88,6 +88,7 @@ const Header: FC = () => {
               fontWeight={600}
               sx={theme => ({
                 'backgroundColor': link.path === location.pathname ? theme.palette.primary.light : 'transparent',
+                'color': link.path === location.pathname ? theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main : theme.palette.secondary.main,
                 '&:hover': {
                   color: theme.palette.secondary.main,
                 },

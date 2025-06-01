@@ -19,6 +19,7 @@ export const taskApi = rtkApi.injectEndpoints({
         url: `/orders/${id}`,
         method: 'GET',
       }),
+      providesTags: (result, error, { id }) => [{ type: 'Tasks', id: id }],
       transformResponse: (response: Task) => {
         const camel = snakeToCamelObject<Task>(response)
 
@@ -28,9 +29,23 @@ export const taskApi = rtkApi.injectEndpoints({
         }
       },
     }),
+    startPlan: build.mutation<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `/predictors/${id}/start`,
+        method: 'POST',
+      }),
+    }),
+    getPlanResult: build.query<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `/predictors/result/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
+export const useLazyGetPlanResult = taskApi.useLazyGetPlanResultQuery
+export const useStartPlan = taskApi.useStartPlanMutation
 export const useLazyGetTasks = taskApi.useLazyGetTasksQuery
 export const useGetTasks = taskApi.useGetTasksQuery
 export const useLazyGetTask = taskApi.useLazyGetTaskQuery

@@ -1,6 +1,7 @@
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined'
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import ImgCornerVector from '@/shared/assets/images/imgСornerVector.svg?react'
+import ImgCornerVectorBlack from '@/shared/assets/images/imgCornerVectorBlack.svg?react'
 import { AnimatePresence } from 'motion/react'
 import { MotionBox } from '@/shared/ui/MotionBox'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +11,10 @@ import { ROUTES } from '@/shared/const/routes'
 const HomeHero = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const theme = useTheme()
+
+  const CornerImage = theme.palette.mode === 'dark' ? ImgCornerVectorBlack : ImgCornerVector
 
   return (
     <Box sx={{
@@ -21,7 +26,7 @@ const HomeHero = () => {
       position: 'relative',
     }}
     >
-      <ImgCornerVector style={{
+      <CornerImage style={{
         position: 'absolute',
         top: -1,
         left: 0,
@@ -63,11 +68,16 @@ const HomeHero = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontWeight: 600,
+                  color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
                 }}
                 >
                   5
                 </Box>
-                <Typography fontWeight={600}>{t('Сотрудников')}</Typography>
+                <Typography
+                  fontWeight={600}
+                >
+                  {t('Сотрудников')}
+                </Typography>
               </Stack>
               <Stack spacing={1} direction="row" alignItems="center">
                 <Box sx={{
@@ -80,6 +90,7 @@ const HomeHero = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontWeight: 600,
+                  color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
                 }}
                 >
                   3
@@ -97,6 +108,7 @@ const HomeHero = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontWeight: 600,
+                  color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.main : theme.palette.secondary.main,
                 }}
                 >
                   0
@@ -105,7 +117,7 @@ const HomeHero = () => {
               </Stack>
             </Stack>
           </Box>
-          <ImgCornerVector style={{
+          <CornerImage style={{
             transform: 'rotate(180deg)',
           }}
           />

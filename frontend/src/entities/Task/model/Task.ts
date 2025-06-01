@@ -1,4 +1,5 @@
 import type { TaskFilterField } from '@/shared/types/TaskFilterField'
+import type { GanttInputItem } from '@/shared/ui/GanttChartComponent/ui/GanttChart'
 
 export interface Task {
   id: number
@@ -10,6 +11,7 @@ export interface Task {
   start: null
   end: null
   createdAt: string
+  plan: GanttInputItem[] | null
 }
 
 export interface GetTasksResponse {

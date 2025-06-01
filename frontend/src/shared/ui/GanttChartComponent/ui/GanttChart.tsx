@@ -36,8 +36,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 // Описание формата входных/выходных данных
 export interface GanttInputItem {
   name: string
-  start_date: string // ожидаем формат 'YYYY-MM-DD' или ISO
-  end_date: string // ожидаем формат 'YYYY-MM-DD' или ISO
+  startDate: string // ожидаем формат 'YYYY-MM-DD' или ISO
+  endDate: string // ожидаем формат 'YYYY-MM-DD' или ISO
   progress: number
 }
 
@@ -85,8 +85,8 @@ const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
   // @ts-expect-error Task is not exported
   return data
     .map((item, index) => {
-      const parsedStart = dayjs(item.start_date)
-      const parsedEnd = dayjs(item.end_date)
+      const parsedStart = dayjs(item.startDate)
+      const parsedEnd = dayjs(item.endDate)
 
       // Если хотя бы одна из дат невалидна, пропускаем эту запись
       if (!parsedStart.isValid() || !parsedEnd.isValid()) {
@@ -120,8 +120,8 @@ const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
 const convertToInputItems = (tasks: Task[]): GanttInputItem[] => {
   return tasks.map(task => ({
     name: task.name,
-    start_date: dayjs(task.start).format('YYYY-MM-DD'),
-    end_date: dayjs(task.end).format('YYYY-MM-DD'),
+    startDate: dayjs(task.start).format('YYYY-MM-DD'),
+    endDate: dayjs(task.end).format('YYYY-MM-DD'),
     progress: task.progress,
   }))
 }
