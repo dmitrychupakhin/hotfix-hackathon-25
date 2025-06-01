@@ -19,11 +19,22 @@ password
 
 ### hotfix-hackathon-25
 
-## frontend
+React + TypeScript
+Архитектура - FSD https://mui.com/material-ui/getting-started/ 
+Material-UI (MUI) в качестве библиотеки компонентов
+Конфигурация MUI src/shared/config/theme/appTheme.ts
+Vite как сборщик (конфигурация, плагины, запуск)
+React Router для маршрутизации
+Константы маршрутов: src/shared/const/routes.ts
+Конфигурация маршрутов: src/app/providers/RouteProvider/config/routeConfig.ts
+Redux Toolkit для управления состоянием
+ESLint + плагин eslint-plugin-stylistic для поддержания единых правил кодирования
+i18next для интернационализации (локализации)
+react-hook-form для работы с формами
 
-# React + TypeScript + Vite
-# Eslint + Eslint Stylistic
-# MUI
-# React Router
+Запуск на порте 80 для работы ВК авторизации!
 
-// shared/const/routes.ts - константы маршрутов
+MacOs: sudo npm run dev
+Windows: npm run dev
+
+
