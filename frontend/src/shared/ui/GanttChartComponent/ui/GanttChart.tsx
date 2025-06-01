@@ -84,7 +84,6 @@ const CustomTooltip: React.FC<TooltipContentProps> = ({ task }) => {
 
 // Преобразование входного массива GanttInputItem[] в Task[]
 const convertToTasks = (data: GanttInputItem[] = []): Task[] => {
-  const { t } = useTranslation()
   // @ts-expect-error Task is not exported
   return data
     .map((item, index) => {
@@ -149,11 +148,10 @@ class GanttErrorBoundary extends Component<
   }
 
   render() {
-    const { t } = useTranslation()
     if (this.state.hasError) {
       return (
         <Typography color="error" sx={{ p: 2 }}>
-          {t('Произошла ошибка при отрисовке диаграммы Ганта.')}
+          Произошла ошибка при отрисовке диаграммы Ганта.
         </Typography>
       )
     }
@@ -352,7 +350,8 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         onClick={() => moveTask(task.id, 'down')}
                         disabled={index === tableTasks.length - 1 || isEditProgressOnly}
                         size="small"
-                        title={t('Вниз')}                      >
+                        title={t('Вниз')}
+                      >
                         <ArrowDownward fontSize="small" />
                       </IconButton>
                       <IconButton

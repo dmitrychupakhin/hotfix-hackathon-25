@@ -4,6 +4,8 @@ import CodeOffRoundedIcon from '@mui/icons-material/CodeOffRounded'
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { getProfileDataIsStaff, getProfileDataIsTeam } from '../model/selectors/getProfileData'
 
 interface ProfileSmallCardItemProps {
   data: User
@@ -12,6 +14,9 @@ interface ProfileSmallCardItemProps {
 }
 
 const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardItemProps) => {
+  const isStaff = useSelector(getProfileDataIsStaff)
+  const isTeam = useSelector(getProfileDataIsTeam)
+
   const { t } = useTranslation()
   return (
     <Box sx={theme => ({
@@ -44,8 +49,22 @@ const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardIt
               color: theme.palette.mode === 'dark' ? theme.palette.invertedSecondary.dark : theme.palette.secondary.dark,
             })}
           >
-            <CodeOffRoundedIcon />
-            {t('Тимлид')}
+            {
+              isStaff && (
+                <>
+                  <CodeOffRoundedIcon />
+                  {t('Тимлид')}
+                </>
+              )
+            }
+            {
+              isTeam && (
+                <>
+                  <CodeOffRoundedIcon />
+                  {t(data.role)}
+                </>
+              )
+            }
           </Typography>
           <Typography variant="body1" fontWeight={600}>
             {data.lastName}
@@ -61,9 +80,13 @@ const ProfileSmallCardItem = ({ data, isEdit, handleRemove }: ProfileSmallCardIt
           <Button fullWidth variant="contained" color="secondary" size="small" endIcon={<DeleteForeverRoundedIcon />} onClick={() => handleRemove(data.id)}>
             {t('Удалить')}
           </Button>
-          <Button fullWidth variant="contained" color="primary" size="small" endIcon={<EditRoundedIcon />}>
-            {t('Редактировать')}
-          </Button>
+          {
+            isTeam && (
+              <Button fullWidth variant="contained" color="primary" size="small" endIcon={<EditRoundedIcon />}>
+                {t('Редактировать')}
+              </Button>
+            )
+          }
         </Stack>
       )}
     </Box>

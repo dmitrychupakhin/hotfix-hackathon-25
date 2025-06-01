@@ -1,10 +1,11 @@
+import type { User } from '@/entities/Profile'
 import type { TaskFilterField } from '@/shared/types/TaskFilterField'
 import type { GanttInputItem } from '@/shared/ui/GanttChartComponent/ui/GanttChart'
 
 export interface Task {
   id: number
   user: string
-  team: number | null
+  team: User | null
   title: string
   description: string
   status: TaskFilterField
@@ -33,4 +34,5 @@ export interface UpdateTaskRequest {
   plan: string | null
   title: string
   description: string
+  team: number | null
 }
