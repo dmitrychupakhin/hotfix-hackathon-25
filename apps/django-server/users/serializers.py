@@ -115,6 +115,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         password = validated_data.pop('password')
+    
+        if validated_data.get('photo') in (None, ''):
+            validated_data.pop('photo', None)
+        
         user = User(**validated_data)
         user.set_password(password)
         user.save()
@@ -127,14 +131,10 @@ class GetUserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'vk_id', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'photo', 'tg', 'is_staff', 'is_team')
 
 class TeamLeaderSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'full_name')
-
-    def get_full_name(self, obj):
-        return f"{obj.first_name} {obj.last_name}"
+        fields = '__all__'
     
 class EditUserSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(required=True)

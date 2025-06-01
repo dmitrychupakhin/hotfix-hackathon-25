@@ -7,7 +7,7 @@ from rest_framework import generics, status
 from rest_framework.views import APIView
 from django.core.cache import cache
 import string, random, requests
-from .permissions import IsStaff
+from .permissions import IsStaff, IsLeader
 
 from .utils.auth import set_auth_cookies
 from services.email_sender import EmailSender
@@ -181,7 +181,7 @@ class VKAuthView(APIView):
 # IsAuthenticated
 @extend_schema(summary="Создать тимлида", tags=["Менеджер"])
 class LeaderCreateAPIView(generics.CreateAPIView):
-    permission_classes = [IsStaff]
+    permission_classes = [IsStaff, IsLeader]
     serializer_class = UserCreateSerializer
     queryset = User.objects.all()
 
