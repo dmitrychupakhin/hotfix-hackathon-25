@@ -5,6 +5,6 @@ urlpatterns = [
     path('orders/create', OrderCreateAPIView.as_view()),
     path('orders', OrderListAPIView.as_view()),
     path('orders/<int:id>', OrderDetailRetrieveAPIView.as_view()),
-    path('orders/connect/<int:id>', OrderConnectAPIView.as_view()),
     path('orders/<int:id>/cancel/', OrderCancelView.as_view()),
+    path('orders/<int:id>/update', OrderUpdateAPIView.as_view()),
 ]

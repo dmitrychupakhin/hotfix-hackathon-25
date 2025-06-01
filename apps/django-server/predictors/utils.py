@@ -11,9 +11,7 @@ def edit_order(data, order_id):
     
     plan_data = json.dumps(data) if isinstance(data, dict) else data
 
-    plan_obj, created = Plan.objects.update_or_create(
-        order=order,
-        defaults={'data': plan_data}
-    )
+    order.plan = plan_data
+    order.save()
 
     return {"status": "updated", "order_id": order.id}

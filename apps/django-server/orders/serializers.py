@@ -12,7 +12,7 @@ class CreateOrderSerializer(serializers.ModelSerializer):
 class GetOrderSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     plan = serializers.SerializerMethodField()
-
+    
     class Meta:
         model = Order
         fields = [
@@ -24,14 +24,17 @@ class GetOrderSerializer(serializers.ModelSerializer):
         return f"{obj.user.last_name} {obj.user.first_name}"
 
     def get_plan(self, obj):
-        plan = getattr(obj, 'plan', None)
-        if plan:
-            plan_obj = plan.first()
-            if plan_obj:
-                # Преобразуем строку в список словарей
-                data = ast.literal_eval(plan_obj.data)
-                return data  # просто возвращаем как объект
+        if obj.plan:
+            return ast.literal_eval(obj.plan)
         return None
+
+class UpdateOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = [
+            'team', 'title', 'description', 'status',
+            'start', 'end', 'predicted_team', 'plan'
+        ]
     
 class ConnectOrderSerializer(serializers.ModelSerializer):
     

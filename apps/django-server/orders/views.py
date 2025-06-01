@@ -51,14 +51,14 @@ class OrderDetailRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Order.objects.all()
     serializer_class = GetOrderSerializer
     lookup_field = 'id'
-    
-@extend_schema(summary="Привязка команды к заявке", tags=["Заявки"])
-class OrderConnectAPIView(generics.UpdateAPIView):
+
+@extend_schema(summary="Изменение заявки по ID", tags=["Заявки"])
+class OrderUpdateAPIView(generics.UpdateAPIView):
     permission_classes = [IsStaff]
     queryset = Order.objects.all()
-    serializer_class = ConnectOrderSerializer
+    serializer_class = UpdateOrderSerializer
     lookup_field = 'id'
-
+    
     def perform_update(self, serializer):
         serializer.save(status='inwork')
 
