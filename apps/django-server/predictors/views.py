@@ -9,8 +9,8 @@ from teams.models import TeamMember
 
 class PredictionResultView(APIView):
     def get(self, request, id):
-        plan = Plan.objects.filter(order=id).first()
-        if plan:
+        order = Order.objects.filter(id=id).first()
+        if order:
             return Response({'status': 'success'})
         return Response({'status': 'pending'})
     
