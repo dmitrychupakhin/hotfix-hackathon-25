@@ -44,8 +44,7 @@
 - **CSS-in-JS:** стили MUI (теки, темы)  
 - **Инструменты разработки:**  
   - Node.js (рекомендуемая версия ≥ 16)  
-  - npm или yarn  
-![Main](https://github.com/user-attachments/assets/84e30ece-0712-468d-b200-a468eef922a1)
-
+  - npm или yarn
 ---
+![Main](https://github.com/user-attachments/assets/84e30ece-0712-468d-b200-a468eef922a1)
 
