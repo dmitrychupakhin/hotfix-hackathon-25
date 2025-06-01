@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api'
-import type { GetTasksRequest, GetTasksResponse, Task } from '../model/Task'
+import type { GetTasksRequest, GetTasksResponse, Task, UpdateTaskRequest } from '../model/Task'
 import { getTasksRequestAdapter } from '../lib/adapters/requestApiAdapters'
 import { snakeToCamelObject } from '@/shared/lib/utils/snakeToCamel'
 import { formatIsoDate } from '@/shared/lib/utils/formatIsoDate'
@@ -41,9 +41,17 @@ export const taskApi = rtkApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    updateTask: build.mutation<void, { id: number, data: UpdateTaskRequest }>({
+      query: ({ id, data }) => ({
+        url: `/orders/${id}/update`,
+        method: 'PUT',
+        body: data,
+      }),
+    }),
   }),
 })
 
+export const useUpdateTask = taskApi.useUpdateTaskMutation
 export const useLazyGetPlanResult = taskApi.useLazyGetPlanResultQuery
 export const useStartPlan = taskApi.useStartPlanMutation
 export const useLazyGetTasks = taskApi.useLazyGetTasksQuery

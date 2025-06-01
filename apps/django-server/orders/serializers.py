@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from users.serializers import GetUserSerializer
 import os
 import json
 import ast
@@ -10,8 +11,9 @@ class CreateOrderSerializer(serializers.ModelSerializer):
         fields = ['title', 'description']
         
 class GetOrderSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField()
     plan = serializers.SerializerMethodField()
+    user = GetUserSerializer(read_only=True)
+    team = GetUserSerializer(read_only=True)
     
     class Meta:
         model = Order

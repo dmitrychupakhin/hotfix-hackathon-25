@@ -11,6 +11,7 @@ def add_plan(data, order_id):
     plan_data = json.dumps(data) if isinstance(data, dict) else data
 
     order.plan = plan_data
+    order.gen_status = 1
     order.save()
 
     return {"status": "updated", "order_id": order.id}

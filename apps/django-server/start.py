@@ -27,5 +27,10 @@ if not User.objects.exists():
         password=make_password("password"),
         is_team=True
     )
+    User.objects.create(
+        username="user",
+        email="example12@mail.ru",
+        password=make_password("password")
+    )
 else:
     pass
