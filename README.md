@@ -12,7 +12,7 @@
 **Пользователи по умолчанию:**\
 Админ: admin password\
 Менеджер: staff password\
-Тимлид: leader password\
+Тимлид: leader password
 
 ## Backend-часть
 Django, FastApi, Docker, Nginx, Redis, Rabbit, Postgres
