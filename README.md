@@ -9,6 +9,10 @@
 > - В ветке `dev` удалены ключи от YandexGPT и пароли для SMTP-сервиса. По этой причине при локальном запуске будет возвращаться заранее сгенерированный план. Проверить реальную работу YandexGPT можно на развёрнутом сайте по адресу выше.
 
 ---
+Админ: admin password
+Менеджер: staff password
+Тимлид: leader password
+---
 ## Backend-часть
 Django, FastApi, Docker, Nginx, Redis, Rabbit, Postgres
 
